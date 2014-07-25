@@ -35,7 +35,7 @@ git submodule add git@github.com:onassar/PHP-MySQL.git TurtlePHP/application/ven
 git submodule add git@github.com:onassar/PHP-Query.git TurtlePHP/application/vendors/PHP-Query
 git submodule add git@github.com:onassar/PHP-RequestCache.git TurtlePHP/application/vendors/PHP-RequestCache
 git submodule add git@github.com:onassar/PHP-SecureSessions.git TurtlePHP/application/vendors/PHP-SecureSessions
-git submodule add git@github.com:onassar/TurtlePHP-UsersModule.git TurtlePHP/modules/TurtlePHP-ImagesModule
+git submodule add git@github.com:onassar/TurtlePHP-UsersModule.git TurtlePHP/modules/TurtlePHP-UsersModule
 ```
 
 ``` php
