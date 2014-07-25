@@ -7,19 +7,19 @@ TurtlePHP-UsersModule
 `GET`  
 `POST`  
 
-`/users/login`
-`GET`
+`/users/login`  
+`GET`  
 `POST`
 
-`/users/logout`
+`/users/logout`  
 `POST`
 
-`/users/changePassword`
-`GET`
+`/users/changePassword`  
+`GET`  
 `POST`
 
-`/users/resetPassword`
-`GET`
+`/users/resetPassword`  
+`GET`  
 `POST`
 
 ### Install and init flows
