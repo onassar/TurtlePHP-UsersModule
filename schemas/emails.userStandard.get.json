@@ -1,0 +1,12 @@
+[
+    {
+        "validator": ["SecurityValidator", "requestIsSubRequest"],
+        "params": ["{__request__}"],
+        "blocking": true
+    },
+    {
+        "validator": ["UserValidator", "validUserById"],
+        "params": ["{userId}"],
+        "blocking": true
+    }
+]

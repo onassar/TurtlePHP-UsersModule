@@ -1,8 +1,21 @@
 <?php
 
     // configuration init
-    $views = array();
     $callbacks = array();
+    $views = array();
+
+    /**
+     * Callbacks
+     * 
+     */
+
+    // POST callbacks
+    $callbacks = array(
+        'register' => array(),
+        'login' => array(),
+        'resetPassword' => array(),
+        'changePassword' => array()
+    );
 
     /**
      * Views
@@ -21,19 +34,6 @@
         'changePassword' => ($parent) . '/views/changePassword.inc.php',
         'resetPasswordEmail' => ($parent) . '/views/emails/resetPassword.v1.inc.php',
         'welcomeEmail' => ($parent) . '/views/emails/welcome.v1.inc.php'
-    );
-
-    /**
-     * Callbacks
-     * 
-     */
-
-    // POST callbacks
-    $callbacks = array(
-        'register' => array(),
-        'login' => array(),
-        'resetPassword' => array(),
-        'changePassword' => array()
     );
 
     // config storage

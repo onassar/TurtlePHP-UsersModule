@@ -1,0 +1,61 @@
+[
+    {
+        "validator": ["CommonValidator", "siteIsNotLocked"],
+        "blocking": true,
+        "error": {
+            "reference": "900"
+        }
+    },
+    {
+        "validator": ["DataValidator", "dataPosted"],
+        "blocking": true,
+        "error": {
+            "reference": "901"
+        }
+    },
+    {
+        "validator": ["SecurityValidator", "validCsrfToken"],
+        "params": ["{csrfToken}"],
+        "blocking": true,
+        "error": {
+            "reference": "902"
+        }
+    },
+    {
+        "validator": ["UserValidator", "isLoggedOut"],
+        "blocking": true
+    },
+    {
+        "validator": ["StringValidator", "notEmpty"],
+        "params": ["{email}"],
+        "blocking": true,
+        "error": {
+            "reference": "903",
+            "input": "email",
+            "message": "Please enter your email."
+        }
+    },
+    {
+        "validator": ["StringValidator", "notEmpty"],
+        "params": ["{password}"],
+        "blocking": true,
+        "error": {
+            "reference": "904",
+            "input": "password",
+            "message": "Please enter your password."
+        },
+        "rules": [
+            {
+                "validator": ["UserValidator", "validUserCriteria"],
+                "params": ["{email}", "{password}"],
+                "blocking": true,
+                "error": {
+                "reference": "905",
+                    "input": "password",
+                    "message": "Could not log you in. Try again."
+                }
+            }
+
+        ]
+    }
+]

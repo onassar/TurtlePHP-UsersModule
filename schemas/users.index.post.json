@@ -1,0 +1,93 @@
+[
+    {
+        "validator": ["CommonValidator", "siteIsNotLocked"],
+        "blocking": true,
+        "error": {
+            "reference": "800"
+        }
+    },
+    {
+        "validator": ["DataValidator", "dataPosted"],
+        "blocking": true,
+        "error": {
+            "reference": "801"
+        }
+    },
+    {
+        "validator": ["SecurityValidator", "validCsrfToken"],
+        "params": ["{csrfToken}"],
+        "blocking": true,
+        "error": {
+            "reference": "802"
+        }
+    },
+    {
+        "validator": ["UserValidator", "isLoggedOut"],
+        "blocking": true,
+        "error": {
+            "reference": "803"
+        }
+    },
+    {
+        "validator": ["StringValidator", "notEmpty"],
+        "params": ["{email}"],
+        "blocking": true,
+        "error": {
+            "reference": "804",
+            "input": "email",
+            "message": "Please enter your email."
+        },
+        "rules": [
+            {
+                "validator": ["StringValidator", "email"],
+                "params": ["{email}"],
+                "blocking": true,
+                "error": {
+                    "reference": "805",
+                    "input": "email",
+                    "message": "Please enter a valid email address."
+                }
+            }
+        ]
+    },
+    {
+        "validator": ["UserValidator", "uniqueEmailAddress"],
+        "blocking": true,
+        "params": ["{email}"],
+        "error": {
+            "reference": "806",
+            "input": "email",
+            "message": "Email found. Maybe your forgot your password?"
+        }
+    },
+    {
+        "validator": ["StringValidator", "notEmpty"],
+        "params": ["{password}"],
+        "blocking": true,
+        "error": {
+            "reference": "807",
+            "input": "password",
+            "message": "Please enter a password"
+        }
+    },
+    {
+        "validator": ["StringValidator", "minLength"],
+        "params": ["{password}", 4],
+        "blocking": true,
+        "error": {
+            "reference": "808",
+            "input": "password",
+            "message": "Password needs to be at least 4 characters long"
+        }
+    },
+    {
+        "validator": ["StringValidator", "equals"],
+        "params": ["{password}", "{passwordConfirmation}"],
+        "blocking": true,
+        "error": {
+            "reference": "809",
+            "input": "passwordConfirmation",
+            "message": "Please make sure your passwords match"
+        }
+    }
+]

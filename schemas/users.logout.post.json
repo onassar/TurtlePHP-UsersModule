@@ -1,0 +1,11 @@
+[
+    {
+        "validator": ["DataValidator", "dataPosted"],
+        "blocking": true
+    },
+    {
+        "validator": ["SecurityValidator", "validCsrfToken"],
+        "params": ["{csrfToken}"],
+        "blocking": true
+    }
+]
