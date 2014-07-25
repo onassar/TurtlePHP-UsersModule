@@ -7,14 +7,16 @@
 
     // required classes
     $required = array(
+        '\Plugin\Config' => 'TurtlePHP-ConfigPlugin',
         'Email' => 'PHP-Email',
+        '\Postmark\Mail' => 'postmark-php',
         'Geo' => 'PHP-Geo',
-        '\Plugin\Config' => 'PHP-JSON-Validation',
+        'RequestCache' => 'PHP-RequestCache',
         'MemcachedCache' => 'PHP-MemcachedCache',
         'MySQLQuery' => 'PHP-MySQL',
         'Query' => 'PHP-Query',
-        'RequestCache' => 'PHP-RequestCache',
-        'SMSession' => 'PHP-SecureSessions'
+        'SMSession' => 'PHP-SecureSessions',
+        // '\Plugin\Config' => 'PHP-JSON-Validation'
     );
 
     // perform checks
