@@ -7,8 +7,10 @@
         $info = pathinfo(__DIR__);
         $parent = $info['dirname'];
 
-        // include class, controller
+        // include functions, classes, controller
+        require_once ($parent) . '/functions.inc.php';
         require_once ($parent) . '/Users.class.php';
+        require_once ($parent) . '/models/User.class.php';
         require_once ($parent) . '/controllers/Users.class.php';
 
         // flow includes

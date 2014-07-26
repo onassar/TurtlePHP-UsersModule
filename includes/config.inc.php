@@ -18,6 +18,15 @@
     );
 
     /**
+     * Memcached
+     * 
+     */
+
+    // servers
+    $memcached = array(
+    );
+
+    /**
      * Views
      * 
      */
@@ -41,6 +50,7 @@
         'TurtlePHP-UsersModule',
         array(
             'callbacks' => $callbacks,
+            'memcached' => $memcached,
             'views' => $views
         )
     );

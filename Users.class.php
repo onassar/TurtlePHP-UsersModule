@@ -28,6 +28,21 @@
         }
 
         /**
+         * getConfig
+         * 
+         * @access public
+         * @static
+         * @return array
+         */
+        public static function getConfig()
+        {
+            // configuration settings
+            $config = \Plugin\Config::retrieve();
+            $config = $config['TurtlePHP-UsersModule'];
+            return $config;
+        }
+
+        /**
          * setView
          * 
          * @access public

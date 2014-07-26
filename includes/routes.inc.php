@@ -7,31 +7,31 @@
     // add module routes to application
     \Turtle\Application::addRoutes(array(
 
-        '^/users' => array(// G + P
+        '^/users$' => array(// G + P
             'module' => true,
             'controller' => '\Modules\Users\Users',
             'action' => 'actionIndex',
             'view' => ($parent) . '/views/raw.inc.php'
         ),
-        '^/users/login' => array(// G + P
+        '^/users/login$' => array(// G + P
             'module' => true,
             'controller' => '\Modules\Users\Users',
             'action' => 'actionLogin',
             'view' => ($parent) . '/views/raw.inc.php'
         ),
-        '^/users/logout' => array(// P
+        '^/users/logout$' => array(// P
             'module' => true,
             'controller' => '\Modules\Users\Users',
             'action' => 'actionLogout',
             'view' => ($parent) . '/views/raw.inc.php'
         ),
-        '^/users/changePassword' => array(// G + P
+        '^/users/changePassword$' => array(// G + P
             'module' => true,
             'controller' => '\Modules\Users\Users',
             'action' => 'actionChangePassword',
             'view' => ($parent) . '/views/raw.inc.php'
         ),
-        '^/users/resetPassword' => array(// G + P
+        '^/users/resetPassword$' => array(// G + P
             'module' => true,
             'controller' => '\Modules\Users\Users',
             'action' => 'actionResetPassword',

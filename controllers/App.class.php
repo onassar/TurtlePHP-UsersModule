@@ -1,9 +1,12 @@
 <?php
 
+    // namespaces
+    namespace Modules\Users;
+
     /**
      * AppController
      * 
-     * @extends Controller
+     * @extends \Turtle\Controller
      */
     class AppController extends \Turtle\Controller
     {

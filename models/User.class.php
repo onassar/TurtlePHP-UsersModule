@@ -1,15 +1,20 @@
 <?php
 
+    // namespaces
+    namespace Modules\Users;
+
     // dependencies
-    require_once 'App.class.php';
-    require_once APP . '/accessors/User.class.php';
+    $info = pathinfo(__DIR__);
+    $parent = $info['dirname'];
+    require_once ($parent) . '/models/App.class.php';
+    require_once ($parent) . '/accessors/User.class.php';
 
     /**
      * UserModel
      *
-     * @extends AppModel
+     * @extends \Modules\Users\AppModel
      */
-    class UserModel extends AppModel
+    class UserModel extends \Modules\Users\AppModel
     {
         /**
          * _modelName

@@ -35,7 +35,6 @@ git clone git@github.com:Znarkus/postmark-php.git TurtlePHP/application/vendors/
 rm -rf TurtlePHP/application/vendors/postmark-php/.git
 git submodule add git@github.com:onassar/PHP-Geo.git TurtlePHP/application/vendors/PHP-Geo
 git submodule add git@github.com:onassar/PHP-RequestCache.git TurtlePHP/application/vendors/PHP-RequestCache
-git submodule add git@github.com:onassar/PHP-MemcachedCache.git TurtlePHP/application/vendors/PHP-MemcachedCache
 git submodule add git@github.com:onassar/PHP-MySQL.git TurtlePHP/application/vendors/PHP-MySQL
 git submodule add git@github.com:onassar/PHP-Query.git TurtlePHP/application/vendors/PHP-Query
 git submodule add git@github.com:onassar/PHP-SecureSessions.git TurtlePHP/application/vendors/PHP-SecureSessions
@@ -50,7 +49,6 @@ require_once APP . '/vendors/postmark-php/src/Postmark/Mail.php';
 require_once APP . '/vendors/PHP-Email/PostmarkEmail.class.php';
 require_once APP . '/vendors/PHP-Geo/Geo.class.php';
 require_once APP . '/vendors/PHP-RequestCache/RequestCache.class.php';
-require_once APP . '/vendors/PHP-MemcachedCache/MemcachedCache.class.php';
 require_once APP . '/vendors/PHP-MySQL/MySQLConnection.class.php';
 require_once APP . '/vendors/PHP-MySQL/MySQLQuery.class.php';
 require_once APP . '/vendors/PHP-Query/Query.class.php';

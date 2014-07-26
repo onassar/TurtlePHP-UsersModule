@@ -12,11 +12,12 @@
         '\Postmark\Mail' => 'postmark-php',
         'Geo' => 'PHP-Geo',
         'RequestCache' => 'PHP-RequestCache',
-        'MemcachedCache' => 'PHP-MemcachedCache',
         'MySQLQuery' => 'PHP-MySQL',
         'Query' => 'PHP-Query',
         'SMSession' => 'PHP-SecureSessions',
-        // '\Plugin\Config' => 'PHP-JSON-Validation'
+        // 'Schema' => 'PHP-JSON-Validation',
+        // 'SmartSchema' => 'PHP-JSON-Validation',
+        // 'Schema' => 'PHP-JSON-Validation'
     );
 
     // perform checks

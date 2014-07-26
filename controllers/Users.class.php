@@ -3,13 +3,18 @@
     // namespaces
     namespace Modules\Users;
 
+    // dependencies
+    $info = pathinfo(__DIR__);
+    $parent = $info['dirname'];
+    require_once ($parent) . '/controllers/App.class.php';
+
     /**
      * UsersController
      * 
-     * @extends \Turtle\Controller
+     * @extends \Modules\Users\AppController
      * @final
      */
-    final class UsersController extends \Turtle\Controller
+    final class UsersController extends \Modules\Users\AppController
     {
         /**
          * _actionChangePasswordGet
@@ -19,6 +24,14 @@
          */
         protected function _actionChangePasswordGet()
         {
+            // View
+            $config = \Modules\Users::getConfig();
+            $view = $config['views']['changePassword'];
+            $this->_setView($view);
+
+$userModel = $this->_getModel('\Modules\Users\User');
+print_r($userModel);
+exit(0);
         }
 
         /**
@@ -39,6 +52,10 @@
          */
         protected function _actionIndexGet()
         {
+            // View
+            $config = \Modules\Users::getConfig();
+            $view = $config['views']['register'];
+            $this->_setView($view);
         }
 
         /**
@@ -83,7 +100,7 @@
                 $email = $_POST['email'];
                 $fragments = explode('@', $email);
                 $firstFragment = $fragments[0];
-                $userModel = $this->_getModel('User');
+                $userModel = $this->_getModel('\Modules\Users\User');
                 $username = $userModel->getUniqueUsername($firstFragment);
 
                 // Newsletter check
@@ -92,41 +109,18 @@
                     $receiveNewsletters = 1;
                 }
 
-                // Defaults
-                $config = getConfig();
-                $role = getRole();
-                $rate = $config['defaults'][$role]['rate'];
-                $yearlyRate = $config['defaults'][$role]['yearlyRate'];
-                $frequency = $config['defaults'][$role]['frequency'];
-                $maxFreeImages = $config['defaults'][$role]['maxFreeImages'];
-
-                // Default template
-                $embedImageTemplateId = $config['defaults'][$role]['embedImageTemplateId'];
-
                 // Create the user and log them in
-                $userModel = $this->_getModel('User');
                 $user = $userModel->createUser(array(
                     'type' => 'default',
                     'email' => $_POST['email'],
                     'username' => $username,
-                    'watermarkJson' => json_encode($config['watermark']),
-                    'rate' => $rate,
-                    'yearlyRate' => $yearlyRate,
-                    'frequency' => $frequency,
-                    'maxFreeImages' => $maxFreeImages,
+                    'publicKey' => $userModel->getUniquePublicKey(),
                     'registeredIPAddress' => IP,
-                    'receiveImageRemixEmail' => 1,
                     'locationCity' => Geo::getCity(),
                     'locationCountryName' => Geo::getCountry(),
                     'locationRegionName' => Geo::getRegion(),
                     'locationCountryCode' => Geo::getCountryCode(2),
-                    'embedImageTemplateId' => $embedImageTemplateId,
-                    'embedTotalImageViews' => 0,
-                    'embedTotalImagesSaved' => 0,
                     'receiveNewsletters' => $receiveNewsletters
-                ));
-                $user->update(array(
-                    'publicKey' => $userModel->getUniquePublicKey()
                 ));
                 $user->setPassword($_POST['password']);
                 $user->login();
@@ -158,6 +152,10 @@
          */
         protected function _actionLoginGet()
         {
+            // View
+            $config = \Modules\Users::getConfig();
+            $view = $config['views']['login'];
+            $this->_setView($view);
         }
 
         /**
@@ -168,6 +166,56 @@
          */
         protected function _actionLoginPost()
         {
+            /**
+             * Validation
+             * 
+             */
+
+            // validate
+            $schema = (new SmartSchema(
+                APP . '/schemas/users.login.post.json',
+                true
+            ));
+            $validator = (new ProjectSchemaValidator(
+                $schema,
+                $this->getRequest(),
+                $_POST
+            ));
+            if ($validator->valid() === false) {
+
+                // Baillll
+                $response = array(
+                    'success' => false,
+                    'failedRules' => $validator->getFailedRules(false)
+                );
+                $this->_pass('response', json_encode($response));
+            } else {
+
+                /**
+                 * Body
+                 * 
+                 */
+
+                // Log them in
+                $userModel = $this->_getModel('\Modules\Users\User');
+                $user = $userModel->getUserByEmail($_POST['email']);
+                $user->login();
+
+                // Success, homie ;)
+                $response = array(
+                    'success' => true,
+                    'data' => array(
+                        'user' => $user->getPublicData()
+                    )
+                );
+                $this->_pass('response', json_encode($response));
+
+                // Callbacks
+                $callbacks = $config['callbacks']['changePassword'];
+                foreach ($callbacks as $callback) {
+                    call_user_func($callback);
+                }
+            }
         }
 
         /**
@@ -178,6 +226,10 @@
          */
         protected function _actionResetPasswordGet()
         {
+            // View
+            $config = \Modules\Users::getConfig();
+            $view = $config['views']['resetPassword'];
+            $this->_setView($view);
         }
 
         /**
@@ -243,6 +295,42 @@
          */
         public function actionLogout()
         {
+            /**
+             * Validation
+             * 
+             */
+
+            // validate
+            $schema = (new SmartSchema(
+                APP . '/schemas/users.logout.post.json'
+            ));
+            $validator = (new ProjectSchemaValidator(
+                $schema,
+                $this->getRequest(),
+                $_POST
+            ));
+            if ($validator->valid() === false) {
+                throw new SchemaValidationException(
+                    $this->_getFailedSchemaMessage($validator)
+                );
+            }
+
+            /**
+             * Body
+             * 
+             */
+            $loggedInUser = getLoggedInUser();
+            $loggedInUser->logout();
+            $response = array(
+                'success' => true
+            );
+            $this->_pass('response', json_encode($response));
+
+            // Callbacks
+            $callbacks = $config['callbacks']['changePassword'];
+            foreach ($callbacks as $callback) {
+                call_user_func($callback);
+            }
         }
 
         /**

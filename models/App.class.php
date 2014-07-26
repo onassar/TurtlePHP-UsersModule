@@ -1,11 +1,14 @@
 <?php
 
+    // namespaces
+    namespace Modules\Users;
+
     /**
      * AppModel
      *
-     * @extends Model
+     * @extends \Turtle\Model
      */
-    class AppModel extends Turtle\Model
+    class AppModel extends \Turtle\Model
     {
         /**
          * _modelName

@@ -1,1 +1,1 @@
-<?= ($response) ?>
+reset password

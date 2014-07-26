@@ -1,5 +1,8 @@
 <?php
 
+    // namespaces
+    namespace Modules\Users;
+
     /**
      * Accessor
      *
