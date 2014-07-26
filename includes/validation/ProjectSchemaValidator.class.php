@@ -24,17 +24,15 @@
          * @return void
          */
         public function __construct(
-            Schema $schema,
-            Turtle\Request $request,
+            \Schema $schema,
+            \Turtle\Request $request,
             array $data = array())
         {
-            $info = pathinfo(__DIR__);
-            $parent = $info['dirname'];
             $this->_libraries = array(
                 APP . '/vendors/PHP-JSON-Validation/DataValidator.class.php',
                 APP . '/vendors/PHP-JSON-Validation/StringValidator.class.php',
-                ($parent) . '/validation/SecurityValidator.class.php',
-                ($parent) . '/validation/UserValidator.class.php'
+                MODULE . '/validation/SecurityValidator.class.php',
+                MODULE . '/validation/UserValidator.class.php'
             );
             parent::__construct($schema, $data);
 

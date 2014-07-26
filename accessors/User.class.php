@@ -4,16 +4,14 @@
     namespace Modules\Users;
 
     // dependencies
-    $info = pathinfo(__DIR__);
-    $parent = $info['dirname'];
-    require_once ($parent) . '/accessors/Accessor.class.php';
+    require_once MODULE . '/accessors/Accessor.class.php';
 
     /**
      * UserAccessor
      *
-     * @extends \Modules\Users\Accessor
+     * @extends Accessor
      */
-    class UserAccessor extends \Modules\Users\Accessor
+    class UserAccessor extends Accessor
     {
         /**
          * _modelName

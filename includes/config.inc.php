@@ -42,20 +42,17 @@
      * 
      */
 
-    // grab parent directory
-    $info = pathinfo(__DIR__);
-    $parent = $info['dirname'];
-
     // GET views
     $views = array(
-        'register' => ($parent) . '/views/register.inc.php',
-        'login' => ($parent) . '/views/login.inc.php',
-        'resetPassword' => ($parent) . '/views/resetPassword.inc.php',
-        'changePassword' => ($parent) . '/views/changePassword.inc.php',
-        'resetPasswordEmail' => ($parent) . '/views/emails/resetPassword.v1.inc.php',
-        'welcomeEmail' => ($parent) . '/views/emails/welcome.v1.inc.php'
+        'register' => MODULE . '/views/register.inc.php',
+        'login' => MODULE . '/views/login.inc.php',
+        'resetPassword' => MODULE . '/views/resetPassword.inc.php',
+        'changePassword' => MODULE . '/views/changePassword.inc.php',
+        'resetPasswordEmail' => MODULE . '/views/emails/resetPassword.v1.inc.php',
+        'welcomeEmail' => MODULE . '/views/emails/welcome.v1.inc.php'
     );
-
+print_r($views);
+exit(0);
     // config storage
     \Plugin\Config::add(
         'TurtlePHP-UsersModule',
