@@ -411,7 +411,6 @@
          */
         public function actionLogout()
         {
-exitMODULE;
             /**
              * Validation
              * 

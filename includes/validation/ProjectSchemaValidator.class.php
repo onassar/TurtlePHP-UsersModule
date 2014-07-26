@@ -31,8 +31,8 @@
             $this->_libraries = array(
                 APP . '/vendors/PHP-JSON-Validation/DataValidator.class.php',
                 APP . '/vendors/PHP-JSON-Validation/StringValidator.class.php',
-                MODULE . '/validation/SecurityValidator.class.php',
-                MODULE . '/validation/UserValidator.class.php'
+                MODULE . '/includes/validation/SecurityValidator.class.php',
+                MODULE . '/includes/validation/UserValidator.class.php'
             );
             parent::__construct($schema, $data);
 

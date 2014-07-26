@@ -11,11 +11,11 @@
         DEFINE('MODULE', $parent);
 
         // include classes, controllers, models, helpers
-        require_once ($parent) . '/Users.class.php';
-        require_once ($parent) . '/models/User.class.php';
-        require_once ($parent) . '/controllers/Users.class.php';
-        require_once ($parent) . '/controllers/Emails.class.php';
-        require_once ($parent) . '/includes/validation/ProjectSchemaValidator.class.php';
+        require_once MODULE . '/Users.class.php';
+        require_once MODULE . '/models/User.class.php';
+        require_once MODULE . '/controllers/Users.class.php';
+        require_once MODULE . '/controllers/Emails.class.php';
+        require_once MODULE . '/includes/validation/ProjectSchemaValidator.class.php';
 
         // flow includes
         require_once 'functions.inc.php';

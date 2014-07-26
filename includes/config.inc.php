@@ -51,8 +51,7 @@
         'resetPasswordEmail' => MODULE . '/views/emails/resetPassword.v1.inc.php',
         'welcomeEmail' => MODULE . '/views/emails/welcome.v1.inc.php'
     );
-print_r($views);
-exit(0);
+
     // config storage
     \Plugin\Config::add(
         'TurtlePHP-UsersModule',
