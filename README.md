@@ -53,7 +53,6 @@ require_once APP . '/vendors/PHP-MySQL/MySQLConnection.class.php';
 require_once APP . '/vendors/PHP-MySQL/MySQLQuery.class.php';
 require_once APP . '/vendors/PHP-Query/Query.class.php';
 require_once APP . '/vendors/PHP-SecureSessions/SMSession.class.php';
-
 require_once APP . '/vendors/PHP-JSON-Validation/Schema.class.php';
 require_once APP . '/vendors/PHP-JSON-Validation/SmartSchema.class.php';
 require_once APP . '/vendors/PHP-JSON-Validation/SchemaValidator.class.php';

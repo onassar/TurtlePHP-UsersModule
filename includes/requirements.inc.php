@@ -15,9 +15,9 @@
         'MySQLQuery' => 'PHP-MySQL',
         'Query' => 'PHP-Query',
         'SMSession' => 'PHP-SecureSessions',
-        // 'Schema' => 'PHP-JSON-Validation',
-        // 'SmartSchema' => 'PHP-JSON-Validation',
-        // 'Schema' => 'PHP-JSON-Validation'
+        'Schema' => 'PHP-JSON-Validation',
+        'SmartSchema' => 'PHP-JSON-Validation',
+        'Schema' => 'PHP-JSON-Validation'
     );
 
     // perform checks

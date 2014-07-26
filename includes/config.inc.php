@@ -27,6 +27,17 @@
     );
 
     /**
+     * Settings
+     * 
+     */
+
+    // generic
+    $settings = array(
+        'checkForSchema' => true,
+        'cacheData' => false
+    );
+
+    /**
      * Views
      * 
      */
