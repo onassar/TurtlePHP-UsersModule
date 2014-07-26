@@ -56,7 +56,5 @@ require_once APP . '/vendors/PHP-SecureSessions/SMSession.class.php';
 require_once APP . '/vendors/PHP-JSON-Validation/Schema.class.php';
 require_once APP . '/vendors/PHP-JSON-Validation/SmartSchema.class.php';
 require_once APP . '/vendors/PHP-JSON-Validation/SchemaValidator.class.php';
-#require_once APP . '/helpers/validation/ProjectSchemaValidator.class.php';
-
 require_once APP . '/modules/TurtlePHP-UsersModule/includes/init.inc.php';
 ```
