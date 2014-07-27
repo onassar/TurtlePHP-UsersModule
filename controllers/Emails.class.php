@@ -26,45 +26,41 @@
         );
 
         /**
-         * _getPostmarkEmailResource
-         * 
+         * _getSchemaPath
+         *
          * @access protected
-         * @return PostmarkEmail
+         * @param  string $action
+         * @param  string $method
+         * @return string
          */
-        protected function _getPostmarkEmailResource()
+        protected function _getSchemaPath($action, $method)
         {
-            if (defined('POSTMARKAPP_API_KEY') === false) {
-                $config = getConfig();
-                $postmarkConfig = $config['postmark'];
-                define('POSTMARKAPP_API_KEY', $postmarkConfig['key']);
-                define('POSTMARKAPP_MAIL_FROM_ADDRESS', $postmarkConfig['from']['email']);
-                define('POSTMARKAPP_MAIL_FROM_NAME', $postmarkConfig['from']['name']);
-            }
-            if (is_null($this->_postmarkEmailResource)) {
-                $this->_postmarkEmailResource = (new PostmarkEmail());
-            }
-            return $this->_postmarkEmailResource;
+            $config = getConfig();
+            return $config['schemas']['emails']['user'][$action][$method];
         }
 
         /**
          * _validateUserSchema
          * 
          * @access protected
+         * @param  string $action
+         * @param  string $method
          * @return void
          */
-        protected function _validateUserSchema()
+        protected function _validateUserSchema($action, $method)
         {
             $_get = $this->getGet();
-            $schema = (new SmartSchema(
-                APP . '/schemas/emails.userStandard.get.json'
-            ));
+            $schema = (new \SmartSchema($this->_getSchemaPath(
+                $action,
+                $method
+            )));
             $validator = (new ProjectSchemaValidator(
                 $schema,
                 $this->getRequest(),
                 $_get
             ));
             if ($validator->valid() === false) {
-                throw new SchemaValidationException(
+                throw new \SchemaValidationException(
                     $this->_getFailedSchemaMessage($validator)
                 );
             }
@@ -81,7 +77,7 @@
             // Validate
             $_get = $this->getGet();
             if (!isset($_get['preview'])) {
-                $this->_validateUserSchema();
+                $this->_validateUserSchema('welcome', 'get');
             }
 
             // Get user record

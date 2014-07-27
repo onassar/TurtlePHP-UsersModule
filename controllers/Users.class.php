@@ -28,7 +28,7 @@
              */
 
             // Schema
-            $path = MODULE . '/schemas/users.changePassword.get.json';
+            $path = $this->_getSchemaPath('changePassword', 'get');
             $schema = (new \SmartSchema($path));
 
             // Validator
@@ -50,7 +50,7 @@
              */
 
             // View
-            $config = \Modules\Users::getConfig();
+            $config = getConfig();
             $view = $config['views']['changePassword'];
             $this->_setView($view);
 
@@ -83,7 +83,7 @@
              */
 
             // Schema
-            $path = MODULE . '/schemas/users.index.get.json';
+            $path = $this->_getSchemaPath('register', 'get');
             $schema = (new \SmartSchema($path));
 
             // Validator
@@ -105,7 +105,7 @@
              */
 
             // View
-            $config = \Modules\Users::getConfig();
+            $config = getConfig();
             $view = $config['views']['register'];
             $this->_setView($view);
         }
@@ -210,7 +210,7 @@
              */
 
             // Schema
-            $path = MODULE . '/schemas/users.login.get.json';
+            $path = $this->_getSchemaPath('login', 'get');
             $schema = (new \SmartSchema($path));
 
             // Validator
@@ -232,7 +232,7 @@
              */
 
             // View
-            $config = \Modules\Users::getConfig();
+            $config = getConfig();
             $view = $config['views']['login'];
             $this->_setView($view);
         }
@@ -311,7 +311,7 @@
              */
 
             // Schema
-            $path = MODULE . '/schemas/users.resetPassword.get.json';
+            $path = $this->_getSchemaPath('resetPassword', 'get');
             $schema = (new \SmartSchema($path));
 
             // Validator
@@ -333,7 +333,7 @@
              */
 
             // View
-            $config = \Modules\Users::getConfig();
+            $config = getConfig();
             $view = $config['views']['resetPassword'];
             $this->_setView($view);
         }
@@ -356,6 +356,20 @@
 // 
 // 
 //             
+        }
+
+        /**
+         * _getSchemaPath
+         *
+         * @access protected
+         * @param  string $action
+         * @param  string $method
+         * @return string
+         */
+        protected function _getSchemaPath($action, $method)
+        {
+            $config = getConfig();
+            return $config['schemas'][$action][$method];
         }
 
         /**
@@ -417,7 +431,7 @@
              */
 
             // Schema
-            $path = MODULE . '/schemas/users.logout.post.json';
+            $path = $this->_getSchemaPath('logout', 'post');
             $schema = (new \SmartSchema($path));
 
             // Validator

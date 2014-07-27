@@ -4,6 +4,17 @@
     namespace Modules\Users;
 
     /**
+     * getConfig
+     * 
+     * @access public
+     * @return array
+     */
+    function getConfig()
+    {
+        return \Modules\Users::getConfig();
+    }
+
+    /**
      * getLoggedInUser
      * 
      * @note   Exception thrown if invalid id

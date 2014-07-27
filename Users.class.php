@@ -41,20 +41,4 @@
             $config = $config['TurtlePHP-UsersModule'];
             return $config;
         }
-
-        /**
-         * setView
-         * 
-         * @access public
-         * @static
-         * @param  string $name
-         * @param  string $path
-         * @return void
-         */
-        public static function setView($name, $path)
-        {
-            $config = \Plugin\Config::retrieve();
-            $config = $config['TurtlePHP-UsersModule'];
-            $config['views'][$name] = $path;
-        }
     }
