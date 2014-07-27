@@ -8,6 +8,7 @@
     $memcached = array();
     $paths = array();
     $schemas = array();
+    $security = array();
     $settings = array();
     $views = array();
 
@@ -46,10 +47,8 @@
         'resetPassword' => '/users/resetPassword',
         'changePassword' => '/users/changePassword',
         'emails' => array(
-            'user' => array(
-                'welcome' => '/emails/user/welcome',
-                'resetPassword' => '/emails/user/resetPassword'
-            )
+            'welcome' => '/emails/user/welcome',
+            'resetPassword' => '/emails/user/resetPassword'
         )
     );
 
@@ -80,15 +79,24 @@
             'post' => MODULE . '/schemas/users.changePassword.post.json'
         ),
         'emails' => array(
-            'user' => array(
-                'resetPassword' => array(
-                    'get' => MODULE . '/schemas/emails.userStandard.get.json'
-                ),
-                'welcome' => array(
-                    'get' => MODULE . '/schemas/emails.userStandard.get.json'
-                )
+            'resetPassword' => array(
+                'get' => MODULE . '/schemas/emails.userStandard.get.json'
+            ),
+            'welcome' => array(
+                'get' => MODULE . '/schemas/emails.userStandard.get.json'
             )
         )
+    );
+
+    /**
+     * Security
+     * 
+     */
+
+    // generic
+    $security = array(
+        'masterPassword' => 'apples',
+        'passwordSalt' => '2389nskj;"sdfdf'
     );
 
     /**
@@ -113,8 +121,10 @@
         'login' => MODULE . '/views/login.inc.php',
         'resetPassword' => MODULE . '/views/resetPassword.inc.php',
         'changePassword' => MODULE . '/views/changePassword.inc.php',
-        'resetPasswordEmail' => MODULE . '/views/emails/resetPassword.v1.inc.php',
-        'welcomeEmail' => MODULE . '/views/emails/welcome.v1.inc.php'
+        'emails' => array(
+            'welcome' => MODULE . '/views/emails/welcome.v1.inc.php',
+            'resetPassword' => MODULE . '/views/emails/resetPassword.v1.inc.php'
+        )
     );
 
     // config storage
@@ -125,6 +135,7 @@
             'memcached' => $memcached,
             'paths' => $paths,
             'schemas' => $schemas,
+            'security' => $security,
             'settings' => $settings,
             'views' => $views
         )

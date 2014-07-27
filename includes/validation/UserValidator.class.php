@@ -120,11 +120,10 @@
         {
             // Master key
             $config = getConfig();
-            $role = getRole();
-            $masterPassword = $config['security'][$role]['masterPassword'];
+            $masterPassword = $config['security']['masterPassword'];
 
             // Secure settings
-            $security = $config['security'][$role];
+            $security = $config['security'];
 
             // Check email, then password
             $userModel = Turtle\Application::getModel('User');

@@ -36,7 +36,7 @@
         protected function _getSchemaPath($action, $method)
         {
             $config = getConfig();
-            return $config['schemas']['emails']['user'][$action][$method];
+            return $config['schemas']['emails'][$action][$method];
         }
 
         /**

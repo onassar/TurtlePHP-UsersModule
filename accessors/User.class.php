@@ -38,6 +38,21 @@
         protected $_tableName = 'users';
 
         /**
+         * getPublicData
+         *
+         * @access public
+         * @return array
+         */
+        public function getPublicData()
+        {
+            $this->status;// Needed to ensure data is retrieved from store
+            $data = $this->_data;
+            unset($data['passwordHash']);
+            unset($data['loginHash']);
+            return $data;
+        }
+
+        /**
          * login
          *
          * @access public
@@ -123,5 +138,58 @@
                     'loginHash' => getRandomHash()
                 ));
             }
+        }
+
+        /**
+         * sendResetPasswordEmail
+         *
+         * @access public
+         * @param  string $randomPassword
+         * @return void
+         */
+        public function sendResetPasswordEmail($randomPassword)
+        {
+            $path = '/emails/user/resetPassword' .
+                '?userId=' . ($this->id) .
+                '&randomPassword=' . ($randomPassword);
+            $subrequest = (new \Turtle\Request($path));
+            $subrequest->route();
+            $subrequest->generate();
+        }
+
+
+        /**
+         * sendWelcomeEmail
+         *
+         * @access public
+         * @return void
+         */
+        public function sendWelcomeEmail()
+        {
+            $path = '/emails/user/welcome?' .
+                'userId=' . ($this->id);
+            $subrequest = (new \Turtle\Request($path));
+            $subrequest->route();
+            $subrequest->generate();
+            $subrequest->getResponse();
+        }
+
+        /**
+         * setPassword
+         *
+         * @access public
+         * @param  string $password
+         * @return void
+         */
+        public function setPassword($password)
+        {
+            $config = getConfig();
+            $security = $config['security'];
+            $this->update(array(
+                'passwordHash' => hash(
+                    'sha256',
+                    ($security['passwordSalt']) . ($password)
+                )
+            ));
         }
     }

@@ -43,13 +43,13 @@
         ),
 
         // Emails
-        '^' . ($paths['emails']['user']['welcome']) . '$' => array(// G
+        '^' . ($paths['emails']['welcome']) . '$' => array(// G
             'module' => true,
             'controller' => '\Modules\Users\Emails',
             'action' => 'actionUserWelcome',
             'view' => MODULE . '/views/raw.inc.php'
         ),
-        '^' . ($paths['emails']['user']['resetPassword']) . '$' => array(// G
+        '^' . ($paths['emails']['resetPassword']) . '$' => array(// G
             'module' => true,
             'controller' => '\Modules\Users\Emails',
             'action' => 'actionUserResetPassword',
