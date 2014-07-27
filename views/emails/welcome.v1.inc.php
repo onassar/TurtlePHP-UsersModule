@@ -1,1 +1,5 @@
-welcome 1
+<?php
+
+    // namespaces
+    namespace Modules\Users;
+?>welcome 1

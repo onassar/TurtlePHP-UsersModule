@@ -1,5 +1,8 @@
 <?php
 
+    // namespaces
+    namespace Modules\Users;
+
     // add module routes to application
     \Turtle\Application::addRoutes(array(
 

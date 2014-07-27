@@ -1,5 +1,8 @@
 <?php
 
+    // namespaces
+    namespace Modules\Users;
+
     // configuration init
     $callbacks = array();
     $views = array();

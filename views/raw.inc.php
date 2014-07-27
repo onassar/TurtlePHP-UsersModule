@@ -1,1 +1,5 @@
-<?= ($response) ?>
+<?php
+
+    // namespaces
+    namespace Modules\Users;
+?><?= ($response) ?>

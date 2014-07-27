@@ -1,1 +1,5 @@
-login
+<?php
+
+    // namespaces
+    namespace Modules\Users;
+?>login

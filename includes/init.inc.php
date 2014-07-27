@@ -1,5 +1,8 @@
 <?php
 
+    // namespaces
+    namespace Modules\Users;
+
     // closure (variable scope preservation)
     $closure = function() {
 
@@ -8,7 +11,7 @@
         $parent = $info['dirname'];
 
         // module path
-        DEFINE('MODULE', $parent);
+        DEFINE(__NAMESPACE__ . '\MODULE', $parent);
 
         // include classes, controllers, models, helpers
         require_once MODULE . '/Users.class.php';
