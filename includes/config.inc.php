@@ -117,13 +117,34 @@
 
     // GET views
     $views = array(
-        'register' => MODULE . '/views/register.inc.php',
-        'login' => MODULE . '/views/login.inc.php',
-        'resetPassword' => MODULE . '/views/resetPassword.inc.php',
-        'changePassword' => MODULE . '/views/changePassword.inc.php',
+        'register' => array(
+            'get' => MODULE . '/views/register.inc.php',
+            'post' => MODULE . '/views/raw.inc.php'
+        ),
+        'login' => array(
+            'get' => MODULE . '/views/login.inc.php',
+            'post' => MODULE . '/views/raw.inc.php'
+        ),
+        'logou' => array(
+            'post' => MODULE . '/views/raw.inc.php'
+        ),
+        'resetPassword' => array(
+            'get' => MODULE . '/views/resetPassword.inc.php',
+            'post' => MODULE . '/views/raw.inc.php'
+        ),
+        'changePassword' => array(
+            'get' => MODULE . '/views/changePassword.inc.php',
+            'post' => MODULE . '/views/raw.inc.php'
+        ),
         'emails' => array(
-            'welcome' => MODULE . '/views/emails/welcome.v1.inc.php',
-            'resetPassword' => MODULE . '/views/emails/resetPassword.v1.inc.php'
+            'welcome' => array(
+                'get' => MODULE . '/views/emails/welcome.v1.inc.php',
+                'post' => MODULE . '/views/raw.inc.php'
+            ),
+            'resetPassword' => array(
+                'get' => MODULE . '/views/emails/resetPassword.v1.inc.php',
+                'post' => MODULE . '/views/raw.inc.php'
+            )
         )
     );
 

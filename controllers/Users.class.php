@@ -15,6 +15,20 @@
     final class UsersController extends AppController
     {
         /**
+         * __setView
+         *
+         * @access private
+         * @param  string $action
+         * @param  string $method
+         * @return void
+         */
+        protected function __setView($action, $method)
+        {
+            $config = getConfig();
+            parent::_setView($config['views'][$action][$method]);
+        }
+
+        /**
          * _actionChangePasswordGet
          * 
          * @access protected
@@ -48,11 +62,6 @@
              * Body
              * 
              */
-
-            // View
-            $config = getConfig();
-            $view = $config['views']['changePassword'];
-            $this->_setView($view);
 
             // User
             $loggedInUser = getLoggedInUser();
@@ -106,7 +115,7 @@
 
             // View
             $config = getConfig();
-            $view = $config['views']['register'];
+            $view = $config['views']['register']['get'];
             $this->_setView($view);
         }
 
@@ -233,7 +242,7 @@
 
             // View
             $config = getConfig();
-            $view = $config['views']['login'];
+            $view = $config['views']['login']['get'];
             $this->_setView($view);
         }
 
@@ -334,7 +343,7 @@
 
             // View
             $config = getConfig();
-            $view = $config['views']['resetPassword'];
+            $view = $config['views']['resetPassword']['get'];
             $this->_setView($view);
         }
 
@@ -381,8 +390,10 @@
         public function actionChangePassword()
         {
             if (!empty($_POST)) {
+                $this->_setView('changePassword', 'post');
                 $this->_actionChangePasswordPost();
             } else {
+                $this->_setView('changePassword', 'get');
                 $this->_actionChangePasswordGet();
             }
         }
@@ -396,8 +407,10 @@
         public function actionIndex()
         {
             if (!empty($_POST)) {
+                $this->_setView('register', 'post');
                 $this->_actionIndexPost();
             } else {
+                $this->_setView('register', 'get');
                 $this->_actionIndexGet();
             }
         }
@@ -411,8 +424,10 @@
         public function actionLogin()
         {
             if (!empty($_POST)) {
+                $this->_setView('login', 'post');
                 $this->_actionLoginPost();
             } else {
+                $this->_setView('login', 'get');
                 $this->_actionLoginGet();
             }
         }
@@ -425,6 +440,9 @@
          */
         public function actionLogout()
         {
+            // View
+            $this->_setView('logout', 'get');
+
             /**
              * Validation
              * 
@@ -477,8 +495,10 @@
         public function actionResetPassword()
         {
             if (!empty($_POST)) {
+                $this->_setView('resetPassword', 'post');
                 $this->_actionResetPasswordPost();
             } else {
+                $this->_setView('resetPassword', 'get');
                 $this->_actionResetPasswordGet();
             }
         }

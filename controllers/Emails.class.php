@@ -13,6 +13,20 @@
     final class EmailsController extends AppController
     {
         /**
+         * __setView
+         *
+         * @access private
+         * @param  string $action
+         * @param  string $method
+         * @return void
+         */
+        protected function __setView($action, $method)
+        {
+            $config = getConfig();
+            parent::_setView($config['views']['emails'][$action][$method]);
+        }
+
+        /**
          * subjects
          *
          * Publically scoped to allow for closures.
@@ -79,6 +93,9 @@
             if (!isset($_get['preview'])) {
                 $this->_validateUserSchema('welcome', 'get');
             }
+
+            // View
+            $this->__setView('welcome', 'get');
 
             // Get user record
             $userModel = $this->_getModel('User');

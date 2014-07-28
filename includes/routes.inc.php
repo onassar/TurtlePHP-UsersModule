@@ -14,45 +14,38 @@
         '^' . ($paths['register']) . '$' => array(// G + P
             'module' => true,
             'controller' => '\Modules\Users\Users',
-            'action' => 'actionIndex',
-            'view' => MODULE . '/views/raw.inc.php'
+            'action' => 'actionIndex'
         ),
         '^' . ($paths['login']) . '$' => array(// G + P
             'module' => true,
             'controller' => '\Modules\Users\Users',
-            'action' => 'actionLogin',
-            'view' => MODULE . '/views/raw.inc.php'
+            'action' => 'actionLogin'
         ),
         '^' . ($paths['logout']) . '$' => array(// P
             'module' => true,
             'controller' => '\Modules\Users\Users',
-            'action' => 'actionLogout',
-            'view' => MODULE . '/views/raw.inc.php'
+            'action' => 'actionLogout'
         ),
         '^' . ($paths['changePassword']) . '$' => array(// G + P
             'module' => true,
             'controller' => '\Modules\Users\Users',
-            'action' => 'actionChangePassword',
-            'view' => MODULE . '/views/raw.inc.php'
+            'action' => 'actionChangePassword'
         ),
         '^' . ($paths['resetPassword']) . '$' => array(// G + P
             'module' => true,
             'controller' => '\Modules\Users\Users',
-            'action' => 'actionResetPassword',
-            'view' => MODULE . '/views/raw.inc.php'
+            'action' => 'actionResetPassword'
         ),
 
         // Emails
         '^' . ($paths['emails']['welcome']) . '$' => array(// G
             'module' => true,
             'controller' => '\Modules\Users\Emails',
-            'action' => 'actionUserWelcome',
-            'view' => MODULE . '/views/raw.inc.php'
+            'action' => 'actionUserWelcome'
         ),
         '^' . ($paths['emails']['resetPassword']) . '$' => array(// G
             'module' => true,
             'controller' => '\Modules\Users\Emails',
-            'action' => 'actionUserResetPassword',
-            'view' => MODULE . '/views/raw.inc.php'
+            'action' => 'actionUserResetPassword'
         )
     ));

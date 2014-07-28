@@ -149,7 +149,12 @@
          */
         public function sendResetPasswordEmail($randomPassword)
         {
-            $path = '/emails/user/resetPassword' .
+            // Path
+            $config = getConfig();
+            $path = $config['paths']['emails']['resetPassword'];
+
+            // Subrequest
+            $path = ($path) .
                 '?userId=' . ($this->id) .
                 '&randomPassword=' . ($randomPassword);
             $subrequest = (new \Turtle\Request($path));
@@ -166,8 +171,13 @@
          */
         public function sendWelcomeEmail()
         {
-            $path = '/emails/user/welcome?' .
-                'userId=' . ($this->id);
+            // Path
+            $config = getConfig();
+            $path = $config['paths']['emails']['welcome'];
+
+            // Subrequest
+            $path = ($path) .
+                '?userId=' . ($this->id);
             $subrequest = (new \Turtle\Request($path));
             $subrequest->route();
             $subrequest->generate();
