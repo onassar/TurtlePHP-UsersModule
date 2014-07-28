@@ -15,6 +15,24 @@
     final class UsersController extends AppController
     {
         /**
+         * __callParent
+         * 
+         * @access private
+         * @param  string $name
+         * @param  boolean $passed
+         * @param  array $args (default: array)
+         * @return void
+         */
+        private function __callParent($name, $passed, array $args = array())
+        {
+            $parent = array('parent', $name);
+            if (is_callable($parent)) {
+                define('PASSED', $passed);
+                call_user_func_array($parent, $args);
+            }
+        }
+
+        /**
          * __setView
          *
          * @access private
@@ -36,36 +54,6 @@
          */
         protected function _actionChangePasswordGet()
         {
-            /**
-             * Validation
-             * 
-             */
-
-            // Schema
-            $path = $this->_getSchemaPath('changePassword', 'get');
-            $schema = (new \SmartSchema($path));
-
-            // Validator
-            $validator = (new ProjectSchemaValidator(
-                $schema,
-                $this->getRequest()
-            ));
-
-            // Bail if invalid
-            if ($validator->valid() === false) {
-                throw new \SchemaValidationException(
-                    $this->_getFailedSchemaMessage($validator)
-                );
-            }
-
-            /**
-             * Body
-             * 
-             */
-
-            // User
-            $loggedInUser = getLoggedInUser();
-            $this->_pass('loggedInUser', $loggedInUser);
         }
 
         /**
@@ -103,6 +91,12 @@
 
             // Bail if invalid
             if ($validator->valid() === false) {
+
+                // Parent
+                $args = func_get_args();
+                $this->__callParent(__FUNCTION__, false, $args);
+
+                // Done
                 throw new \SchemaValidationException(
                     $this->_getFailedSchemaMessage($validator)
                 );
@@ -117,6 +111,10 @@
             $config = getConfig();
             $view = $config['views']['register']['get'];
             $this->_setView($view);
+
+            // Parent
+            $args = func_get_args();
+            $this->__callParent(__FUNCTION__, false, $args);
         }
 
         /**
@@ -213,37 +211,6 @@
          */
         protected function _actionLoginGet()
         {
-            /**
-             * Validation
-             * 
-             */
-
-            // Schema
-            $path = $this->_getSchemaPath('login', 'get');
-            $schema = (new \SmartSchema($path));
-
-            // Validator
-            $validator = (new ProjectSchemaValidator(
-                $schema,
-                $this->getRequest()
-            ));
-
-            // Bail if invalid
-            if ($validator->valid() === false) {
-                throw new \SchemaValidationException(
-                    $this->_getFailedSchemaMessage($validator)
-                );
-            }
-
-            /**
-             * Body
-             * 
-             */
-
-            // View
-            $config = getConfig();
-            $view = $config['views']['login']['get'];
-            $this->_setView($view);
         }
 
         /**
@@ -314,37 +281,6 @@
          */
         protected function _actionResetPasswordGet()
         {
-            /**
-             * Validation
-             * 
-             */
-
-            // Schema
-            $path = $this->_getSchemaPath('resetPassword', 'get');
-            $schema = (new \SmartSchema($path));
-
-            // Validator
-            $validator = (new ProjectSchemaValidator(
-                $schema,
-                $this->getRequest()
-            ));
-
-            // Bail if invalid
-            if ($validator->valid() === false) {
-                throw new \SchemaValidationException(
-                    $this->_getFailedSchemaMessage($validator)
-                );
-            }
-
-            /**
-             * Body
-             * 
-             */
-
-            // View
-            $config = getConfig();
-            $view = $config['views']['resetPassword']['get'];
-            $this->_setView($view);
         }
 
         /**

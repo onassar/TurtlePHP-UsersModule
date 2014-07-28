@@ -4,11 +4,11 @@
     namespace Modules\Users;
 
     /**
-     * Class Requirements
+     * Plugin/vendors Requirements
      * 
      */
 
-    // required classes
+    // hash
     $required = array(
         '\Plugin\Config' => 'TurtlePHP-ConfigPlugin',
         'Email' => 'PHP-Email',
@@ -23,17 +23,34 @@
         'Schema' => 'PHP-JSON-Validation'
     );
 
-    // perform checks
+    // checks
     foreach ($required as $class => $package) {
-
-        // not found
         if (!class_exists($class)) {
-
-            // error out
-            throw new Exception(
+            throw new \Exception(
                 'Class *' . ($class) . '* couldn\'t be found. Ensure it, and ' .
                 'it\'s associated library (' . ($package) . ') are properly ' .
                 'included.'
+            );
+        }
+    }
+
+    /**
+     * Application requirements
+     * 
+     */
+
+    // hash
+    $required = array(
+        'UsersController',
+        'UserAccessor',
+        'UserModel'
+    );
+
+    // checks
+    foreach ($required as $class) {
+        if (!class_exists($class)) {
+            throw new \Exception(
+                'Class *' . ($class) . '* couldn\'t be found. Load it!'
             );
         }
     }

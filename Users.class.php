@@ -12,22 +12,6 @@
     abstract class Users
     {
         /**
-         * addCallback
-         * 
-         * @access public
-         * @static
-         * @param  string $name
-         * @param  array $callback
-         * @return void
-         */
-        public static function addCallback($name, array $callback)
-        {
-            $config = \Plugin\Config::retrieve();
-            $config = $config['TurtlePHP-UsersModule'];
-            array_push($config['callbacks'][$name], $callback);
-        }
-
-        /**
          * getConfig
          * 
          * @access public

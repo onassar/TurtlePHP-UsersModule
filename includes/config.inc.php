@@ -4,26 +4,12 @@
     namespace Modules\Users;
 
     // configuration init
-    $callbacks = array();
     $memcached = array();
     $paths = array();
     $schemas = array();
     $security = array();
     $settings = array();
     $views = array();
-
-    /**
-     * Callbacks
-     * 
-     */
-
-    // POST callbacks
-    $callbacks = array(
-        'register' => array(),
-        'login' => array(),
-        'resetPassword' => array(),
-        'changePassword' => array()
-    );
 
     /**
      * Memcached
@@ -151,7 +137,6 @@
     \Plugin\Config::add(
         'TurtlePHP-UsersModule',
         array(
-            'callbacks' => $callbacks,
             'memcached' => $memcached,
             'paths' => $paths,
             'schemas' => $schemas,
