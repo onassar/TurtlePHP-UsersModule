@@ -6,9 +6,9 @@
     /**
      * AppModel
      *
-     * @extends \Turtle\Model
+     * @extends \UserModel
      */
-    class AppModel extends \Turtle\Model
+    class AppModel extends \UserModel
     {
         /**
          * _modelName

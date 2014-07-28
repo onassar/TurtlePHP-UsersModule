@@ -6,9 +6,9 @@
     /**
      * AppController
      * 
-     * @extends \Turtle\Controller
+     * @extends \UsersController
      */
-    class AppController extends \Turtle\Controller
+    class AppController extends \UsersController
     {
         /**
          * _generateAndStoreCsrfToken

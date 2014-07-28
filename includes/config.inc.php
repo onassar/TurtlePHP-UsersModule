@@ -106,7 +106,6 @@
 
     // generic
     $settings = array(
-        'checkForSchema' => true,
         'cacheData' => false
     );
 
@@ -125,7 +124,7 @@
             'get' => MODULE . '/views/login.inc.php',
             'post' => MODULE . '/views/raw.inc.php'
         ),
-        'logou' => array(
+        'logout' => array(
             'post' => MODULE . '/views/raw.inc.php'
         ),
         'resetPassword' => array(

@@ -6,8 +6,9 @@
     /**
      * Accessor
      *
+     * @extends \UserAccessor
      */
-    class Accessor
+    class Accessor extends \UserAccessor
     {
         /**
          * _data
