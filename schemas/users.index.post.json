@@ -1,20 +1,20 @@
 [
     {
-        "validator": ["CommonValidator", "siteIsNotLocked"],
+        "validator": ["Modules\\Users\\CommonValidator", "siteIsNotLocked"],
         "blocking": true,
         "error": {
             "reference": "800"
         }
     },
     {
-        "validator": ["DataValidator", "dataPosted"],
+        "validator": ["Modules\\Users\\DataValidator", "dataPosted"],
         "blocking": true,
         "error": {
             "reference": "801"
         }
     },
     {
-        "validator": ["SecurityValidator", "validCsrfToken"],
+        "validator": ["Modules\\Users\\SecurityValidator", "validCsrfToken"],
         "params": ["{csrfToken}"],
         "blocking": true,
         "error": {
@@ -22,14 +22,14 @@
         }
     },
     {
-        "validator": ["UserValidator", "isLoggedOut"],
+        "validator": ["Modules\\Users\\UserValidator", "isLoggedOut"],
         "blocking": true,
         "error": {
             "reference": "803"
         }
     },
     {
-        "validator": ["StringValidator", "notEmpty"],
+        "validator": ["Modules\\Users\\StringValidator", "notEmpty"],
         "params": ["{email}"],
         "blocking": true,
         "error": {
@@ -39,7 +39,7 @@
         },
         "rules": [
             {
-                "validator": ["StringValidator", "email"],
+                "validator": ["Modules\\Users\\StringValidator", "email"],
                 "params": ["{email}"],
                 "blocking": true,
                 "error": {
@@ -51,7 +51,7 @@
         ]
     },
     {
-        "validator": ["UserValidator", "uniqueEmailAddress"],
+        "validator": ["Modules\\Users\\UserValidator", "uniqueEmailAddress"],
         "blocking": true,
         "params": ["{email}"],
         "error": {
@@ -61,7 +61,7 @@
         }
     },
     {
-        "validator": ["StringValidator", "notEmpty"],
+        "validator": ["Modules\\Users\\StringValidator", "notEmpty"],
         "params": ["{password}"],
         "blocking": true,
         "error": {
@@ -71,7 +71,7 @@
         }
     },
     {
-        "validator": ["StringValidator", "minLength"],
+        "validator": ["Modules\\Users\\StringValidator", "minLength"],
         "params": ["{password}", 4],
         "blocking": true,
         "error": {
@@ -81,7 +81,7 @@
         }
     },
     {
-        "validator": ["StringValidator", "equals"],
+        "validator": ["Modules\\Users\\StringValidator", "equals"],
         "params": ["{password}", "{passwordConfirmation}"],
         "blocking": true,
         "error": {

@@ -1,20 +1,20 @@
 [
     {
-        "validator": ["CommonValidator", "siteIsNotLocked"],
+        "validator": ["Modules\\Users\\CommonValidator", "siteIsNotLocked"],
         "blocking": true,
         "error": {
             "reference": "900"
         }
     },
     {
-        "validator": ["DataValidator", "dataPosted"],
+        "validator": ["Modules\\Users\\DataValidator", "dataPosted"],
         "blocking": true,
         "error": {
             "reference": "901"
         }
     },
     {
-        "validator": ["SecurityValidator", "validCsrfToken"],
+        "validator": ["Modules\\Users\\SecurityValidator", "validCsrfToken"],
         "params": ["{csrfToken}"],
         "blocking": true,
         "error": {
@@ -22,11 +22,11 @@
         }
     },
     {
-        "validator": ["UserValidator", "isLoggedOut"],
+        "validator": ["Modules\\Users\\UserValidator", "isLoggedOut"],
         "blocking": true
     },
     {
-        "validator": ["StringValidator", "notEmpty"],
+        "validator": ["Modules\\Users\\StringValidator", "notEmpty"],
         "params": ["{email}"],
         "blocking": true,
         "error": {
@@ -36,7 +36,7 @@
         }
     },
     {
-        "validator": ["StringValidator", "notEmpty"],
+        "validator": ["Modules\\Users\\StringValidator", "notEmpty"],
         "params": ["{password}"],
         "blocking": true,
         "error": {
@@ -46,7 +46,7 @@
         },
         "rules": [
             {
-                "validator": ["UserValidator", "validUserCriteria"],
+                "validator": ["Modules\\Users\\UserValidator", "validUserCriteria"],
                 "params": ["{email}", "{password}"],
                 "blocking": true,
                 "error": {

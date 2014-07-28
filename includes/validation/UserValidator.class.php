@@ -33,7 +33,7 @@
          */
         public static function isLoggedIn()
         {
-            $user = getLoggedInUser();
+            $user = \getLoggedInUser();
             $found = !empty($user);
             return $found;
         }
@@ -74,7 +74,7 @@
          */
         public static function uniqueOrLoggedInUserEmailAddress($email)
         {
-            $loggedInUser = getLoggedInUser();
+            $loggedInUser = \getLoggedInUser();
             return $email === $loggedInUser->email
                 || self::uniqueEmailAddress($email);
         }
@@ -89,7 +89,7 @@
          */
         public static function validUserById($id)
         {
-            $userModel = \Turtle\Application::getModel('User');
+            $userModel = \Turtle\Application::getModel('Modules\Users\User');
             return $userModel->getUserById((int) $id)->exists();
         }
 
@@ -103,7 +103,7 @@
          */
         public static function validUserByPublicKey($publicKey)
         {
-            $userModel = \Turtle\Application::getModel('User');
+            $userModel = \Turtle\Application::getModel('Modules\Users\User');
             return $userModel->getUserByPublicKey($publicKey) !== false;
         }
 

@@ -33,6 +33,20 @@
         }
 
         /**
+         * __getSchemaPath
+         *
+         * @access protected
+         * @param  string $action
+         * @param  string $method
+         * @return string
+         */
+        protected function __getSchemaPath($action, $method)
+        {
+            $config = getConfig();
+            return $config['schemas'][$action][$method];
+        }
+
+        /**
          * __setView
          *
          * @access private
@@ -80,7 +94,7 @@
              */
 
             // Schema
-            $path = $this->_getSchemaPath('register', 'get');
+            $path = $this->__getSchemaPath('register', 'get');
             $schema = (new \SmartSchema($path));
 
             // Validator
@@ -114,7 +128,7 @@
 
             // Parent
             $args = func_get_args();
-            $this->__callParent(__FUNCTION__, false, $args);
+            $this->__callParent(__FUNCTION__, true, $args);
         }
 
         /**
@@ -159,7 +173,7 @@
             //     $email = $_POST['email'];
             //     $fragments = explode('@', $email);
             //     $firstFragment = $fragments[0];
-            //     $userModel = $this->_getModel('\Modules\Users\User');
+            //     $userModel = $this->_getModel('User');
             //     $username = $userModel->getUniqueUsername($firstFragment);
 
             //     // Newsletter check
@@ -252,7 +266,7 @@
             //      */
 
             //     // Log them in
-            //     $userModel = $this->_getModel('\Modules\Users\User');
+            //     $userModel = $this->_getModel('User');
             //     $user = $userModel->getUserByEmail($_POST['email']);
             //     $user->login();
 
@@ -264,12 +278,6 @@
             //         )
             //     );
             //     $this->_pass('response', json_encode($response));
-
-            //     // Callbacks
-            //     $callbacks = $config['callbacks']['changePassword'];
-            //     foreach ($callbacks as $callback) {
-            //         call_user_func($callback);
-            //     }
             // }
         }
 
@@ -290,31 +298,7 @@
          * @return void
          */
         protected function _actionResetPasswordPost()
-        {
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-//             
-        }
-
-        /**
-         * _getSchemaPath
-         *
-         * @access protected
-         * @param  string $action
-         * @param  string $method
-         * @return string
-         */
-        protected function _getSchemaPath($action, $method)
-        {
-            $config = getConfig();
-            return $config['schemas'][$action][$method];
+        {        
         }
 
         /**
@@ -342,6 +326,9 @@
          */
         public function actionIndex()
         {
+$user = \getLoggedInUser();
+$user->sendWelcomeEmail();
+exit(0);
             if (!empty($_POST)) {
                 $this->_setView('register', 'post');
                 $this->_actionIndexPost();
@@ -385,7 +372,7 @@
              */
 
             // Schema
-            $path = $this->_getSchemaPath('logout', 'post');
+            $path = $this->__getSchemaPath('logout', 'post');
             $schema = (new \SmartSchema($path));
 
             // Validator
@@ -408,18 +395,12 @@
              */
 
             // Yup
-            $loggedInUser = getLoggedInUser();
+            $loggedInUser = \getLoggedInUser();
             $loggedInUser->logout();
             $response = array(
                 'success' => true
             );
             $this->_pass('response', json_encode($response));
-
-            // Callbacks
-            $callbacks = $config['callbacks']['changePassword'];
-            foreach ($callbacks as $callback) {
-                call_user_func($callback);
-            }
         }
 
         /**

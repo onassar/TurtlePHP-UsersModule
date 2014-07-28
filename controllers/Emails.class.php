@@ -13,6 +13,33 @@
     final class EmailsController extends AppController
     {
         /**
+         * subjects
+         *
+         * Publically scoped to allow for closures.
+         *
+         * @var    array
+         * @access public
+         */
+        public $subjects = array(
+            'userWelcome' => 'Welcome',
+            'userResetPassword' => 'Password reset'
+        );
+
+        /**
+         * __getSchemaPath
+         *
+         * @access protected
+         * @param  string $action
+         * @param  string $method
+         * @return string
+         */
+        protected function __getSchemaPath($action, $method)
+        {
+            $config = getConfig();
+            return $config['schemas']['emails'][$action][$method];
+        }
+
+        /**
          * __setView
          *
          * @access private
@@ -27,44 +54,17 @@
         }
 
         /**
-         * subjects
-         *
-         * Publically scoped to allow for closures.
-         *
-         * @var    array
-         * @access public
-         */
-        public $subjects = array(
-            'userWelcome' => 'Welcome',
-            'userResetPassword' => 'Password reset'
-        );
-
-        /**
-         * _getSchemaPath
-         *
-         * @access protected
-         * @param  string $action
-         * @param  string $method
-         * @return string
-         */
-        protected function _getSchemaPath($action, $method)
-        {
-            $config = getConfig();
-            return $config['schemas']['emails'][$action][$method];
-        }
-
-        /**
-         * _validateUserSchema
+         * __validateUserSchema
          * 
          * @access protected
          * @param  string $action
          * @param  string $method
          * @return void
          */
-        protected function _validateUserSchema($action, $method)
+        protected function __validateUserSchema($action, $method)
         {
             $_get = $this->getGet();
-            $schema = (new \SmartSchema($this->_getSchemaPath(
+            $schema = (new \SmartSchema($this->__getSchemaPath(
                 $action,
                 $method
             )));
@@ -91,14 +91,14 @@
             // Validate
             $_get = $this->getGet();
             if (!isset($_get['preview'])) {
-                $this->_validateUserSchema('welcome', 'get');
+                $this->__validateUserSchema('welcome', 'get');
             }
 
             // View
             $this->__setView('welcome', 'get');
 
             // Get user record
-            $userModel = $this->_getModel('User');
+            $userModel = $this->_getModel('Modules\Users\User');
             $user = $userModel->getUserById($_get['userId']);
             $this->_pass('user', $user);
 

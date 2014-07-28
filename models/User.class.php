@@ -61,7 +61,7 @@
         {
             // Recursion
             if ($iteration >= 1000) {
-                throw new Exception('Something terrible went wrong. Terrible.');
+                throw new \Exception('Something terrible went wrong. Terrible.');
             }
             $publicKey = getRandomHash(8);
             $user = $this->getUserByPublicKey($publicKey);
@@ -83,7 +83,7 @@
         {
             // Recursion
             if ($iteration >= 1000) {
-                throw new Exception('Something terrible went wrong. Terrible.');
+                throw new \Exception('Something terrible went wrong. Terrible.');
             }
             $handleCheck = $username;
             $pattern = '/[^a-zA-Z0-9\.]/';
@@ -111,14 +111,14 @@
         public function getUserByEmail($email)
         {
             // Query
-            $query = (new Query());
+            $query = (new \Query());
             $query->select('id');
             $query->from('users');
             $query->where('status', 'open');
             $query->andWhere('email', mysql_real_escape_string($email));
 
             // Retrieve matching records
-            $mySQLQuery = (new MySQLQuery($query->parse()));
+            $mySQLQuery = (new \MySQLQuery($query->parse()));
             $records = $mySQLQuery->getResults();
 
             // Not found
@@ -140,14 +140,14 @@
         public function getUserByUsername($username)
         {
             // Query
-            $query = (new Query());
+            $query = (new \Query());
             $query->select('id');
             $query->from('users');
             $query->where('status', 'open');
             $query->andWhere('username', mysql_real_escape_string($username));
 
             // Retrieve matching records
-            $mySQLQuery = (new MySQLQuery($query->parse()));
+            $mySQLQuery = (new \MySQLQuery($query->parse()));
             $records = $mySQLQuery->getResults();
 
             // Not found
@@ -169,14 +169,14 @@
         public function getUserByLoginHash($loginHash)
         {
             // Query
-            $query = (new Query());
+            $query = (new \Query());
             $query->select('id');
             $query->from('users');
             $query->where('status', 'open');
             $query->andWhere('loginHash', mysql_real_escape_string($loginHash));
 
             // Retrieve matching records
-            $mySQLQuery = (new MySQLQuery($query->parse()));
+            $mySQLQuery = (new \MySQLQuery($query->parse()));
             $records = $mySQLQuery->getResults();
 
             // Not found
@@ -197,7 +197,6 @@
          */
         public function getUserById($id)
         {
-            $id = (int) $id;
             return $this->_getAccessorById($id);
         }
 
@@ -211,14 +210,14 @@
         public function getUserByPublicKey($publicKey)
         {
             // Query
-            $query = (new Query());
+            $query = (new \Query());
             $query->select('id');
             $query->from('users');
             $query->where('status', 'open');
             $query->andWhere('publicKey', mysql_real_escape_string($publicKey));
 
             // Retrieve matching records
-            $mySQLQuery = (new MySQLQuery($query->parse()));
+            $mySQLQuery = (new \MySQLQuery($query->parse()));
             $records = $mySQLQuery->getResults();
 
             // Not found
@@ -247,7 +246,7 @@
             $escapeValues = true
         ) {
             // Query
-            $query = (new Query());
+            $query = (new \Query());
             $query->select('id');
             $query->from('users');
             $query->where('status', 'open');
@@ -268,7 +267,7 @@
             $query->orderBy('id', false);
 
             // Retrieve matching records
-            $mySQLQuery = (new MySQLQuery($query->parse()));
+            $mySQLQuery = (new \MySQLQuery($query->parse()));
             $records = $mySQLQuery->getResults();
 
             // Accessors

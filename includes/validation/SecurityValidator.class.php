@@ -19,7 +19,7 @@
          * @param  Turtle\Request $request
          * @return boolean
          */
-        public static function requestIsSubRequest(Turtle\Request $request)
+        public static function requestIsSubRequest(\Turtle\Request $request)
         {
             return $request->isSubRequest() === true;
         }

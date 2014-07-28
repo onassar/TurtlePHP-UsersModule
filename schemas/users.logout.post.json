@@ -1,10 +1,10 @@
 [
     {
-        "validator": ["DataValidator", "dataPosted"],
+        "validator": ["Modules\\Users\\DataValidator", "dataPosted"],
         "blocking": true
     },
     {
-        "validator": ["SecurityValidator", "validCsrfToken"],
+        "validator": ["Modules\\Users\\SecurityValidator", "validCsrfToken"],
         "params": ["{csrfToken}"],
         "blocking": true
     }

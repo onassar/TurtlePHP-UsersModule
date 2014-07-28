@@ -21,7 +21,8 @@
         require_once MODULE . '/includes/validation/ProjectSchemaValidator.class.php';
 
         // flow includes
-        require_once 'functions.inc.php';
+        require_once MODULE . '/functions/local.inc.php';
+        require_once MODULE . '/functions/global.inc.php';
         require_once 'requirements.inc.php';
         require_once 'config.inc.php';
         require_once 'routes.inc.php';

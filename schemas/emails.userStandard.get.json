@@ -1,11 +1,11 @@
 [
     {
-        "validator": ["SecurityValidator", "requestIsSubRequest"],
+        "validator": ["Modules\\Users\\SecurityValidator", "requestIsSubRequest"],
         "params": ["{__request__}"],
         "blocking": true
     },
     {
-        "validator": ["UserValidator", "validUserById"],
+        "validator": ["Modules\\Users\\UserValidator", "validUserById"],
         "params": ["{userId}"],
         "blocking": true
     }

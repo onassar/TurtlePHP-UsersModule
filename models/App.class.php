@@ -38,12 +38,12 @@
          * _cacheAccessor
          *
          * @access protected
-         * @param  Accessor $accessor
+         * @param  \Accessor $accessor
          * @return void
          */
-        protected function _cacheAccessor(Accessor $accessor)
+        protected function _cacheAccessor(\Accessor $accessor)
         {
-            RequestCache::simpleWrite(
+            \RequestCache::simpleWrite(
                 'accessor'.
                 $accessor->getRecordType().
                 $accessor->id,
@@ -73,7 +73,7 @@
             $parsed = $this->_parse($details);
 
             // insert
-            (new MySQLQuery(
+            (new \MySQLQuery(
                 'INSERT INTO `' . ($this->_tableName) . '` ' .
                     '(`' . implode('`, `', $parsed['columns']) . '`) ' .
                 'VALUES ' .
@@ -81,7 +81,7 @@
             ));
 
             // return record
-            $id = MySQLConnection::getInsertedId();
+            $id = \MySQLConnection::getInsertedId();
             return call_user_func_array(
                 array($this, 'get' . ($this->_modelName) . 'ById'),
                 array($id)
@@ -105,6 +105,7 @@
 
             // Return accessor
             $accessorName = ($this->_modelName) . 'Accessor';
+            $accessorName = 'Modules\Users\\' . ($accessorName);
             $accessor = (new $accessorName($id));
             $this->_cacheAccessor($accessor);
             return $accessor;
@@ -121,7 +122,7 @@
          */
         protected function _getCachedAccessor($accessorType, $id)
         {
-            $accessor = RequestCache::simpleRead(
+            $accessor = \RequestCache::simpleRead(
                 'accessor' . ($accessorType) . ($id)
             );
             if ($accessor === null) {
@@ -169,7 +170,7 @@
         public function getRecordData($id)
         {
             // Query
-            $query = (new Query());
+            $query = (new \Query());
             $query->select('*');
             $query->from($this->_tableName);
             $query->where('status', 'open');
@@ -177,7 +178,7 @@
             $query->limit(false);
 
             // Retrieve matching records; cache them
-            $mySQLQuery = (new MySQLQuery($query->parse()));
+            $mySQLQuery = (new \MySQLQuery($query->parse()));
             $records = $mySQLQuery->getResults();
 
             // Not found
@@ -212,7 +213,7 @@
             }
 
             // perform update
-            (new MySQLQuery(
+            (new \MySQLQuery(
                 'UPDATE `' . ($table) . '` ' .
                     'SET ' . implode(', ', $changes) . ' ' .
                 'WHERE ' .

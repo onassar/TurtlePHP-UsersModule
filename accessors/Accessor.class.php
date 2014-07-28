@@ -91,7 +91,7 @@
 
             // Only use this for debugging
             // el(pr(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS), true));
-            throw new Exception('Invalid property: ' . ($name));
+            throw new \Exception('Invalid property: ' . ($name));
         }
 
         /**
@@ -105,6 +105,7 @@
          */
         protected function _getModel($name)
         {
+            $name = 'Modules\Users\\' . ($name);
             return \Turtle\Application::getModel($name);
         }
 
@@ -137,7 +138,7 @@
             try {
                 $this->status;
                 return true;
-            } catch (Exception $exception) {
+            } catch (\Exception $exception) {
                 return false;
             }
         }
