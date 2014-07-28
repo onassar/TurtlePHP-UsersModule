@@ -16,7 +16,7 @@
          * 
          * @access public
          * @static
-         * @param  Turtle\Request $request
+         * @param  \Turtle\Request $request
          * @return boolean
          */
         public static function requestIsSubRequest(\Turtle\Request $request)

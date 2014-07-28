@@ -9,11 +9,27 @@
     /**
      * UsersController
      * 
-     * @extends AppController
+     * @extends \UsersController
      * @final
      */
-    final class UsersController extends AppController
+    final class UsersController extends \UsersController
     {
+        /**
+         * prepare
+         *
+         * @access public
+         * @return void
+         */
+        public function prepare()
+        {
+            // Pass in the Csrf token
+            \Modules\Users::generateAndStoreCsrfToken();
+            $this->_pass('csrfToken', $_SESSION['csrfToken']);
+
+            // parental guidance :)
+            parent::prepare();
+        }
+
         /**
          * __callParent
          * 
@@ -326,9 +342,9 @@
          */
         public function actionIndex()
         {
-$user = \getLoggedInUser();
-$user->sendWelcomeEmail();
-exit(0);
+// $user = \getLoggedInUser();
+// $user->sendWelcomeEmail();
+// exit(0);
             if (!empty($_POST)) {
                 $this->_setView('register', 'post');
                 $this->_actionIndexPost();

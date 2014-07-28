@@ -7,10 +7,10 @@
      * EmailsController
      * 
      * @note    No emails should be sent by this controller
-     * @extends AppController
+     * @extends \EmailsController
      * @final
      */
-    final class EmailsController extends AppController
+    final class EmailsController extends \EmailsController
     {
         /**
          * subjects

@@ -43,7 +43,8 @@
     $required = array(
         'UsersController',
         'UserAccessor',
-        'UserModel'
+        'UserModel',
+        'EmailsController'
     );
 
     // checks

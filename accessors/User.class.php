@@ -106,7 +106,7 @@
             setcookie(
                 'isLoggedIn',
                 '',
-                time() - 42000,
+                time() - (365 * 24 * 60 * 60),
                 '/',
                 $_SERVER['HTTP_HOST'],
                 false,
@@ -115,7 +115,7 @@
             setcookie(
                 'loginHash',
                 '',
-                time() - 42000,
+                time() - (365 * 24 * 60 * 60),
                 '/',
                 $_SERVER['HTTP_HOST'],
                 false,
