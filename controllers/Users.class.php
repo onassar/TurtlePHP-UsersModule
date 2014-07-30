@@ -3,9 +3,6 @@
     // namespaces
     namespace Modules\Users;
 
-    // dependencies
-    require_once MODULE . '/controllers/App.class.php';
-
     /**
      * UsersController
      * 
@@ -51,12 +48,12 @@
         /**
          * __getSchemaPath
          *
-         * @access protected
+         * @access private
          * @param  string $action
          * @param  string $method
          * @return string
          */
-        protected function __getSchemaPath($action, $method)
+        private function __getSchemaPath($action, $method)
         {
             $config = getConfig();
             return $config['schemas'][$action][$method];
@@ -70,7 +67,7 @@
          * @param  string $method
          * @return void
          */
-        protected function __setView($action, $method)
+        private function __setView($action, $method)
         {
             $config = getConfig();
             parent::_setView($config['views'][$action][$method]);
@@ -119,32 +116,41 @@
                 $this->getRequest()
             ));
 
-            // Bail if invalid
+            /**
+             * Validation failed
+             * 
+             */
             if ($validator->valid() === false) {
 
-                // Parent
-                $args = func_get_args();
-                $this->__callParent(__FUNCTION__, false, $args);
+                // Parent check
+                if (is_callable(array('parent', __FUNCTION__))) {
 
-                // Done
-                throw new \SchemaValidationException(
-                    $this->_getFailedSchemaMessage($validator)
-                );
+                    // Parent
+                    $args = func_get_args();
+                    $this->__callParent(__FUNCTION__, false, $args);
+                }
+                // Otherwise
+                else {
+
+                    // Exception
+                    throw new \SchemaValidationException(
+                        \Modules\Users::getFailedSchemaMessage($validator)
+                    );
+                }
             }
-
             /**
              * Body
              * 
              */
+            else {
 
-            // View
-            $config = getConfig();
-            $view = $config['views']['register']['get'];
-            $this->_setView($view);
+                // View
+                $this->__setView('register', 'get');
 
-            // Parent
-            $args = func_get_args();
-            $this->__callParent(__FUNCTION__, true, $args);
+                // Parent
+                $args = func_get_args();
+                $this->__callParent(__FUNCTION__, true, $args);
+            }
         }
 
         /**
@@ -326,10 +332,10 @@
         public function actionChangePassword()
         {
             if (!empty($_POST)) {
-                $this->_setView('changePassword', 'post');
+                $this->__setView('changePassword', 'post');
                 $this->_actionChangePasswordPost();
             } else {
-                $this->_setView('changePassword', 'get');
+                $this->__setView('changePassword', 'get');
                 $this->_actionChangePasswordGet();
             }
         }
@@ -346,10 +352,10 @@
 // $user->sendWelcomeEmail();
 // exit(0);
             if (!empty($_POST)) {
-                $this->_setView('register', 'post');
+                $this->__setView('register', 'post');
                 $this->_actionIndexPost();
             } else {
-                $this->_setView('register', 'get');
+                $this->__setView('register', 'get');
                 $this->_actionIndexGet();
             }
         }
@@ -363,10 +369,10 @@
         public function actionLogin()
         {
             if (!empty($_POST)) {
-                $this->_setView('login', 'post');
+                $this->__setView('login', 'post');
                 $this->_actionLoginPost();
             } else {
-                $this->_setView('login', 'get');
+                $this->__setView('login', 'get');
                 $this->_actionLoginGet();
             }
         }
@@ -380,7 +386,7 @@
         public function actionLogout()
         {
             // View
-            $this->_setView('logout', 'get');
+            $this->__setView('logout', 'post');
 
             /**
              * Validation
@@ -398,25 +404,46 @@
                 $_POST
             ));
 
-            // Bail if invalid
+            /**
+             * Validation failed
+             * 
+             */
             if ($validator->valid() === false) {
-                throw new \SchemaValidationException(
-                    $this->_getFailedSchemaMessage($validator)
-                );
-            }
 
+                // Parent check
+                if (is_callable(array('parent', __FUNCTION__))) {
+
+                    // Parent
+                    $args = func_get_args();
+                    $this->__callParent(__FUNCTION__, false, $args);
+                }
+                // Otherwise
+                else {
+
+                    // Exception
+                    throw new \SchemaValidationException(
+                        \Modules\Users::getFailedSchemaMessage($validator)
+                    );
+                }
+            }
             /**
              * Body
              * 
              */
+            else {
 
-            // Yup
-            $loggedInUser = \getLoggedInUser();
-            $loggedInUser->logout();
-            $response = array(
-                'success' => true
-            );
-            $this->_pass('response', json_encode($response));
+                // View
+                $loggedInUser = \getLoggedInUser();
+                $loggedInUser->logout();
+                $response = array(
+                    'success' => true
+                );
+                $this->_pass('response', json_encode($response));
+
+                // Parent
+                $args = func_get_args();
+                $this->__callParent(__FUNCTION__, true, $args);
+            }
         }
 
         /**
@@ -428,10 +455,10 @@
         public function actionResetPassword()
         {
             if (!empty($_POST)) {
-                $this->_setView('resetPassword', 'post');
+                $this->__setView('resetPassword', 'post');
                 $this->_actionResetPasswordPost();
             } else {
-                $this->_setView('resetPassword', 'get');
+                $this->__setView('resetPassword', 'get');
                 $this->_actionResetPasswordGet();
             }
         }

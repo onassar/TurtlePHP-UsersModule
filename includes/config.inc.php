@@ -4,12 +4,26 @@
     namespace Modules\Users;
 
     // configuration init
+    $emails = array();
     $memcached = array();
     $paths = array();
     $schemas = array();
     $security = array();
     $settings = array();
     $views = array();
+
+    /**
+     * Email settings
+     * 
+     */
+
+    // subjects
+    $emails = array(
+        'subjects' => array(
+            'welcome' => 'Welcome',
+            'resetPassword' => 'Password reset'
+        )
+    );
 
     /**
      * Memcached
@@ -137,6 +151,7 @@
     \Plugin\Config::add(
         'TurtlePHP-UsersModule',
         array(
+            'emails' => $emails,
             'memcached' => $memcached,
             'paths' => $paths,
             'schemas' => $schemas,

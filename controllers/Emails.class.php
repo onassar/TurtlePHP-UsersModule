@@ -13,30 +13,30 @@
     final class EmailsController extends \EmailsController
     {
         /**
-         * subjects
-         *
-         * Publically scoped to allow for closures.
-         *
-         * @var    array
-         * @access public
-         */
-        public $subjects = array(
-            'userWelcome' => 'Welcome',
-            'userResetPassword' => 'Password reset'
-        );
-
-        /**
          * __getSchemaPath
          *
-         * @access protected
+         * @access private
          * @param  string $action
          * @param  string $method
          * @return string
          */
-        protected function __getSchemaPath($action, $method)
+        private function __getSchemaPath($action, $method)
         {
             $config = getConfig();
             return $config['schemas']['emails'][$action][$method];
+        }
+
+        /**
+         * __getSubject
+         *
+         * @access private
+         * @param  string $action
+         * @return string
+         */
+        private function __getSubject($action)
+        {
+            $config = getConfig();
+            return $config['emails']['subjects'][$action];
         }
 
         /**
@@ -47,7 +47,7 @@
          * @param  string $method
          * @return void
          */
-        protected function __setView($action, $method)
+        private function __setView($action, $method)
         {
             $config = getConfig();
             parent::_setView($config['views']['emails'][$action][$method]);
@@ -56,12 +56,12 @@
         /**
          * __validateUserSchema
          * 
-         * @access protected
+         * @access private
          * @param  string $action
          * @param  string $method
          * @return void
          */
-        protected function __validateUserSchema($action, $method)
+        private function __validateUserSchema($action, $method)
         {
             $_get = $this->getGet();
             $schema = (new \SmartSchema($this->__getSchemaPath(
@@ -74,6 +74,12 @@
                 $_get
             ));
             if ($validator->valid() === false) {
+
+                // Parent
+                // $args = func_get_args();
+                // $this->__callParent(__FUNCTION__, false, $args);
+
+                // Done
                 throw new \SchemaValidationException(
                     $this->_getFailedSchemaMessage($validator)
                 );
@@ -81,21 +87,31 @@
         }
 
         /**
-         * actionUserWelcome
+         * actionWelcome
          * 
          * @access public
          * @return void
          */
-        public function actionUserWelcome()
+        public function actionWelcome()
         {
-            // Validate
+            // View
+            $this->__setView('welcome', 'get');
+
+            /**
+             * Validation
+             * 
+             */
+
+            // Preview check
             $_get = $this->getGet();
             if (!isset($_get['preview'])) {
                 $this->__validateUserSchema('welcome', 'get');
             }
 
-            // View
-            $this->__setView('welcome', 'get');
+            /**
+             * Body
+             * 
+             */
 
             // Get user record
             $userModel = $this->_getModel('Modules\Users\User');
@@ -104,8 +120,9 @@
 
             // callback (for sending the email)
             $self = $this;
+            $subject = $this->__getSubject('welcome');
             $this->getRequest()->addCallback(
-                function($buffer) use ($self, $user) {
+                function($buffer) use ($self, $subject, $user) {
 
                     // Email should be preview
                     if ($self->isPreviewing()) {
@@ -113,16 +130,23 @@
                     } else {
 
                         // Send it off
-                        sendEmail(
-                            $user->email,
-                            $self->subjects['userWelcome'],
-                            $buffer,
-                            'userWelcome'
-                        );
+                        // $response = sendEmail(
+                        //     $user->email,
+                        //     $subject,
+                        //     $buffer,
+                        //     'welcome'
+                        // );
+
+                        // Parent
+                        $args = func_get_args();
+                        // $this->__callParent(__FUNCTION__, true, $args);
+
+                        // 
 
                         // Donezo
                         return json_encode(array(
-                            'success' => true
+                            'success' => true,
+                            'data' => $response
                         ));
                     }
                 }

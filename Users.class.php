@@ -4,7 +4,9 @@
     namespace Modules;
 
     /**
-     * UsersModule
+     * Users
+     * 
+     * Helper methods that are used by the module
      * 
      * @author   Oliver Nassar <onassar@gmail.com>
      * @abstract
@@ -59,8 +61,8 @@
          * @param  ProjectSchemaValidator $validator
          * @return string
          */
-        public function getFailedSchemaMessage(
-            ProjectSchemaValidator $validator
+        public static function getFailedSchemaMessage(
+            \Modules\Users\ProjectSchemaValidator $validator
         ) {
             // Failed rule
             $failedRules = $validator->getFailedRules();

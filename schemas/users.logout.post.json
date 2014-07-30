@@ -1,6 +1,6 @@
 [
     {
-        "validator": ["Modules\\Users\\DataValidator", "dataPosted"],
+        "validator": ["DataValidator", "dataPosted"],
         "blocking": true
     },
     {

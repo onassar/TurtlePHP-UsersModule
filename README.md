@@ -43,6 +43,9 @@ git submodule add git@github.com:onassar/TurtlePHP-UsersModule.git TurtlePHP/mod
 ```
 
 ``` php
+require_once APP . '/controllers/Emails.class.php';
+require_once APP . '/controllers/Users.class.php';
+require_once APP . '/models/User.class.php';
 require_once APP . '/plugins/TurtlePHP-ConfigPlugin/Config.class.php';
 require_once APP . '/vendors/PHP-Email/Email.class.php';
 require_once APP . '/vendors/postmark-php/src/Postmark/Mail.php';
@@ -51,10 +54,21 @@ require_once APP . '/vendors/PHP-Geo/Geo.class.php';
 require_once APP . '/vendors/PHP-RequestCache/RequestCache.class.php';
 require_once APP . '/vendors/PHP-MySQL/MySQLConnection.class.php';
 require_once APP . '/vendors/PHP-MySQL/MySQLQuery.class.php';
+MySQLConnection::init(array(
+    'host' => 'localhost',
+    'port' => 3306,
+    'username' => 'app',
+    'password' => 'apples'
+));
+(new MySQLQuery('USE `donatello`'));
+(new MySQLQuery('SET time_zone = \'Etc\/UTC\''));
+(new MySQLQuery('SET names utf8'));
 require_once APP . '/vendors/PHP-Query/Query.class.php';
 require_once APP . '/vendors/PHP-SecureSessions/SMSession.class.php';
 require_once APP . '/vendors/PHP-JSON-Validation/Schema.class.php';
 require_once APP . '/vendors/PHP-JSON-Validation/SmartSchema.class.php';
 require_once APP . '/vendors/PHP-JSON-Validation/SchemaValidator.class.php';
-require_once APP . '/modules/TurtlePHP-UsersModule/includes/init.inc.php';
+require_once APP . '/vendors/PHP-JSON-Validation/SchemaValidator.class.php';
+require_once APP . '/modules/TurtlePHP-UsersModules/includes/init.inc.php';
+Modules\Users::openSession();
 ```

@@ -41,11 +41,11 @@
         '^' . ($paths['emails']['welcome']) . '$' => array(// G
             'module' => true,
             'controller' => 'Modules\Users\Emails',
-            'action' => 'actionUserWelcome'
+            'action' => 'actionWelcome'
         ),
         '^' . ($paths['emails']['resetPassword']) . '$' => array(// G
             'module' => true,
             'controller' => 'Modules\Users\Emails',
-            'action' => 'actionUserResetPassword'
+            'action' => 'actionResetPassword'
         )
     ));
