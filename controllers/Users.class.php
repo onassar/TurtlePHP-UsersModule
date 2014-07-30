@@ -81,6 +81,56 @@
          */
         protected function _actionChangePasswordGet()
         {
+            /**
+             * Validation
+             * 
+             */
+
+            // Schema
+            $path = $this->__getSchemaPath('changePassword', 'get');
+            $schema = (new \SmartSchema($path));
+
+            // Validator
+            $validator = (new ProjectSchemaValidator(
+                $schema,
+                $this->getRequest()
+            ));
+
+            /**
+             * Validation failed
+             * 
+             */
+            if ($validator->valid() === false) {
+
+                // Parent check
+                if (is_callable(array('parent', __FUNCTION__))) {
+
+                    // Parent
+                    $args = func_get_args();
+                    $this->__callParent(__FUNCTION__, false, $args);
+                }
+                // Otherwise
+                else {
+
+                    // Exception
+                    throw new \SchemaValidationException(
+                        \Modules\Users::getFailedSchemaMessage($validator)
+                    );
+                }
+            }
+            /**
+             * Body
+             * 
+             */
+            else {
+
+                // View
+                $this->__setView('changePassword', 'get');
+
+                // Parent
+                $args = func_get_args();
+                $this->__callParent(__FUNCTION__, true, $args);
+            }
         }
 
         /**
@@ -161,82 +211,94 @@
          */
         protected function _actionIndexPost()
         {
-            // /**
-            //  * Validation
-            //  * 
-            //  */
+            /**
+             * Validation
+             * 
+             */
 
-            // // validate
-            // $schema = (new SmartSchema(
-            //     APP . '/schemas/users.index.post.json',
-            //     true
-            // ));
-            // $validator = (new ProjectSchemaValidator(
-            //     $schema,
-            //     $this->getRequest(),
-            //     $_POST
-            // ));
-            // if ($validator->valid() === false) {
+            // Schema
+            $path = $this->__getSchemaPath('register', 'post');
+            $schema = (new \SmartSchema($path));
 
-            //     // Baillll
-            //     $response = array(
-            //         'success' => false,
-            //         'failedRules' => $validator->getFailedRules(false)
-            //     );
-            //     $this->_pass('response', json_encode($response));
-            // } else {
+            // Validator
+            $validator = (new ProjectSchemaValidator(
+                $schema,
+                $this->getRequest(),
+                $_POST
+            ));
 
-            //     /**
-            //      * Body
-            //      * 
-            //      */
+            /**
+             * Validation failed
+             * 
+             */
+            if ($validator->valid() === false) {
 
-            //     // Generate unique handle from the email
-            //     $email = $_POST['email'];
-            //     $fragments = explode('@', $email);
-            //     $firstFragment = $fragments[0];
-            //     $userModel = $this->_getModel('User');
-            //     $username = $userModel->getUniqueUsername($firstFragment);
+                // Failed response
+                $response = array(
+                    'success' => false,
+                    'failedRules' => $validator->getFailedRules(false)
+                );
+                $this->_pass('response', json_encode($response));
 
-            //     // Newsletter check
-            //     $receiveNewsletters = 0;
-            //     if (isset($_POST['receiveNewsletters'])) {
-            //         $receiveNewsletters = 1;
-            //     }
+                // Parent
+                $args = func_get_args();
+                $this->__callParent(__FUNCTION__, false, $args);
+            }
+            /**
+             * Body
+             * 
+             */
+            else {
 
-            //     // Create the user and log them in
-            //     $user = $userModel->createUser(array(
-            //         'type' => 'default',
-            //         'email' => $_POST['email'],
-            //         'username' => $username,
-            //         'publicKey' => $userModel->getUniquePublicKey(),
-            //         'registeredIPAddress' => IP,
-            //         'locationCity' => Geo::getCity(),
-            //         'locationCountryName' => Geo::getCountry(),
-            //         'locationRegionName' => Geo::getRegion(),
-            //         'locationCountryCode' => Geo::getCountryCode(2),
-            //         'receiveNewsletters' => $receiveNewsletters
-            //     ));
-            //     $user->setPassword($_POST['password']);
-            //     $user->login();
+                // Username
+                $email = $_POST['email'];
+                $fragments = explode('@', $email);
+                $firstFragment = $fragments[0];
+                $userModel = $this->_getModel('Modules\Users\User');
+                $username = $userModel->getUniqueUsername($firstFragment);
 
-            //     // Add to Campaign Monitor
-            //     if ((int) $user->receiveNewsletters === 1) {
-            //         $user->addToFreeMailingList();
-            //     }
+                // Newsletter
+                $receiveNewsletters = 0;
+                if (isset($_POST['receiveNewsletters'])) {
+                    $receiveNewsletters = 1;
+                }
 
-            //     // Say hi :)
-            //     // $user->sendWelcomeEmail();
+                // Create the user
+                $user = $userModel->createUser(array(
+                    'publicKey' => $userModel->getUniquePublicKey(),
+                    'email' => $_POST['email'],
+                    'username' => $username,
+                    'registeredIPAddress' => IP,
+                    'locationCity' => \Geo::getCity(),
+                    'locationCountryName' => \Geo::getCountry(),
+                    'locationRegionName' => \Geo::getRegion(),
+                    'locationCountryCode' => \Geo::getCountryCode(2),
+                    'receiveNewsletters' => $receiveNewsletters
+                ));
 
-            //     // Success, homie ;)
-            //     $response = array(
-            //         'success' => true,
-            //         'data' => array(
-            //             'user' => $user->getPublicData()
-            //         )
-            //     );
-            //     $this->_pass('response', json_encode($response));
-            // }
+                // Password + login
+                $user->setPassword($_POST['password']);
+                $user->login();
+
+                // Welcome email
+                $config = getConfig();
+                if ($config['emails']['welcome']['send'] === true) {
+                    $user->sendWelcomeEmail();
+                }
+
+                // Response
+                $response = array(
+                    'success' => true,
+                    'data' => array(
+                        'user' => $user->getPublicData()
+                    )
+                );
+                $this->_pass('response', json_encode($response));
+
+                // Parent
+                $args = func_get_args();
+                $this->__callParent(__FUNCTION__, true, $args);
+            }
         }
 
         /**
@@ -247,6 +309,56 @@
          */
         protected function _actionLoginGet()
         {
+            /**
+             * Validation
+             * 
+             */
+
+            // Schema
+            $path = $this->__getSchemaPath('login', 'get');
+            $schema = (new \SmartSchema($path));
+
+            // Validator
+            $validator = (new ProjectSchemaValidator(
+                $schema,
+                $this->getRequest()
+            ));
+
+            /**
+             * Validation failed
+             * 
+             */
+            if ($validator->valid() === false) {
+
+                // Parent check
+                if (is_callable(array('parent', __FUNCTION__))) {
+
+                    // Parent
+                    $args = func_get_args();
+                    $this->__callParent(__FUNCTION__, false, $args);
+                }
+                // Otherwise
+                else {
+
+                    // Exception
+                    throw new \SchemaValidationException(
+                        \Modules\Users::getFailedSchemaMessage($validator)
+                    );
+                }
+            }
+            /**
+             * Body
+             * 
+             */
+            else {
+
+                // View
+                $this->__setView('login', 'get');
+
+                // Parent
+                $args = func_get_args();
+                $this->__callParent(__FUNCTION__, true, $args);
+            }
         }
 
         /**
@@ -262,45 +374,58 @@
              * 
              */
 
-            // // validate
-            // $schema = (new SmartSchema(
-            //     APP . '/schemas/users.login.post.json',
-            //     true
-            // ));
-            // $validator = (new ProjectSchemaValidator(
-            //     $schema,
-            //     $this->getRequest(),
-            //     $_POST
-            // ));
-            // if ($validator->valid() === false) {
+            // Schema
+            $path = $this->__getSchemaPath('login', 'post');
+            $schema = (new \SmartSchema($path));
 
-            //     // Baillll
-            //     $response = array(
-            //         'success' => false,
-            //         'failedRules' => $validator->getFailedRules(false)
-            //     );
-            //     $this->_pass('response', json_encode($response));
-            // } else {
+            // Validator
+            $validator = (new ProjectSchemaValidator(
+                $schema,
+                $this->getRequest(),
+                $_POST
+            ));
 
-            //     /**
-            //      * Body
-            //      * 
-            //      */
+            /**
+             * Validation failed
+             * 
+             */
+            if ($validator->valid() === false) {
 
-            //     // Log them in
-            //     $userModel = $this->_getModel('User');
-            //     $user = $userModel->getUserByEmail($_POST['email']);
-            //     $user->login();
+                // Failed response
+                $response = array(
+                    'success' => false,
+                    'failedRules' => $validator->getFailedRules(false)
+                );
+                $this->_pass('response', json_encode($response));
 
-            //     // Success, homie ;)
-            //     $response = array(
-            //         'success' => true,
-            //         'data' => array(
-            //             'user' => $user->getPublicData()
-            //         )
-            //     );
-            //     $this->_pass('response', json_encode($response));
-            // }
+                // Parent
+                $args = func_get_args();
+                $this->__callParent(__FUNCTION__, false, $args);
+            }
+            /**
+             * Body
+             * 
+             */
+            else {
+
+                // Logic
+                $userModel = $this->_getModel('Modules\Users\User');
+                $user = $userModel->getUserByEmail($_POST['email']);
+                $user->login();
+
+                // Response
+                $response = array(
+                    'success' => true,
+                    'data' => array(
+                        'user' => $user->getPublicData()
+                    )
+                );
+                $this->_pass('response', json_encode($response));
+
+                // Parent
+                $args = func_get_args();
+                $this->__callParent(__FUNCTION__, true, $args);
+            }
         }
 
         /**
@@ -311,6 +436,56 @@
          */
         protected function _actionResetPasswordGet()
         {
+            /**
+             * Validation
+             * 
+             */
+
+            // Schema
+            $path = $this->__getSchemaPath('resetPassword', 'get');
+            $schema = (new \SmartSchema($path));
+
+            // Validator
+            $validator = (new ProjectSchemaValidator(
+                $schema,
+                $this->getRequest()
+            ));
+
+            /**
+             * Validation failed
+             * 
+             */
+            if ($validator->valid() === false) {
+
+                // Parent check
+                if (is_callable(array('parent', __FUNCTION__))) {
+
+                    // Parent
+                    $args = func_get_args();
+                    $this->__callParent(__FUNCTION__, false, $args);
+                }
+                // Otherwise
+                else {
+
+                    // Exception
+                    throw new \SchemaValidationException(
+                        \Modules\Users::getFailedSchemaMessage($validator)
+                    );
+                }
+            }
+            /**
+             * Body
+             * 
+             */
+            else {
+
+                // View
+                $this->__setView('resetPassword', 'get');
+
+                // Parent
+                $args = func_get_args();
+                $this->__callParent(__FUNCTION__, true, $args);
+            }
         }
 
         /**
@@ -348,6 +523,11 @@
          */
         public function actionIndex()
         {
+$_POST = array(
+    'email' => 'onassar@gmail.com',
+    'password' => 'oliver',
+    'passwordConfirmation' => 'oliver'
+);
 // $user = \getLoggedInUser();
 // $user->sendWelcomeEmail();
 // exit(0);
@@ -410,21 +590,16 @@
              */
             if ($validator->valid() === false) {
 
-                // Parent check
-                if (is_callable(array('parent', __FUNCTION__))) {
+                // Failed response
+                $response = array(
+                    'success' => false,
+                    'failedRules' => $validator->getFailedRules(false)
+                );
+                $this->_pass('response', json_encode($response));
 
-                    // Parent
-                    $args = func_get_args();
-                    $this->__callParent(__FUNCTION__, false, $args);
-                }
-                // Otherwise
-                else {
-
-                    // Exception
-                    throw new \SchemaValidationException(
-                        \Modules\Users::getFailedSchemaMessage($validator)
-                    );
-                }
+                // Parent
+                $args = func_get_args();
+                $this->__callParent(__FUNCTION__, false, $args);
             }
             /**
              * Body

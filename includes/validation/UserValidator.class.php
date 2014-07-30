@@ -60,7 +60,7 @@
          */
         public static function uniqueEmailAddress($email)
         {
-            $userModel = Turtle\Application::getModel('User');
+            $userModel = \Turtle\Application::getModel('Modules\Users\User');
             return $userModel->getUserByEmail($email) === false;
         }
 
@@ -126,7 +126,7 @@
             $security = $config['security'];
 
             // Check email, then password
-            $userModel = Turtle\Application::getModel('User');
+            $userModel = \Turtle\Application::getModel('Modules\Users\User');
             $hashedPassword = hash(
                 'sha256',
                 ($security['passwordSalt']) . ($password)
@@ -154,7 +154,7 @@
          */
         public static function validUserEmail($email)
         {
-            $userModel = Turtle\Application::getModel('User');
+            $userModel = \Turtle\Application::getModel('Modules\Users\User');
             return $userModel->getUserByEmail($email) !== false;
         }
     }

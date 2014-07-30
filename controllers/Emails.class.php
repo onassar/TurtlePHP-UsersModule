@@ -36,7 +36,7 @@
         private function __getSubject($action)
         {
             $config = getConfig();
-            return $config['emails']['subjects'][$action];
+            return $config['emails'][$action]['subject'];
         }
 
         /**

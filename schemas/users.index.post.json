@@ -22,7 +22,7 @@
         }
     },
     {
-        "validator": ["Modules\\Users\\StringValidator", "notEmpty"],
+        "validator": ["StringValidator", "notEmpty"],
         "params": ["{email}"],
         "blocking": true,
         "error": {
@@ -32,7 +32,7 @@
         },
         "rules": [
             {
-                "validator": ["Modules\\Users\\StringValidator", "email"],
+                "validator": ["StringValidator", "email"],
                 "params": ["{email}"],
                 "blocking": true,
                 "error": {
@@ -54,7 +54,7 @@
         }
     },
     {
-        "validator": ["Modules\\Users\\StringValidator", "notEmpty"],
+        "validator": ["StringValidator", "notEmpty"],
         "params": ["{password}"],
         "blocking": true,
         "error": {
@@ -64,7 +64,7 @@
         }
     },
     {
-        "validator": ["Modules\\Users\\StringValidator", "minLength"],
+        "validator": ["StringValidator", "minLength"],
         "params": ["{password}", 4],
         "blocking": true,
         "error": {
@@ -74,7 +74,7 @@
         }
     },
     {
-        "validator": ["Modules\\Users\\StringValidator", "equals"],
+        "validator": ["StringValidator", "equals"],
         "params": ["{password}", "{passwordConfirmation}"],
         "blocking": true,
         "error": {

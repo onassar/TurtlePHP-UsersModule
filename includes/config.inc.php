@@ -16,12 +16,14 @@
      * Email settings
      * 
      */
-
-    // subjects
     $emails = array(
-        'subjects' => array(
-            'welcome' => 'Welcome',
-            'resetPassword' => 'Password reset'
+        'resetPassword' => array(
+            'send' => true,
+            'subject' => 'Password reset'
+        ),
+        'welcome' => array(
+            'send' => true,
+            'subject' => 'Welcome'
         )
     );
 
