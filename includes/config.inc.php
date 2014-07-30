@@ -19,7 +19,14 @@
     $emails = array(
         'resetPassword' => array(
             'send' => true,
-            'subject' => 'Password reset'
+            'subject' => 'Password reset',
+            'resetTerms' => array(
+                'Boat',
+                'Apple',
+                'Shoe',
+                'Pencil',
+                'Kitten'
+            )
         ),
         'welcome' => array(
             'send' => true,

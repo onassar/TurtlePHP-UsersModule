@@ -141,6 +141,62 @@
          */
         protected function _actionChangePasswordPost()
         {
+            /**
+             * Validation
+             * 
+             */
+
+            // Schema
+            $path = $this->__getSchemaPath('changePassword', 'post');
+            $schema = (new \SmartSchema($path));
+
+            // Validator
+            $validator = (new ProjectSchemaValidator(
+                $schema,
+                $this->getRequest(),
+                $_POST
+            ));
+
+            /**
+             * Validation failed
+             * 
+             */
+            if ($validator->valid() === false) {
+
+                // Failed response
+                $response = array(
+                    'success' => false,
+                    'failedRules' => $validator->getFailedRules(false)
+                );
+                $this->_pass('response', json_encode($response));
+
+                // Parent
+                $args = func_get_args();
+                $this->__callParent(__FUNCTION__, false, $args);
+            }
+            /**
+             * Body
+             * 
+             */
+            else {
+
+                // Logic
+                $loggedInUser = \getLoggedInUser();
+                $loggedInUser->setPassword($_POST['password']);
+
+                // Response
+                $response = array(
+                    'success' => true,
+                    'data' => array(
+                        'user' => $user->getPublicData()
+                    )
+                );
+                $this->_pass('response', json_encode($response));
+
+                // Parent
+                $args = func_get_args();
+                $this->__callParent(__FUNCTION__, true, $args);
+            }
         }
 
         /**
@@ -495,7 +551,76 @@
          * @return void
          */
         protected function _actionResetPasswordPost()
-        {        
+        {
+            /**
+             * Validation
+             * 
+             */
+
+            // Schema
+            $path = $this->__getSchemaPath('resetPassword', 'post');
+            $schema = (new \SmartSchema($path));
+
+            // Validator
+            $validator = (new ProjectSchemaValidator(
+                $schema,
+                $this->getRequest(),
+                $_POST
+            ));
+
+            /**
+             * Validation failed
+             * 
+             */
+            if ($validator->valid() === false) {
+
+                // Failed response
+                $response = array(
+                    'success' => false,
+                    'failedRules' => $validator->getFailedRules(false)
+                );
+                $this->_pass('response', json_encode($response));
+
+                // Parent
+                $args = func_get_args();
+                $this->__callParent(__FUNCTION__, false, $args);
+            }
+            /**
+             * Body
+             * 
+             */
+            else {
+
+                // Matching user
+                $userModel = $this->_getModel('Modules\Users\User');
+                $user = $userModel->getUserByEmail($_POST['email']);
+
+                // Generate a random password
+                $config = getConfig();
+                $possibleWords = $config['emails']['resetPassword']['resetTerms'];
+                $randomNumber = rand(1000, 9999);
+                $randomKey = rand(0, count($possibleWords) - 1);
+                $randomPassword = ($possibleWords[$randomKey]) .
+                    ($randomNumber);
+
+                // Reset login hash; set password; send email
+                $user->resetLoginHash();
+                $user->setPassword($randomPassword);
+                $user->sendResetPasswordEmail($randomPassword);
+
+                // Response
+                $response = array(
+                    'success' => true,
+                    'data' => array(
+                        'user' => $user->getPublicData()
+                    )
+                );
+                $this->_pass('response', json_encode($response));
+
+                // Parent
+                $args = func_get_args();
+                $this->__callParent(__FUNCTION__, true, $args);
+            }
         }
 
         /**
