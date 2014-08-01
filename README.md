@@ -50,21 +50,20 @@ require_once APP . '/plugins/TurtlePHP-ConfigPlugin/Config.class.php';
 require_once APP . '/vendors/PHP-Email/Email.class.php';
 require_once APP . '/vendors/postmark-php/src/Postmark/Mail.php';
 require_once APP . '/vendors/PHP-Email/PostmarkEmail.class.php';
+require_once APP . '/vendors/mailgun/autoload.php';
+require_once APP . '/vendors/PHP-Email/MailgunEmail.class.php';
+require_once APP . '/plugins/TurtlePHP-EmailerPlugin/Emailer.class.php';
+\Plugin\Emailer::init();
 require_once APP . '/vendors/PHP-Geo/Geo.class.php';
 require_once APP . '/vendors/PHP-RequestCache/RequestCache.class.php';
 require_once APP . '/vendors/PHP-MySQL/MySQLConnection.class.php';
 require_once APP . '/vendors/PHP-MySQL/MySQLQuery.class.php';
-MySQLConnection::init(array(
-    'host' => 'localhost',
-    'port' => 3306,
-    'username' => 'app',
-    'password' => 'apples'
-));
-(new MySQLQuery('USE `donatello`'));
-(new MySQLQuery('SET time_zone = \'Etc\/UTC\''));
-(new MySQLQuery('SET names utf8'));
+require_once APP . '/plugins/TurtlePHP-DatabasePlugin/Database.class.php';
+\Plugin\Database::connect();
 require_once APP . '/vendors/PHP-Query/Query.class.php';
 require_once APP . '/vendors/PHP-SecureSessions/SMSession.class.php';
+require_once APP . '/plugins/TurtlePHP-MemcachedSessionPlugin/MemcachedSession.class.php';
+\Plugin\MemcachedSession::open();
 require_once APP . '/vendors/PHP-JSON-Validation/Schema.class.php';
 require_once APP . '/vendors/PHP-JSON-Validation/SmartSchema.class.php';
 require_once APP . '/vendors/PHP-JSON-Validation/SchemaValidator.class.php';
