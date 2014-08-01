@@ -5,11 +5,9 @@
 
     // configuration init
     $emails = array();
-    $memcached = array();
     $paths = array();
     $schemas = array();
     $security = array();
-    $settings = array();
     $views = array();
 
     /**
@@ -20,6 +18,7 @@
         'resetPassword' => array(
             'send' => true,
             'subject' => 'Password reset',
+            'tag' => 'resetPassword',
             'resetTerms' => array(
                 'Boat',
                 'Apple',
@@ -30,17 +29,9 @@
         ),
         'welcome' => array(
             'send' => true,
-            'subject' => 'Welcome'
+            'subject' => 'Welcome',
+            'tag' => 'welcome'
         )
-    );
-
-    /**
-     * Memcached
-     * 
-     */
-
-    // servers
-    $memcached = array(
     );
 
     /**
@@ -109,16 +100,6 @@
     );
 
     /**
-     * Settings
-     * 
-     */
-
-    // generic
-    $settings = array(
-        'cacheData' => false
-    );
-
-    /**
      * Views
      * 
      */
@@ -161,11 +142,9 @@
         'TurtlePHP-UsersModule',
         array(
             'emails' => $emails,
-            'memcached' => $memcached,
             'paths' => $paths,
             'schemas' => $schemas,
             'security' => $security,
-            'settings' => $settings,
             'views' => $views
         )
     );

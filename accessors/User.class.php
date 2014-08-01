@@ -145,7 +145,7 @@
          *
          * @access public
          * @param  string $randomPassword
-         * @return void
+         * @return array
          */
         public function sendResetPasswordEmail($randomPassword)
         {
@@ -160,6 +160,10 @@
             $subrequest = (new \Turtle\Request($path));
             $subrequest->route();
             $subrequest->generate();
+            $response = $subrequest->getResponse();
+
+            // Respond
+            return json_decode($response, true);
         }
 
 
@@ -167,7 +171,7 @@
          * sendWelcomeEmail
          *
          * @access public
-         * @return void
+         * @return array
          */
         public function sendWelcomeEmail()
         {
@@ -181,7 +185,10 @@
             $subrequest = (new \Turtle\Request($path));
             $subrequest->route();
             $subrequest->generate();
-            $subrequest->getResponse();
+            $response = $subrequest->getResponse();
+
+            // Response
+            return json_decode($response, true);
         }
 
         /**

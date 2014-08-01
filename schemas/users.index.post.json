@@ -3,7 +3,7 @@
         "validator": ["DataValidator", "dataPosted"],
         "blocking": true,
         "error": {
-            "reference": "801"
+            "reference": "101"
         }
     },
     {
@@ -11,14 +11,14 @@
         "params": ["{csrfToken}"],
         "blocking": true,
         "error": {
-            "reference": "802"
+            "reference": "102"
         }
     },
     {
         "validator": ["Modules\\Users\\UserValidator", "isLoggedOut"],
         "blocking": true,
         "error": {
-            "reference": "803"
+            "reference": "103"
         }
     },
     {
@@ -26,7 +26,7 @@
         "params": ["{email}"],
         "blocking": true,
         "error": {
-            "reference": "804",
+            "reference": "104",
             "input": "email",
             "message": "Please enter your email."
         },
@@ -36,7 +36,7 @@
                 "params": ["{email}"],
                 "blocking": true,
                 "error": {
-                    "reference": "805",
+                    "reference": "105",
                     "input": "email",
                     "message": "Please enter a valid email address."
                 }
@@ -48,7 +48,7 @@
         "blocking": true,
         "params": ["{email}"],
         "error": {
-            "reference": "806",
+            "reference": "106",
             "input": "email",
             "message": "Email found. Maybe your forgot your password?"
         }
@@ -58,7 +58,7 @@
         "params": ["{password}"],
         "blocking": true,
         "error": {
-            "reference": "807",
+            "reference": "107",
             "input": "password",
             "message": "Please enter a password"
         }
@@ -68,7 +68,7 @@
         "params": ["{password}", 4],
         "blocking": true,
         "error": {
-            "reference": "808",
+            "reference": "108",
             "input": "password",
             "message": "Password needs to be at least 4 characters long"
         }
@@ -78,7 +78,7 @@
         "params": ["{password}", "{passwordConfirmation}"],
         "blocking": true,
         "error": {
-            "reference": "809",
+            "reference": "109",
             "input": "passwordConfirmation",
             "message": "Please make sure your passwords match"
         }

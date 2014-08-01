@@ -40,6 +40,19 @@
         }
 
         /**
+         * __getTag
+         *
+         * @access private
+         * @param  string $action
+         * @return string
+         */
+        private function __getTag($action)
+        {
+            $config = getConfig();
+            return $config['emails'][$action]['tag'];
+        }
+
+        /**
          * __setView
          *
          * @access private
@@ -81,7 +94,7 @@
 
                 // Done
                 throw new \SchemaValidationException(
-                    $this->_getFailedSchemaMessage($validator)
+                    \Modules\Users::getFailedSchemaMessage($validator)
                 );
             }
         }
@@ -121,8 +134,9 @@
             // callback (for sending the email)
             $self = $this;
             $subject = $this->__getSubject('welcome');
+            $tag = $this->__getTag('welcome');
             $this->getRequest()->addCallback(
-                function($buffer) use ($self, $subject, $user) {
+                function($buffer) use ($self, $subject, $tag, $user) {
 
                     // Email should be preview
                     if ($self->isPreviewing()) {
@@ -134,7 +148,7 @@
                         //     $user->email,
                         //     $subject,
                         //     $buffer,
-                        //     'welcome'
+                        //     $tag
                         // );
 
                         // Parent

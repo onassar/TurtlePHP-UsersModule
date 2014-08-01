@@ -14,30 +14,13 @@
     abstract class Users
     {
         /**
-         * getConfig
-         * 
-         * @access public
+         * _configPath
+         *
+         * @var    string
+         * @access protected
          * @static
-         * @return array
          */
-        public static function getConfig()
-        {
-            // configuration settings
-            $config = \Plugin\Config::retrieve();
-            $config = $config['TurtlePHP-UsersModule'];
-            return $config;
-        }
-
-        /**
-         * openSession
-         * 
-         * @access public
-         * @static
-         * @return void
-         */
-        public static function openSession()
-        {
-        }
+        protected static $_configPath = 'config.inc.php';
 
         /**
          * generateAndStoreCsrfToken
@@ -54,11 +37,37 @@
         }
 
         /**
+         * getConfig
+         * 
+         * @access public
+         * @static
+         * @return array
+         */
+        public static function getConfig()
+        {
+            // configuration settings
+            $config = \Plugin\Config::retrieve();
+            $config = $config['TurtlePHP-UsersModule'];
+            return $config;
+        }
+
+        /**
+         * getConfigPath
+         * 
+         * @access public
+         * @return string
+         */
+        public static function getConfigPath()
+        {
+            return self::$_configPath;
+        }
+
+        /**
          * getFailedSchemaMessage
          *
          * @access public
          * @static
-         * @param  ProjectSchemaValidator $validator
+         * @param  \Modules\Users\ProjectSchemaValidator $validator
          * @return string
          */
         public static function getFailedSchemaMessage(
@@ -79,4 +88,15 @@
                 ($firstFailedRule) . ')';
         }
 
+        /**
+         * setConfigPath
+         * 
+         * @access public
+         * @param  string $path
+         * @return void
+         */
+        public static function setConfigPath($path)
+        {
+            self::$_configPath = $path;
+        }
     }

@@ -70,5 +70,4 @@ require_once APP . '/vendors/PHP-JSON-Validation/SmartSchema.class.php';
 require_once APP . '/vendors/PHP-JSON-Validation/SchemaValidator.class.php';
 require_once APP . '/vendors/PHP-JSON-Validation/SchemaValidator.class.php';
 require_once APP . '/modules/TurtlePHP-UsersModules/includes/init.inc.php';
-Modules\Users::openSession();
 ```

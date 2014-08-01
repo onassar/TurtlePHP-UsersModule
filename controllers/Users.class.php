@@ -339,7 +339,7 @@
                 // Welcome email
                 $config = getConfig();
                 if ($config['emails']['welcome']['send'] === true) {
-                    $user->sendWelcomeEmail();
+                    $emailResponse = $user->sendWelcomeEmail();
                 }
 
                 // Response
@@ -606,7 +606,7 @@
                 // Reset login hash; set password; send email
                 $user->resetLoginHash();
                 $user->setPassword($randomPassword);
-                $user->sendResetPasswordEmail($randomPassword);
+                $emailResponse = $user->sendResetPasswordEmail($randomPassword);
 
                 // Response
                 $response = array(
