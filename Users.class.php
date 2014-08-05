@@ -20,7 +20,7 @@
          * @access protected
          * @static
          */
-        protected static $_configPath = 'config.inc.php';
+        protected static $_configPath = 'config.default.inc.php';
 
         /**
          * generateAndStoreCsrfToken
@@ -99,4 +99,14 @@
         {
             self::$_configPath = $path;
         }
+    }
+
+    // non-default config file check
+    $info = pathinfo(__DIR__);
+    $parent = ($info['dirname']) . '/' . ($info['basename']);
+print_r($parent);
+exit(0);
+    $configPath = MODULE . '/includes/config.inc.php';
+    if (is_file($configPath)) {
+        \Modules\Users::setConfigPath($configPath);
     }
