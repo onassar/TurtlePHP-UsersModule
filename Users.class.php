@@ -106,5 +106,5 @@
     $parent = ($info['dirname']) . '/' . ($info['basename']);
     $configPath = $parent . '/includes/config.inc.php';
     if (is_file($configPath)) {
-        \Modules\Users::setConfigPath($configPath);
+        Users::setConfigPath($configPath);
     }
