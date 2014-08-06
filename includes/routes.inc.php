@@ -21,6 +21,11 @@
             'controller' => 'Modules\Users\Users',
             'action' => 'actionLogin'
         ),
+        '^' . ($paths['dashboard']) . '$' => array(// G
+            'module' => true,
+            'controller' => 'Modules\Users\Users',
+            'action' => 'actionDashboard'
+        ),
         '^' . ($paths['logout']) . '$' => array(// P
             'module' => true,
             'controller' => 'Modules\Users\Users',

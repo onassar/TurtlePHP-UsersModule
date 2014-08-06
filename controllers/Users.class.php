@@ -641,6 +641,66 @@
         }
 
         /**
+         * actionDashboard
+         * 
+         * @access public
+         * @return void
+         */
+        public function actionDashboard()
+        {
+            /**
+             * Validation
+             * 
+             */
+
+            // Schema
+            $path = $this->__getSchemaPath('dashboard', 'get');
+            $schema = (new \SmartSchema($path));
+
+            // Validator
+            $validator = (new ProjectSchemaValidator(
+                $schema,
+                $this->getRequest()
+            ));
+
+            /**
+             * Validation failed
+             * 
+             */
+            if ($validator->valid() === false) {
+
+                // Parent check
+                if (is_callable(array('parent', __FUNCTION__))) {
+
+                    // Parent
+                    $args = func_get_args();
+                    $this->__callParent(__FUNCTION__, false, $args);
+                }
+                // Otherwise
+                else {
+
+                    // Exception
+                    throw new \SchemaValidationException(
+                        \Modules\Users::getFailedSchemaMessage($validator)
+                    );
+                }
+            }
+            /**
+             * Body
+             * 
+             */
+            else {
+
+                // View
+                $this->__setView('dashboard', 'get');
+
+                // Parent
+                $args = func_get_args();
+                $this->__callParent(__FUNCTION__, true, $args);
+            }
+        }
+
+        /**
          * actionIndex
          * 
          * @access public

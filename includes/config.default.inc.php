@@ -41,6 +41,7 @@
 
     // generic
     $paths = array(
+        'dashboard' => '/dashboard',
         'register' => '/users',
         'login' => '/users/login',
         'logout' => '/users/logout',
@@ -59,6 +60,9 @@
 
     // generic
     $schemas = array(
+        'dashboard' => array(
+            'get' => MODULE . '/schemas/users.dashboard.get.json'
+        ),
         'register' => array(
             'get' => MODULE . '/schemas/users.index.get.json',
             'post' => MODULE . '/schemas/users.index.post.json'
@@ -106,6 +110,9 @@
 
     // GET views
     $views = array(
+        'dashboard' => array(
+            'get' => MODULE . '/views/dashboard.inc.php'
+        ),
         'register' => array(
             'get' => MODULE . '/views/register.inc.php',
             'post' => MODULE . '/views/raw.inc.php'
