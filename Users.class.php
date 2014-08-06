@@ -104,9 +104,7 @@
     // non-default config file check
     $info = pathinfo(__DIR__);
     $parent = ($info['dirname']) . '/' . ($info['basename']);
-print_r($parent);
-exit(0);
-    $configPath = MODULE . '/includes/config.inc.php';
+    $configPath = $parent . '/includes/config.inc.php';
     if (is_file($configPath)) {
         \Modules\Users::setConfigPath($configPath);
     }
