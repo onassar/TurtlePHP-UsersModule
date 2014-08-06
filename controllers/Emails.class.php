@@ -150,9 +150,7 @@
                             $buffer,
                             $tag
                         );
-var_dump($response);
-print_r($response);
-exit(0);
+
                         // Parent
                         $args = func_get_args();
                         // $this->__callParent(__FUNCTION__, true, $args);
