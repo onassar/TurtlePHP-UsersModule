@@ -144,13 +144,15 @@
                     } else {
 
                         // Send it off
-                        // $response = sendEmail(
-                        //     $user->email,
-                        //     $subject,
-                        //     $buffer,
-                        //     $tag
-                        // );
-
+                        $response = \Plugin\Emailer::send(
+                            $user->email,
+                            $subject,
+                            $buffer,
+                            $tag
+                        );
+var_dump($response);
+print_r($response);
+exit(0);
                         // Parent
                         $args = func_get_args();
                         // $this->__callParent(__FUNCTION__, true, $args);
@@ -159,7 +161,7 @@
 
                         // Donezo
                         return json_encode(array(
-                            'success' => true,
+                            'success' => $response !== false,
                             'data' => $response
                         ));
                     }

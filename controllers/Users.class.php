@@ -708,14 +708,16 @@
          */
         public function actionIndex()
         {
-$_POST = array(
-    'email' => 'onassar@gmail.com',
-    'password' => 'oliver',
-    'passwordConfirmation' => 'oliver'
-);
-// $user = \getLoggedInUser();
-// $user->sendWelcomeEmail();
+// $_POST = array(
+//     'email' => 'onassar@gmail.com',
+//     'password' => 'oliver',
+//     'passwordConfirmation' => 'oliver'
+// );
+$user = \getLoggedInUser();
+// print_r($user);
 // exit(0);
+$user->sendWelcomeEmail();
+exit(0);
             if (!empty($_POST)) {
                 $this->__setView('register', 'post');
                 $this->_actionIndexPost();

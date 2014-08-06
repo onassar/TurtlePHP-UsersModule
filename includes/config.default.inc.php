@@ -16,7 +16,6 @@
      */
     $emails = array(
         'resetPassword' => array(
-            'send' => true,
             'subject' => 'Password reset',
             'tag' => 'resetPassword',
             'resetTerms' => array(

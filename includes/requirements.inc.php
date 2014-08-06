@@ -11,8 +11,7 @@
     // hash
     $required = array(
         '\Plugin\Config' => 'TurtlePHP-ConfigPlugin',
-        'Email' => 'PHP-Email',
-        '\Postmark\Mail' => 'postmark-php',
+        '\Plugin\Emailer' => 'TurtlePHP-EmailerPlugin',
         'Geo' => 'PHP-Geo',
         'RequestCache' => 'PHP-RequestCache',
         'MySQLQuery' => 'PHP-MySQL',

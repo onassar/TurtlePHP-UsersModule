@@ -188,7 +188,17 @@
             $response = $subrequest->getResponse();
 
             // Response
-            return json_decode($response, true);
+            $response = json_decode($response, true);
+            if ($response['success'] === true) {
+                $this->update(
+                    array(
+                        'hasReceivedWelcomeEmail' => 1
+                    )
+                );
+            }
+
+            // Done
+            return $response;
         }
 
         /**
