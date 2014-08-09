@@ -9,11 +9,9 @@
      */
     function getLoggedInUser()
     {
-        // if (!isset($_SESSION['userId'])) {
-        //     return false;
-        // }
-        $id = 1;
+        if (!isset($_SESSION['userId'])) {
+            return false;
+        }
         $userModel = Turtle\Application::getModel('Modules\Users\User');
-        return $userModel->getUserById($id);
         return $userModel->getUserById($_SESSION['userId']);
     }

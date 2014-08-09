@@ -708,11 +708,12 @@
          */
         public function actionIndex()
         {
-// $_POST = array(
-//     'email' => 'onassar@gmail.com',
-//     'password' => 'oliver',
-//     'passwordConfirmation' => 'oliver'
-// );
+$_POST = array(
+    'email' => 'onassar@gmail.com',
+    'password' => 'oliver',
+    'passwordConfirmation' => 'oliver',
+    'csrfToken' => $_SESSION['csrfToken']
+);
 // $user = \getLoggedInUser();
 // // print_r($user);
 // // exit(0);
