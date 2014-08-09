@@ -277,4 +277,33 @@
             }
             return $users;
         }
+
+        /**
+         * getUsersCount
+         *
+         * @access public
+         * @param  array $clauses (default: array());
+         * @return integer
+         */
+        public function getUsersCount($clauses = array())
+        {
+            // Query
+            $query = (new \Query());
+            $query->count();
+            $query->table('users');
+            $query->where('status', 'open');
+            if (!empty($clauses)) {
+                foreach ($clauses as $clause) {
+                    foreach ($clause as $key => $property) {
+                        $clause[$key] = mysql_real_escape_string($property);
+                    }
+                    $query->andWhere($clause);
+                }
+            }
+
+            // Retrieve matching records
+            $mySQLQuery = (new \MySQLQuery($query->parse()));
+            $records = $mySQLQuery->getResults();
+            return (int) $records[0]['count'];
+        }
     }
