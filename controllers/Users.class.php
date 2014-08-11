@@ -322,6 +322,8 @@
                 // Create the user
                 $user = $userModel->createUser(array(
                     'publicKey' => $userModel->getUniquePublicKey(),
+                    'firstName' => $_POST['firstName'],
+                    'lastName' => $_POST['lastName'],
                     'email' => $_POST['email'],
                     'username' => $username,
                     'registeredIPAddress' => IP,
@@ -334,7 +336,7 @@
 
                 // Password + login
                 $user->setPassword($_POST['password']);
-                $user->login();
+                $user->login(time() + 2 * 365 * 24 * 60 * 60);
 
                 // Welcome email
                 $config = getConfig();
@@ -468,7 +470,7 @@
                 $userModel = $this->_getModel('Modules\Users\User');
                 $user = $userModel->getUserByEmail($_POST['email']);
                 if (isset($_POST['rememberMe'])) {
-                    $user->login(time() + 365 * 24 * 60 * 60);
+                    $user->login(time() + 2 * 365 * 24 * 60 * 60);
                 } else {
                     $user->login(0);
                 }

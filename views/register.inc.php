@@ -23,8 +23,12 @@
                 <form action="<?= ($config['paths']['register']) ?>" method="post">
                     <input type="hidden" name="csrfToken" value="<?= ($csrfToken) ?>" />
                     <div class="wrapper">
-                        <label for="name">Full Name</label>
-                        <input type="text" name="name" id="name" />
+                        <label for="firstName">First name</label>
+                        <input type="text" name="firstName" id="firstName" />
+                    </div>
+                    <div class="wrapper">
+                        <label for="lastName">Last name</label>
+                        <input type="text" name="lastName" id="lastName" />
                     </div>
                     <div class="wrapper">
                         <label for="email">Email</label>

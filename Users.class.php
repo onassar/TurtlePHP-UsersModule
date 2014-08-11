@@ -23,6 +23,33 @@
         protected static $_configPath = 'config.default.inc.php';
 
         /**
+         * autoLogin
+         *
+         * @access public
+         * @static
+         * @return void
+         */
+        public static function autoLogin()
+        {
+            $loggedInUser = getLoggedInUser();
+            if ($loggedInUser === false) {
+                if (
+                    isset($_COOKIE['isLoggedIn'])
+                    && $_COOKIE['isLoggedIn'] === '1'
+                    && isset($_COOKIE['loginHash'])
+                ) {
+                    $userModel = \Turtle\Application::getModel('Modules\\Users\\User');
+                    $user = $userModel->getUserByLoginHash(
+                        $_COOKIE['loginHash']
+                    );
+                    if ($user !== false) {
+                        $user->login(time() + 2 * 365 * 24 * 60 * 60);
+                    }
+                }
+            }
+        }
+
+        /**
          * generateAndStoreCsrfToken
          *
          * @access public
