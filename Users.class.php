@@ -38,7 +38,9 @@
                     && $_COOKIE['isLoggedIn'] === '1'
                     && isset($_COOKIE['loginHash'])
                 ) {
-                    $userModel = \Turtle\Application::getModel('Modules\\Users\\User');
+                    $userModel = \Turtle\Application::getModel(
+                        'Modules\\Users\\User'
+                    );
                     $user = $userModel->getUserByLoginHash(
                         $_COOKIE['loginHash']
                     );
@@ -125,6 +127,23 @@
         public static function setConfigPath($path)
         {
             self::$_configPath = $path;
+        }
+
+        /**
+         * track
+         *
+         * @access public
+         * @static
+         * @return void
+         */
+        public static function track()
+        {
+            $loggedInUser = getLoggedInUser();
+            if ($loggedInUser !== false) {
+                $loggedInUser->update(array(
+                    'lastActiveEpoch' => time()
+                ));
+            }
         }
     }
 

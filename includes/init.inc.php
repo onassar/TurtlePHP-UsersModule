@@ -26,8 +26,9 @@
         require_once \Modules\Users::getConfigPath();
         require_once 'routes.inc.php';
 
-        // Auto-login
+        // overhead
         \Modules\Users::autoLogin();
+        \Modules\Users::track();
     };
 
     // run/clear
