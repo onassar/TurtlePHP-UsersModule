@@ -27,7 +27,7 @@
             )
         ),
         'welcome' => array(
-            'send' => true,
+            'autoSend' => true,
             'subject' => 'Welcome',
             'tag' => 'welcome'
         )

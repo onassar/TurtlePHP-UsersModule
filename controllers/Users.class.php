@@ -338,7 +338,7 @@
 
                 // Welcome email
                 $config = getConfig();
-                if ($config['emails']['welcome']['send'] === true) {
+                if ($config['emails']['welcome']['autoSend'] === true) {
                     $emailResponse = $user->sendWelcomeEmail();
                 }
 
