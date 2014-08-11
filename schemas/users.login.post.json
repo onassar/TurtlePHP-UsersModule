@@ -3,7 +3,7 @@
         "validator": ["DataValidator", "dataPosted"],
         "blocking": true,
         "error": {
-            "reference": "901"
+            "reference": "users.login.post.0"
         }
     },
     {
@@ -11,29 +11,32 @@
         "params": ["{csrfToken}"],
         "blocking": true,
         "error": {
-            "reference": "902"
+            "reference": "users.login.post.1"
         }
     },
     {
         "validator": ["Modules\\Users\\UserValidator", "isLoggedOut"],
-        "blocking": true
+        "blocking": true,
+        "error": {
+            "reference": "users.login.post.2"
+        }
     },
     {
-        "validator": ["Modules\\Users\\StringValidator", "notEmpty"],
+        "validator": ["StringValidator", "notEmpty"],
         "params": ["{email}"],
         "blocking": true,
         "error": {
-            "reference": "903",
+            "reference": "users.login.post.3",
             "input": "email",
             "message": "Please enter your email."
         }
     },
     {
-        "validator": ["Modules\\Users\\StringValidator", "notEmpty"],
+        "validator": ["StringValidator", "notEmpty"],
         "params": ["{password}"],
         "blocking": true,
         "error": {
-            "reference": "904",
+            "reference": "users.login.post.4",
             "input": "password",
             "message": "Please enter your password."
         },
@@ -43,12 +46,11 @@
                 "params": ["{email}", "{password}"],
                 "blocking": true,
                 "error": {
-                "reference": "905",
+                    "reference": "users.login.post.5",
                     "input": "password",
                     "message": "Could not log you in. Try again."
                 }
             }
-
         ]
     }
 ]

@@ -1,0 +1,21 @@
+CREATE TABLE `users` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `created` int(10) unsigned NOT NULL,
+  `updated` int(10) unsigned NOT NULL,
+  `status` varchar(8) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `type` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `publicKey` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(256) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `username` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
+  `passwordHash` varchar(256) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `loginHash` varchar(256) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `registeredIPAddress` varchar(128) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `locationCity` varchar(128) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `locationCountryName` varchar(128) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `locationRegionName` varchar(128) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `locationCountryCode` varchar(128) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `receiveNewsletters` tinyint(1) unsigned NOT NULL,
+  `hasReceivedWelcomeEmail` tinyint(1) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `openRecord` (`id`,`status`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

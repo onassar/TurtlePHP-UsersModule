@@ -467,7 +467,11 @@
                 // Logic
                 $userModel = $this->_getModel('Modules\Users\User');
                 $user = $userModel->getUserByEmail($_POST['email']);
-                $user->login();
+                if (isset($_POST['rememberMe'])) {
+                    $user->login(time() + 365 * 24 * 60 * 60);
+                } else {
+                    $user->login(0);
+                }
 
                 // Response
                 $response = array(
@@ -708,17 +712,6 @@
          */
         public function actionIndex()
         {
-$_POST = array(
-    'email' => 'onassar@gmail.com',
-    'password' => 'oliver',
-    'passwordConfirmation' => 'oliver',
-    'csrfToken' => $_SESSION['csrfToken']
-);
-// $user = \getLoggedInUser();
-// // print_r($user);
-// // exit(0);
-// $user->sendWelcomeEmail();
-// exit(0);
             if (!empty($_POST)) {
                 $this->__setView('register', 'post');
                 $this->_actionIndexPost();

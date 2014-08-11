@@ -100,6 +100,75 @@
         }
 
         /**
+         * actionResetPassword
+         * 
+         * @access public
+         * @return void
+         */
+        public function actionResetPassword()
+        {
+            // View
+            $this->__setView('resetPassword', 'get');
+
+            /**
+             * Validation
+             * 
+             */
+
+            // Preview check
+            $_get = $this->getGet();
+            if (!isset($_get['preview'])) {
+                $this->__validateUserSchema('resetPassword', 'get');
+            }
+
+            /**
+             * Body
+             * 
+             */
+
+            // Get user record
+            $userModel = $this->_getModel('Modules\Users\User');
+            $user = $userModel->getUserById($_get['userId']);
+            $this->_pass('user', $user);
+            $this->_pass('randomPassword', $_get['randomPassword']);
+
+            // callback (for sending the email)
+            $self = $this;
+            $subject = $this->__getSubject('resetPassword');
+            $tag = $this->__getTag('resetPassword');
+            $this->getRequest()->addCallback(
+                function($buffer) use ($self, $subject, $tag, $user) {
+
+                    // Email should be preview
+                    if ($self->isPreviewing()) {
+                        exit($buffer);
+                    } else {
+
+                        // Send it off
+                        $response = \Plugin\Emailer::send(
+                            $user->email,
+                            $subject,
+                            $buffer,
+                            $tag
+                        );
+
+                        // Parent
+                        $args = func_get_args();
+                        // $this->__callParent(__FUNCTION__, true, $args);
+
+                        // 
+
+                        // Donezo
+                        return json_encode(array(
+                            'success' => $response !== false,
+                            'data' => $response
+                        ));
+                    }
+                }
+            );
+        }
+
+        /**
          * actionWelcome
          * 
          * @access public

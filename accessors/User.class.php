@@ -56,40 +56,41 @@
          * login
          *
          * @access public
+         * @param  integer $expire
          * @return void
          */
-        public function login()
+        public function login($expire)
         {
             $_SESSION['userId'] = $this->id;
             $this->resetLoginHash();
             setcookie(
                 'isLoggedIn',
                 '1',
-                time() + (365 * 24 * 60 * 60),
+                $expire,
                 '/',
                 $_SERVER['HTTP_HOST'],
-                false,
-                false
+                HTTPS,
+                true
             );
             setcookie(
                 'loginHash',
                 $this->loginHash,
-                time() + (365 * 24 * 60 * 60),
+                $expire,
                 '/',
                 $_SERVER['HTTP_HOST'],
-                false,
-                false
+                HTTPS,
+                true
             );
 
             // Track email
             setcookie(
                 'email',
                 $this->email,
-                time() + (365 * 24 * 60 * 60),
+                $expire,
                 '/',
                 $_SERVER['HTTP_HOST'],
-                false,
-                false
+                HTTPS,
+                true
             );
         }
 
@@ -109,8 +110,8 @@
                 time() - (365 * 24 * 60 * 60),
                 '/',
                 $_SERVER['HTTP_HOST'],
-                false,
-                false
+                HTTPS,
+                true
             );
             setcookie(
                 'loginHash',
@@ -118,8 +119,8 @@
                 time() - (365 * 24 * 60 * 60),
                 '/',
                 $_SERVER['HTTP_HOST'],
-                false,
-                false
+                HTTPS,
+                true
             );
         }
 

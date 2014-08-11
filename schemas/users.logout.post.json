@@ -1,11 +1,17 @@
 [
     {
         "validator": ["DataValidator", "dataPosted"],
-        "blocking": true
+        "blocking": true,
+        "error": {
+            "reference": "users.logout.post.0"
+        }
     },
     {
         "validator": ["Modules\\Users\\SecurityValidator", "validCsrfToken"],
         "params": ["{csrfToken}"],
-        "blocking": true
+        "blocking": true,
+        "error": {
+            "reference": "users.logout.post.1"
+        }
     }
 ]

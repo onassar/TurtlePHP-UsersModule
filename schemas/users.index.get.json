@@ -1,2 +1,9 @@
 [
+    {
+        "validator": ["Modules\\Users\\UserValidator", "isLoggedOut"],
+        "blocking": true,
+        "error": {
+            "reference": "users.index.get.0"
+        }
+    }
 ]

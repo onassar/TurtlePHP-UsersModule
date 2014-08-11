@@ -2,11 +2,17 @@
     {
         "validator": ["Modules\\Users\\SecurityValidator", "requestIsSubRequest"],
         "params": ["{__request__}"],
-        "blocking": true
+        "blocking": true,
+        "error": {
+            "reference": "Emails.userStandard.get.0"
+        }
     },
     {
         "validator": ["Modules\\Users\\UserValidator", "validUserById"],
         "params": ["{userId}"],
-        "blocking": true
+        "blocking": true,
+        "error": {
+            "reference": "Emails.userStandard.get.1"
+        }
     }
 ]
