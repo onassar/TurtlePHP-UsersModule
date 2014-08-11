@@ -238,6 +238,11 @@
                 // Otherwise
                 else {
 
+                    // Send to dashboard
+                    $config = getConfig();
+                    header('Location: ' . ($config['paths']['dashboard']));
+                    exit(0);
+
                     // Exception
                     throw new \SchemaValidationException(
                         \Modules\Users::getFailedSchemaMessage($validator)
@@ -398,6 +403,11 @@
                 // Otherwise
                 else {
 
+                    // Send to dashboard
+                    $config = getConfig();
+                    header('Location: ' . ($config['paths']['dashboard']));
+                    exit(0);
+
                     // Exception
                     throw new \SchemaValidationException(
                         \Modules\Users::getFailedSchemaMessage($validator)
@@ -528,6 +538,11 @@
                 }
                 // Otherwise
                 else {
+
+                    // Send to dashboard
+                    $config = getConfig();
+                    header('Location: ' . ($config['paths']['dashboard']));
+                    exit(0);
 
                     // Exception
                     throw new \SchemaValidationException(
