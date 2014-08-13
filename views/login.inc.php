@@ -31,7 +31,10 @@
                         <input type="password" name="password" id="password" />
                     </div>
                     <div class="wrapper">
-                        <input type="checkbox" name="rememberMe" id="rememberMe" value="1" />
+                        <?php
+                            $checked = $config['defaults']['rememberMe'];
+                        ?>
+                        <input type="checkbox" name="rememberMe" id="rememberMe" value="1" <?= ($checked === true ? 'checked="checked" ' : '') ?>/>
                         <label for="rememberMe">Remember me</a>
                     </div>
                     <button type="submit">Login</button>

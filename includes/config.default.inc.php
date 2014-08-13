@@ -4,11 +4,20 @@
     namespace Modules\Users;
 
     // configuration init
+    $defaults = array();
     $emails = array();
     $paths = array();
     $schemas = array();
     $security = array();
     $views = array();
+
+    /**
+     * Default settings
+     * 
+     */
+    $defaults = array(
+        'rememberMe' => true
+    );
 
     /**
      * Email settings
@@ -18,6 +27,17 @@
         'resetPassword' => array(
             'subject' => 'Password reset',
             'tag' => 'resetPassword',
+
+            /**
+             * Method of reset
+             * 
+             * If 'change', users password will be changed, and login link will
+             * be sent. If 'link', user will be passed link which will log them
+             * in, and forward them to the change password view
+             * 
+             * @var string (default: 'link') can also be 'change'
+             */
+            'method' => 'link',
             'resetTerms' => array(
                 'Boat',
                 'Apple',
@@ -147,6 +167,7 @@
     \Plugin\Config::add(
         'TurtlePHP-UsersModule',
         array(
+            'defaults' => $defaults,
             'emails' => $emails,
             'paths' => $paths,
             'schemas' => $schemas,

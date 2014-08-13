@@ -46,7 +46,7 @@
                         <input type="checkbox" name="terms" id="terms" value="1" />
                         <label for="terms">I agree to the </label><a href="#">terms of service</a>
                     </div>
-                    <button type="submit">Login</button>
+                    <button type="submit">Register</button>
                 </form>
             </div>
         </div>

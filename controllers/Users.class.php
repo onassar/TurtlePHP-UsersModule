@@ -188,7 +188,7 @@
                 $response = array(
                     'success' => true,
                     'data' => array(
-                        'user' => $user->getPublicData()
+                        'user' => $loggedInUser->getPublicData()
                     )
                 );
                 $this->_pass('response', json_encode($response));
@@ -341,7 +341,13 @@
 
                 // Password + login
                 $user->setPassword($_POST['password']);
-                $user->login(time() + 2 * 365 * 24 * 60 * 60);
+                $config = getConfig();
+                $defaults = $config['defaults'];
+                $expire = 0;
+                if ($defaults['rememberMe'] === true) {
+                    $expire = time() + 2 * 365 * 24 * 60 * 60;
+                }
+                $user->login($expire);
 
                 // Welcome email
                 $config = getConfig();
@@ -616,18 +622,29 @@
                 $userModel = $this->_getModel('Modules\Users\User');
                 $user = $userModel->getUserByEmail($_POST['email']);
 
-                // Generate a random password
+                // Generate a random password if needed
                 $config = getConfig();
-                $possibleWords = $config['emails']['resetPassword']['resetTerms'];
-                $randomNumber = rand(1000, 9999);
-                $randomKey = rand(0, count($possibleWords) - 1);
-                $randomPassword = ($possibleWords[$randomKey]) .
-                    ($randomNumber);
+                if ($config['emails']['resetPassword']['method'] === 'change') {
+                    $possibleWords = $config['emails']['resetPassword']['resetTerms'];
+                    $randomNumber = rand(1000, 9999);
+                    $randomKey = rand(0, count($possibleWords) - 1);
+                    $randomPassword = ($possibleWords[$randomKey]) .
+                        ($randomNumber);
 
-                // Reset login hash; set password; send email
-                $user->resetLoginHash();
-                $user->setPassword($randomPassword);
-                $emailResponse = $user->sendResetPasswordEmail($randomPassword);
+                    // Reset login hash; set password; send email
+                    $user->resetLoginHash();
+                    $user->setPassword($randomPassword);
+                }
+
+                // Otherwise send login link to forward them to change view
+                if ($config['emails']['resetPassword']['method'] === 'link') {
+
+                }
+
+                // Send email
+                $emailResponse = $user->sendResetPasswordEmail(
+                    $randomPassword
+                );
 
                 // Response
                 $response = array(

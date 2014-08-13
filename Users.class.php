@@ -33,6 +33,8 @@
         {
             $loggedInUser = getLoggedInUser();
             if ($loggedInUser === false) {
+
+                // Cookie check
                 if (
                     isset($_COOKIE['isLoggedIn'])
                     && $_COOKIE['isLoggedIn'] === '1'
@@ -45,7 +47,32 @@
                         $_COOKIE['loginHash']
                     );
                     if ($user !== false) {
-                        $user->login(time() + 2 * 365 * 24 * 60 * 60);
+                        $config = \Modules\Users::getConfig();
+                        $defaults = $config['defaults'];
+                        $expire = 0;
+                        if ($defaults['rememberMe'] === true) {
+                            $expire = time() + 2 * 365 * 24 * 60 * 60;
+                        }
+                        $user->login($expire);
+                    }
+                }
+
+                // GET check
+                if (isset($_GET['loginHash'])) {
+                    $userModel = \Turtle\Application::getModel(
+                        'Modules\\Users\\User'
+                    );
+                    $user = $userModel->getUserByLoginHash(
+                        $_GET['loginHash']
+                    );
+                    if ($user !== false) {
+                        $config = \Modules\Users::getConfig();
+                        $defaults = $config['defaults'];
+                        $expire = 0;
+                        if ($defaults['rememberMe'] === true) {
+                            $expire = time() + 2 * 365 * 24 * 60 * 60;
+                        }
+                        $user->login($expire);
                     }
                 }
             }

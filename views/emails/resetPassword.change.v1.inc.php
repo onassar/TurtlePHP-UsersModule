@@ -2,5 +2,5 @@
 
     // namespaces
     namespace Modules\Users;
-?>reset password v1
+?>reset password (change) v1
 <?= ($randomPassword) ?>
