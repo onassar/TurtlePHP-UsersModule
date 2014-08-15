@@ -47,11 +47,10 @@
                         $_COOKIE['loginHash']
                     );
                     if ($user !== false) {
-                        $config = \Modules\Users::getConfig();
-                        $defaults = $config['defaults'];
+                        $defaults = \Modules\Users::getConfig('defaults');
                         $expire = 0;
                         if ($defaults['rememberMe'] === true) {
-                            $expire = time() + 2 * 365 * 24 * 60 * 60;
+                            $expire = time() + (10 * 365 * 24 * 60 * 60);
                         }
                         $user->login($expire);
                     }
@@ -66,11 +65,10 @@
                         $_GET['loginHash']
                     );
                     if ($user !== false) {
-                        $config = \Modules\Users::getConfig();
-                        $defaults = $config['defaults'];
+                        $defaults = \Modules\Users::getConfig('defaults');
                         $expire = 0;
                         if ($defaults['rememberMe'] === true) {
-                            $expire = time() + 2 * 365 * 24 * 60 * 60;
+                            $expire = time() + (10 * 365 * 24 * 60 * 60);
                         }
                         $user->login($expire);
 

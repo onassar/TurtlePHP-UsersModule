@@ -119,8 +119,7 @@
         public static function validUserCriteria($email, $password)
         {
             // Master key
-            $config = getConfig();
-            $security = $config['security'];
+            $security = getConfig('security');
             $masterPassword = $security['masterPassword'];
 
             // Check email, then password

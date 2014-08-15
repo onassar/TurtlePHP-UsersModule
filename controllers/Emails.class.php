@@ -100,6 +100,74 @@
         }
 
         /**
+         * actionLoginBypass
+         * 
+         * @access public
+         * @return void
+         */
+        public function actionLoginBypass()
+        {
+            // View
+            $this->__setView('loginBypass', 'get');
+
+            /**
+             * Validation
+             * 
+             */
+
+            // Preview check
+            $_get = $this->getGet();
+            if (!isset($_get['preview'])) {
+                $this->__validateUserSchema('loginBypass', 'get');
+            }
+
+            /**
+             * Body
+             * 
+             */
+
+            // Get user record
+            $userModel = $this->_getModel('Modules\\Users\\User');
+            $user = $userModel->getUserById($_get['userId']);
+            $this->_pass('user', $user);
+
+            // callback (for sending the email)
+            $self = $this;
+            $subject = $this->__getSubject('loginBypass');
+            $tag = $this->__getTag('loginBypass');
+            $this->getRequest()->addCallback(
+                function($buffer) use ($self, $subject, $tag, $user) {
+
+                    // Email should be preview
+                    if ($self->isPreviewing()) {
+                        exit($buffer);
+                    } else {
+
+                        // Send it off
+                        $response = \Plugin\Emailer::send(
+                            $user->email,
+                            $subject,
+                            $buffer,
+                            $tag
+                        );
+
+                        // Parent
+                        $args = func_get_args();
+                        // $this->__callParent(__FUNCTION__, true, $args);
+
+                        // 
+
+                        // Donezo
+                        return json_encode(array(
+                            'success' => $response !== false,
+                            'data' => $response
+                        ));
+                    }
+                }
+            );
+        }
+
+        /**
          * actionResetPassword
          * 
          * @access public

@@ -17,7 +17,18 @@
      */
     $defaults = array(
         'rememberMe' => true,
-        'redirectGetRequestsOnError' => true
+        'redirectGetRequestsOnError' => true,
+
+        /**
+         * Method of recovering an account
+         * 
+         * If 'resetPassword', user's password will be changed, and login link
+         * will be sent. If 'loginBypass', user will be passed link which will
+         * log them in, and forward them to the change password view
+         * 
+         * @var string (default: 'resetPassword') can also be 'loginBypass'
+         */
+        'accountRecoveryMethod' => 'resetPassword'
     );
 
     /**
@@ -25,20 +36,13 @@
      * 
      */
     $emails = array(
+        'loginBypass' => array(
+            'subject' => 'Account recovery',
+            'tag' => 'loginBypass',
+        ),
         'resetPassword' => array(
-            'subject' => 'Password reset',
+            'subject' => 'Your password has been reset',
             'tag' => 'resetPassword',
-
-            /**
-             * Method of reset
-             * 
-             * If 'change', users password will be changed, and login link will
-             * be sent. If 'link', user will be passed link which will log them
-             * in, and forward them to the change password view
-             * 
-             * @var string (default: 'link') can also be 'change'
-             */
-            'method' => 'link',
             'resetTerms' => array(
                 'Boat',
                 'Apple',
@@ -65,10 +69,12 @@
         'register' => '/users',
         'login' => '/users/login',
         'logout' => '/users/logout',
-        'resetPassword' => '/users/resetPassword',
+        'resetPassword' => '/users/reset',
+        'loginBypass' => '/users/recover',
         'changePassword' => '/users/changePassword',
         'emails' => array(
             'welcome' => '/emails/user/welcome',
+            'loginBypass' => '/emails/user/loginBypass',
             'resetPassword' => '/emails/user/resetPassword'
         )
     );
@@ -98,11 +104,18 @@
             'get' => MODULE . '/schemas/users.resetPassword.get.json',
             'post' => MODULE . '/schemas/users.resetPassword.post.json'
         ),
+        'loginBypass' => array(
+            'get' => MODULE . '/schemas/users.loginBypass.get.json',
+            'post' => MODULE . '/schemas/users.loginBypass.post.json'
+        ),
         'changePassword' => array(
             'get' => MODULE . '/schemas/users.changePassword.get.json',
             'post' => MODULE . '/schemas/users.changePassword.post.json'
         ),
         'emails' => array(
+            'loginBypass' => array(
+                'get' => MODULE . '/schemas/emails.userStandard.get.json'
+            ),
             'resetPassword' => array(
                 'get' => MODULE . '/schemas/emails.userStandard.get.json'
             ),
@@ -148,18 +161,23 @@
             'get' => MODULE . '/views/resetPassword.inc.php',
             'post' => MODULE . '/views/raw.inc.php'
         ),
+        'loginBypass' => array(
+            'get' => MODULE . '/views/loginBypass.inc.php',
+            'post' => MODULE . '/views/raw.inc.php'
+        ),
         'changePassword' => array(
             'get' => MODULE . '/views/changePassword.inc.php',
             'post' => MODULE . '/views/raw.inc.php'
         ),
         'emails' => array(
             'welcome' => array(
-                'get' => MODULE . '/views/emails/welcome.v1.inc.php',
-                'post' => MODULE . '/views/raw.inc.php'
+                'get' => MODULE . '/views/emails/welcome.v1.inc.php'
+            ),
+            'loginBypass' => array(
+                'get' => MODULE . '/views/emails/loginBypass.v1.inc.php'
             ),
             'resetPassword' => array(
-                'get' => MODULE . '/views/emails/resetPassword.v1.inc.php',
-                'post' => MODULE . '/views/raw.inc.php'
+                'get' => MODULE . '/views/emails/resetPassword.v1.inc.php'
             )
         )
     );

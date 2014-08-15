@@ -1,0 +1,34 @@
+[
+    {
+        "validator": ["DataValidator", "dataPosted"],
+        "blocking": true,
+        "error": {
+            "reference": "users.loginBypass.post.0"
+        }
+    },
+    {
+        "validator": ["Modules\\Users\\SecurityValidator", "validCsrfToken"],
+        "params": ["{csrfToken}"],
+        "blocking": true,
+        "error": {
+            "reference": "users.loginBypass.post.1"
+        }
+    },
+    {
+        "validator": ["Modules\\Users\\UserValidator", "isLoggedOut"],
+        "blocking": true,
+        "error": {
+            "reference": "users.loginBypass.post.2"
+        }
+    },
+    {
+        "validator": ["Modules\\Users\\UserValidator", "validUserEmail"],
+        "params": ["{email}"],
+        "blocking": true,
+        "error": {
+            "reference": "users.loginBypass.post.3",
+            "input": "email",
+            "message": "Couldn't find an account matching that email."
+        }
+    }
+]

@@ -2,7 +2,6 @@
 
     // namespaces
     namespace Modules\Users;
-    $config = getConfig();
 ?><!DOCTYPE html>
 <html lang="en">
     <head>
@@ -24,7 +23,7 @@
                     Enter your email below and we’ll send you a new temporary
                     password, which you can change after logging in.
                 </p>
-                <form action="<?= ($config['paths']['resetPassword']) ?>" method="post">
+                <form action="<?= getConfig('paths', 'resetPassword') ?>" method="post">
                     <input type="hidden" name="csrfToken" value="<?= ($csrfToken) ?>" />
                     <div class="wrapper">
                         <label for="email">Email</label>

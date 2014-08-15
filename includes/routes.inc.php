@@ -4,8 +4,7 @@
     namespace Modules\Users;
 
     // Path/view settings
-    $config = getConfig();
-    $paths = $config['paths'];
+    $paths = getConfig('paths');
 
     // add module routes to application
     \Turtle\Application::addRoutes(array(
@@ -41,12 +40,22 @@
             'controller' => 'Modules\Users\Users',
             'action' => 'actionResetPassword'
         ),
+        '^' . ($paths['loginBypass']) . '$' => array(// G + P
+            'module' => true,
+            'controller' => 'Modules\Users\Users',
+            'action' => 'actionLoginBypass'
+        ),
 
         // Emails
         '^' . ($paths['emails']['welcome']) . '$' => array(// G
             'module' => true,
             'controller' => 'Modules\Users\Emails',
             'action' => 'actionWelcome'
+        ),
+        '^' . ($paths['emails']['loginBypass']) . '$' => array(// G
+            'module' => true,
+            'controller' => 'Modules\Users\Emails',
+            'action' => 'actionLoginBypass'
         ),
         '^' . ($paths['emails']['resetPassword']) . '$' => array(// G
             'module' => true,

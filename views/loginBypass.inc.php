@@ -6,7 +6,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>Register</title>
+        <title>Account Recovery</title>
         <!--[if lt IE 9]>
         <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
@@ -19,33 +19,17 @@
     <body>
         <div id="wrapper">
             <div id="body" class="clearfix">
-                <form action="<?= getConfig('paths', 'register') ?>" method="post">
+                <p>
+                    Enter your email below and we’ll send you a link to update
+                    your password
+                </p>
+                <form action="<?= getConfig('paths', 'loginBypass') ?>" method="post">
                     <input type="hidden" name="csrfToken" value="<?= ($csrfToken) ?>" />
-                    <div class="wrapper">
-                        <label for="firstName">First name</label>
-                        <input type="text" name="firstName" id="firstName" />
-                    </div>
-                    <div class="wrapper">
-                        <label for="lastName">Last name</label>
-                        <input type="text" name="lastName" id="lastName" />
-                    </div>
                     <div class="wrapper">
                         <label for="email">Email</label>
                         <input type="text" name="email" id="email" />
                     </div>
-                    <div class="wrapper">
-                        <label for="password">Password</label>
-                        <input type="password" name="password" id="password" />
-                    </div>
-                    <div class="wrapper">
-                        <label for="passwordConfirmation">Re-enter password</label>
-                        <input type="password" name="passwordConfirmation" id="passwordConfirmation" />
-                    </div>
-                    <div class="wrapper">
-                        <input type="checkbox" name="terms" id="terms" value="1" />
-                        <label for="terms">I agree to the </label><a href="#">terms of service</a>
-                    </div>
-                    <button type="submit">Register</button>
+                    <button type="submit">Send Recovery Email</button>
                 </form>
             </div>
         </div>

@@ -12,6 +12,7 @@
     $required = array(
         '\Plugin\Config' => 'TurtlePHP-ConfigPlugin',
         '\Plugin\Emailer' => 'TurtlePHP-EmailerPlugin',
+        '\Plugin\CampaignMonitor' => 'TurtlePHP-CampaignMonitorPlugin',
         'Geo' => 'PHP-Geo',
         'RequestCache' => 'PHP-RequestCache',
         'MySQLQuery' => 'PHP-MySQL',

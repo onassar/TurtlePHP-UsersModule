@@ -199,6 +199,29 @@
         }
 
         /**
+         * sendBypassLoginEmail
+         *
+         * @access public
+         * @return array
+         */
+        public function sendBypassLoginEmail()
+        {
+            // Path
+            $path = getConfig('paths', 'emails', 'bypassLogin');
+
+            // Subrequest
+            $path = ($path) .
+                '?userId=' . ($this->id);
+            $subrequest = (new \Turtle\Request($path));
+            $subrequest->route();
+            $subrequest->generate();
+            $response = $subrequest->getResponse();
+
+            // Respond
+            return json_decode($response, true);
+        }
+
+        /**
          * sendResetPasswordEmail
          *
          * @access public
@@ -208,8 +231,7 @@
         public function sendResetPasswordEmail($randomPassword)
         {
             // Path
-            $config = getConfig();
-            $path = $config['paths']['emails']['resetPassword'];
+            $path = getConfig('paths', 'emails', 'resetPassword');
 
             // Subrequest
             $path = ($path) .
@@ -224,7 +246,6 @@
             return json_decode($response, true);
         }
 
-
         /**
          * sendWelcomeEmail
          *
@@ -234,8 +255,7 @@
         public function sendWelcomeEmail()
         {
             // Path
-            $config = getConfig();
-            $path = $config['paths']['emails']['welcome'];
+            $path = getConfig('paths', 'emails', 'welcome');
 
             // Subrequest
             $path = ($path) .
@@ -268,12 +288,11 @@
          */
         public function setPassword($password)
         {
-            $config = getConfig();
-            $security = $config['security'];
+            $passwordSalt = getConfig('security', 'passwordSalt');
             $this->update(array(
                 'passwordHash' => hash(
                     'sha256',
-                    ($security['passwordSalt']) . ($password)
+                    ($passwordSalt) . ($password)
                 )
             ));
         }

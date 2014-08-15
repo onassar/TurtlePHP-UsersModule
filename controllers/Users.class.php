@@ -55,8 +55,7 @@
          */
         private function __getSchemaPath($action, $method)
         {
-            $config = getConfig();
-            return $config['schemas'][$action][$method];
+            return getConfig('schemas', $action, $method);
         }
 
         /**
@@ -137,9 +136,6 @@
              * 
              */
             else {
-
-                // View
-                $this->__setView('changePassword', 'get');
 
                 // Parent
                 $args = func_get_args();
@@ -278,9 +274,6 @@
              */
             else {
 
-                // View
-                $this->__setView('register', 'get');
-
                 // Parent
                 $args = func_get_args();
                 $this->__callParent(__FUNCTION__, true, $args);
@@ -368,7 +361,7 @@
                 $defaults = $config['defaults'];
                 $expire = 0;
                 if ($defaults['rememberMe'] === true) {
-                    $expire = time() + 2 * 365 * 24 * 60 * 60;
+                    $expire = time() + (10 * 365 * 24 * 60 * 60);
                 }
                 $user->login($expire);
 
@@ -458,9 +451,6 @@
              */
             else {
 
-                // View
-                $this->__setView('login', 'get');
-
                 // Parent
                 $args = func_get_args();
                 $this->__callParent(__FUNCTION__, true, $args);
@@ -522,6 +512,144 @@
                 } else {
                     $user->login(0);
                 }
+
+                // Response
+                $response = array(
+                    'success' => true,
+                    'data' => array(
+                        'user' => $user->getPublicData()
+                    )
+                );
+                $this->_pass('response', json_encode($response));
+
+                // Parent
+                $args = func_get_args();
+                $this->__callParent(__FUNCTION__, true, $args);
+            }
+        }
+
+        /**
+         * _actionLoginBypassGet
+         * 
+         * @access protected
+         * @return void
+         */
+        protected function _actionLoginBypassGet()
+        {
+            /**
+             * Validation
+             * 
+             */
+
+            // Schema
+            $path = $this->__getSchemaPath('loginBypass', 'get');
+            $schema = (new \SmartSchema($path));
+
+            // Validator
+            $validator = (new ProjectSchemaValidator(
+                $schema,
+                $this->getRequest()
+            ));
+
+            /**
+             * Validation failed
+             * 
+             */
+            if ($validator->valid() === false) {
+
+                // Parent check
+                if (is_callable(array('parent', __FUNCTION__))) {
+
+                    // Parent
+                    $args = func_get_args();
+                    $this->__callParent(__FUNCTION__, false, $args);
+                }
+                // Otherwise
+                else {
+
+                    // Send to dashboard
+                    $config = getConfig();
+                    $redirectGetRequestsOnError = getConfig(
+                        'defaults',
+                        'redirectGetRequestsOnError'
+                    );
+                    if ($redirectGetRequestsOnError === true) {
+                        header(
+                            'Location: ' . ($config['paths']['dashboard']) .
+                                '?redirected'
+                        );
+                        exit(0);
+                    }
+
+                    // Exception
+                    throw new \SchemaValidationException(
+                        \Modules\Users::getFailedSchemaMessage($validator)
+                    );
+                }
+            }
+            /**
+             * Body
+             * 
+             */
+            else {
+
+                // Parent
+                $args = func_get_args();
+                $this->__callParent(__FUNCTION__, true, $args);
+            }
+        }
+
+        /**
+         * _actionLoginBypassPost
+         * 
+         * @access protected
+         * @return void
+         */
+        protected function _actionLoginBypassPost()
+        {
+            /**
+             * Validation
+             * 
+             */
+
+            // Schema
+            $path = $this->__getSchemaPath('loginBypass', 'post');
+            $schema = (new \SmartSchema($path));
+
+            // Validator
+            $validator = (new ProjectSchemaValidator(
+                $schema,
+                $this->getRequest(),
+                $_POST
+            ));
+
+            /**
+             * Validation failed
+             * 
+             */
+            if ($validator->valid() === false) {
+
+                // Failed response
+                $response = array(
+                    'success' => false,
+                    'failedRules' => $validator->getFailedRules(false)
+                );
+                $this->_pass('response', json_encode($response));
+
+                // Parent
+                $args = func_get_args();
+                $this->__callParent(__FUNCTION__, false, $args);
+            }
+            /**
+             * Body
+             * 
+             */
+            else {
+
+                // Let's do this
+                $userModel = $this->_getModel('Modules\\Users\\User');
+                $user = $userModel->getUserByEmail($_POST['email']);
+                $emailResponse = $user->sendBypassLoginEmail();
 
                 // Response
                 $response = array(
@@ -603,9 +731,6 @@
              */
             else {
 
-                // View
-                $this->__setView('resetPassword', 'get');
-
                 // Parent
                 $args = func_get_args();
                 $this->__callParent(__FUNCTION__, true, $args);
@@ -663,29 +788,21 @@
                 $userModel = $this->_getModel('Modules\\Users\\User');
                 $user = $userModel->getUserByEmail($_POST['email']);
 
-                // Generate a random password if needed
-                $config = getConfig();
-                if ($config['emails']['resetPassword']['method'] === 'change') {
-                    $possibleWords = $config['emails']['resetPassword']['resetTerms'];
-                    $randomNumber = rand(1000, 9999);
-                    $randomKey = rand(0, count($possibleWords) - 1);
-                    $randomPassword = ($possibleWords[$randomKey]) .
-                        ($randomNumber);
-
-                    // Reset login hash; set password; send email
-                    $user->resetLoginHash();
-                    $user->setPassword($randomPassword);
-                }
-
-                // Otherwise send login link to forward them to change view
-                if ($config['emails']['resetPassword']['method'] === 'link') {
-
-                }
-
-                // Send email
-                $emailResponse = $user->sendResetPasswordEmail(
-                    $randomPassword
+                // Generate a random password
+                $possibleWords = getConfig(
+                    'emails',
+                    'resetPassword',
+                    'resetTerms'
                 );
+                $randomNumber = rand(1000, 9999);
+                $randomKey = rand(0, count($possibleWords) - 1);
+                $randomPassword = ($possibleWords[$randomKey]) .
+                    ($randomNumber);
+
+                // Reset login hash; set password; send email
+                $user->resetLoginHash();
+                $user->setPassword($randomPassword);
+                $emailResponse = $user->sendResetPasswordEmail($randomPassword);
 
                 // Response
                 $response = array(
@@ -727,6 +844,9 @@
          */
         public function actionDashboard()
         {
+            // View
+            $this->__setView('dashboard', 'get');
+
             /**
              * Validation
              * 
@@ -784,9 +904,6 @@
              */
             else {
 
-                // View
-                $this->__setView('dashboard', 'get');
-
                 // Parent
                 $args = func_get_args();
                 $this->__callParent(__FUNCTION__, true, $args);
@@ -824,6 +941,23 @@
             } else {
                 $this->__setView('login', 'get');
                 $this->_actionLoginGet();
+            }
+        }
+
+        /**
+         * actionLoginBypass
+         * 
+         * @access public
+         * @return void
+         */
+        public function actionLoginBypass()
+        {
+            if (!empty($_POST)) {
+                $this->__setView('loginBypass', 'post');
+                $this->_actionLoginBypassPost();
+            } else {
+                $this->__setView('loginBypass', 'get');
+                $this->_actionLoginBypassGet();
             }
         }
 

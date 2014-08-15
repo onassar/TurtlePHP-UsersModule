@@ -39,8 +39,14 @@
                     </div>
                     <button type="submit">Login</button>
                 </form>
+                <?php
+                    $passwordPath = getConfig(
+                        'paths',
+                        $config['defaults']['accountRecoveryMethod']
+                    );
+                ?>
                 <p>
-                    <a href="<?= ($config['paths']['resetPassword']) ?>">Forgot your password?</a>
+                    <a href="<?= ($passwordPath) ?>">Forgot your password?</a>
                 </p>
                 <p>or</p>
                 <p>
