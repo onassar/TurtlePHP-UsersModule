@@ -16,7 +16,8 @@
      * 
      */
     $defaults = array(
-        'rememberMe' => true
+        'rememberMe' => true,
+        'redirectGetRequestsOnError' => true
     );
 
     /**

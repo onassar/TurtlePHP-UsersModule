@@ -73,6 +73,11 @@
                             $expire = time() + 2 * 365 * 24 * 60 * 60;
                         }
                         $user->login($expire);
+
+                        // Send to path without query param
+                        $parsed = parse_url($_SERVER['REQUEST_URI']);
+                        header('Location: ' . ($parsed['path']));
+                        exit(0);
                     }
                 }
             }
@@ -101,10 +106,11 @@
          */
         public static function getConfig()
         {
-            // configuration settings
-            $config = \Plugin\Config::retrieve();
-            $config = $config['TurtlePHP-UsersModule'];
-            return $config;
+            $args = func_get_args();
+            return call_user_func_array(
+                array('\Plugin\Config', 'retrieve'),
+                $args
+            );
         }
 
         /**
@@ -157,13 +163,13 @@
         }
 
         /**
-         * track
+         * trackLastActive
          *
          * @access public
          * @static
          * @return void
          */
-        public static function track()
+        public static function trackLastActive()
         {
             $loggedInUser = getLoggedInUser();
             if ($loggedInUser !== false) {

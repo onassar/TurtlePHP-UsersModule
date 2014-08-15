@@ -60,7 +60,7 @@
          */
         public static function uniqueEmailAddress($email)
         {
-            $userModel = \Turtle\Application::getModel('Modules\Users\User');
+            $userModel = \Turtle\Application::getModel('Modules\\Users\\User');
             return $userModel->getUserByEmail($email) === false;
         }
 
@@ -89,7 +89,7 @@
          */
         public static function validUserById($id)
         {
-            $userModel = \Turtle\Application::getModel('Modules\Users\User');
+            $userModel = \Turtle\Application::getModel('Modules\\Users\\User');
             return $userModel->getUserById((int) $id)->exists();
         }
 
@@ -103,7 +103,7 @@
          */
         public static function validUserByPublicKey($publicKey)
         {
-            $userModel = \Turtle\Application::getModel('Modules\Users\User');
+            $userModel = \Turtle\Application::getModel('Modules\\Users\\User');
             return $userModel->getUserByPublicKey($publicKey) !== false;
         }
 
@@ -124,7 +124,7 @@
             $masterPassword = $security['masterPassword'];
 
             // Check email, then password
-            $userModel = \Turtle\Application::getModel('Modules\Users\User');
+            $userModel = \Turtle\Application::getModel('Modules\\Users\\User');
             $hashedPassword = hash(
                 'sha256',
                 ($security['passwordSalt']) . ($password)
@@ -152,7 +152,7 @@
          */
         public static function validUserEmail($email)
         {
-            $userModel = \Turtle\Application::getModel('Modules\Users\User');
+            $userModel = \Turtle\Application::getModel('Modules\\Users\\User');
             return $userModel->getUserByEmail($email) !== false;
         }
     }

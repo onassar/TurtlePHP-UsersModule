@@ -105,7 +105,7 @@
          */
         protected function _getModel($name)
         {
-            $name = 'Modules\Users\\' . ($name);
+            $name = 'Modules\\Users\\' . ($name);
             return \Turtle\Application::getModel($name);
         }
 

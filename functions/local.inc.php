@@ -7,11 +7,16 @@
      * getConfig
      * 
      * @access public
-     * @return array
+     * @return mixed
      */
     function getConfig()
     {
-        return \Modules\Users::getConfig();
+        $args = func_get_args();
+        array_unshift($args, 'TurtlePHP-UsersModule');
+        return call_user_func_array(
+            array('\Modules\Users', 'getConfig'),
+            $args
+        );
     }
 
     /**

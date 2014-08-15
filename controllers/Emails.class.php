@@ -127,7 +127,7 @@
              */
 
             // Get user record
-            $userModel = $this->_getModel('Modules\Users\User');
+            $userModel = $this->_getModel('Modules\\Users\\User');
             $user = $userModel->getUserById($_get['userId']);
             $this->_pass('user', $user);
             $this->_pass('randomPassword', $_get['randomPassword']);
@@ -196,7 +196,7 @@
              */
 
             // Get user record
-            $userModel = $this->_getModel('Modules\Users\User');
+            $userModel = $this->_getModel('Modules\\Users\\User');
             $user = $userModel->getUserById($_get['userId']);
             $this->_pass('user', $user);
 

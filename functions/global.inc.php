@@ -12,6 +12,6 @@
         if (!isset($_SESSION['userId'])) {
             return false;
         }
-        $userModel = Turtle\Application::getModel('Modules\Users\User');
+        $userModel = Turtle\Application::getModel('Modules\\Users\\User');
         return $userModel->getUserById($_SESSION['userId']);
     }

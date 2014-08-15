@@ -112,6 +112,20 @@
                 // Otherwise
                 else {
 
+                    // Send to login
+                    $config = getConfig();
+                    $redirectGetRequestsOnError = getConfig(
+                        'defaults',
+                        'redirectGetRequestsOnError'
+                    );
+                    if ($redirectGetRequestsOnError === true) {
+                        header(
+                            'Location: ' . ($config['paths']['login']) . '?' .
+                                'redirected'
+                        );
+                        exit(0);
+                    }
+
                     // Exception
                     throw new \SchemaValidationException(
                         \Modules\Users::getFailedSchemaMessage($validator)
@@ -240,8 +254,17 @@
 
                     // Send to dashboard
                     $config = getConfig();
-                    header('Location: ' . ($config['paths']['dashboard']));
-                    exit(0);
+                    $redirectGetRequestsOnError = getConfig(
+                        'defaults',
+                        'redirectGetRequestsOnError'
+                    );
+                    if ($redirectGetRequestsOnError === true) {
+                        header(
+                            'Location: ' . ($config['paths']['dashboard']) .
+                                '?redirected'
+                        );
+                        exit(0);
+                    }
 
                     // Exception
                     throw new \SchemaValidationException(
@@ -315,7 +338,7 @@
                 $email = $_POST['email'];
                 $fragments = explode('@', $email);
                 $firstFragment = $fragments[0];
-                $userModel = $this->_getModel('Modules\Users\User');
+                $userModel = $this->_getModel('Modules\\Users\\User');
                 $username = $userModel->getUniqueUsername($firstFragment);
 
                 // Newsletter
@@ -411,8 +434,17 @@
 
                     // Send to dashboard
                     $config = getConfig();
-                    header('Location: ' . ($config['paths']['dashboard']));
-                    exit(0);
+                    $redirectGetRequestsOnError = getConfig(
+                        'defaults',
+                        'redirectGetRequestsOnError'
+                    );
+                    if ($redirectGetRequestsOnError === true) {
+                        header(
+                            'Location: ' . ($config['paths']['dashboard']) .
+                                '?redirected'
+                        );
+                        exit(0);
+                    }
 
                     // Exception
                     throw new \SchemaValidationException(
@@ -483,7 +515,7 @@
             else {
 
                 // Logic
-                $userModel = $this->_getModel('Modules\Users\User');
+                $userModel = $this->_getModel('Modules\\Users\\User');
                 $user = $userModel->getUserByEmail($_POST['email']);
                 if (isset($_POST['rememberMe'])) {
                     $user->login(time() + 2 * 365 * 24 * 60 * 60);
@@ -547,8 +579,17 @@
 
                     // Send to dashboard
                     $config = getConfig();
-                    header('Location: ' . ($config['paths']['dashboard']));
-                    exit(0);
+                    $redirectGetRequestsOnError = getConfig(
+                        'defaults',
+                        'redirectGetRequestsOnError'
+                    );
+                    if ($redirectGetRequestsOnError === true) {
+                        header(
+                            'Location: ' . ($config['paths']['dashboard']) .
+                                '?redirected'
+                        );
+                        exit(0);
+                    }
 
                     // Exception
                     throw new \SchemaValidationException(
@@ -619,7 +660,7 @@
             else {
 
                 // Matching user
-                $userModel = $this->_getModel('Modules\Users\User');
+                $userModel = $this->_getModel('Modules\\Users\\User');
                 $user = $userModel->getUserByEmail($_POST['email']);
 
                 // Generate a random password if needed
@@ -716,6 +757,20 @@
                 }
                 // Otherwise
                 else {
+
+                    // Send to login
+                    $config = getConfig();
+                    $redirectGetRequestsOnError = getConfig(
+                        'defaults',
+                        'redirectGetRequestsOnError'
+                    );
+                    if ($redirectGetRequestsOnError === true) {
+                        header(
+                            'Location: ' . ($config['paths']['login']) . '?' .
+                                'redirected'
+                        );
+                        exit(0);
+                    }
 
                     // Exception
                     throw new \SchemaValidationException(

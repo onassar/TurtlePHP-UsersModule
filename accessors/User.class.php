@@ -38,6 +38,49 @@
         protected $_tableName = 'users';
 
         /**
+         * addToCmList
+         *
+         * @access public
+         * @param  string $listKey
+         * @return CS_REST_Wrapper_Result
+         */
+        public function addToCmList($listKey)
+        {
+            $data = array(
+                'email' => $this->email
+            );
+            if (isset($this->firstName)) {
+                $data['firstName'] = $this->firstName;
+            }
+            if (isset($this->lastName)) {
+                $data['lastName'] = $this->lastName;
+            }
+            if (isset($this->name)) {
+                $data['name'] = $this->name;
+            }
+            return \Plugin\CampaignMonitor::add($listKey, $data);
+        }
+
+        /**
+         * getAutoLoginUrl
+         *
+         * @access public
+         * @param  string $path
+         * @return string
+         */
+        public function getAutoLoginUrl($path)
+        {
+            $host = $_SERVER['HTTP_HOST'];
+            $protocol = 'http://';
+            if (HTTPS) {
+                $protocol = 'https://';
+            }
+            // $query = http_build_query()
+            return ($protocol) . ($host) . ($path) . '?loginHash=' .
+                ($this->loginHash);
+        }
+
+        /**
          * getPublicData
          *
          * @access public
@@ -125,9 +168,23 @@
         }
 
         /**
+         * removeFromCmList
+         *
+         * @access public
+         * @param  string $listKey
+         * @return CS_REST_Wrapper_Result
+         */
+        public function removeFromCmList($listKey)
+        {
+            return \Plugin\CampaignMonitor::add($listKey, $this->email);
+        }
+
+        /**
          * resetLoginHash
          *
          * Chooses a random string for a new login hash.
+         * Should I be updating it each time? I remember there was a problem
+         * when I did this back in the day
          *
          * @access public
          * @return void

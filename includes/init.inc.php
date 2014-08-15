@@ -28,7 +28,7 @@
 
         // overhead
         \Modules\Users::autoLogin();
-        \Modules\Users::track();
+        \Modules\Users::trackLastActive();
     };
 
     // run/clear
