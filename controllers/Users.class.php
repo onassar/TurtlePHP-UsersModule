@@ -649,7 +649,7 @@
                 // Let's do this
                 $userModel = $this->_getModel('Modules\\Users\\User');
                 $user = $userModel->getUserByEmail($_POST['email']);
-                $emailResponse = $user->sendBypassLoginEmail();
+                $emailResponse = $user->sendLoginBypassEmail();
 
                 // Response
                 $response = array(

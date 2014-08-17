@@ -42,7 +42,7 @@
          *
          * @access public
          * @param  string $listKey
-         * @return CS_REST_Wrapper_Result
+         * @return CS_REST_Wrapper_Result|false
          */
         public function addToCmList($listKey)
         {
@@ -172,11 +172,11 @@
          *
          * @access public
          * @param  string $listKey
-         * @return CS_REST_Wrapper_Result
+         * @return CS_REST_Wrapper_Result|false
          */
         public function removeFromCmList($listKey)
         {
-            return \Plugin\CampaignMonitor::add($listKey, $this->email);
+            return \Plugin\CampaignMonitor::remove($listKey, $this->email);
         }
 
         /**
@@ -199,15 +199,15 @@
         }
 
         /**
-         * sendBypassLoginEmail
+         * sendLoginBypassEmail
          *
          * @access public
          * @return array
          */
-        public function sendBypassLoginEmail()
+        public function sendLoginBypassEmail()
         {
             // Path
-            $path = getConfig('paths', 'emails', 'bypassLogin');
+            $path = getConfig('paths', 'emails', 'loginBypass');
 
             // Subrequest
             $path = ($path) .

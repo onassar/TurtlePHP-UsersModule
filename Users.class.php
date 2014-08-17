@@ -105,6 +105,7 @@
         public static function getConfig()
         {
             $args = func_get_args();
+            array_unshift($args, 'TurtlePHP-UsersModule');
             return call_user_func_array(
                 array('\Plugin\Config', 'retrieve'),
                 $args

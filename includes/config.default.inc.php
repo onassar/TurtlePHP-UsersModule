@@ -26,9 +26,9 @@
          * will be sent. If 'loginBypass', user will be passed link which will
          * log them in, and forward them to the change password view
          * 
-         * @var string (default: 'resetPassword') can also be 'loginBypass'
+         * @var string (default: 'loginBypass') can also be 'resetPassword'
          */
-        'accountRecoveryMethod' => 'resetPassword'
+        'accountRecoveryMethod' => 'loginBypass'
     );
 
     /**
@@ -69,9 +69,9 @@
         'register' => '/users',
         'login' => '/users/login',
         'logout' => '/users/logout',
-        'resetPassword' => '/users/reset',
-        'loginBypass' => '/users/recover',
-        'changePassword' => '/users/changePassword',
+        'resetPassword' => '/users/password/reset',
+        'loginBypass' => '/users/password/recover',
+        'changePassword' => '/users/password/change',
         'emails' => array(
             'welcome' => '/emails/user/welcome',
             'loginBypass' => '/emails/user/loginBypass',
