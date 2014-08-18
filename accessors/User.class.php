@@ -49,15 +49,15 @@
             $data = array(
                 'email' => $this->email
             );
-            if (isset($this->firstName)) {
+            try {
                 $data['firstName'] = $this->firstName;
-            }
-            if (isset($this->lastName)) {
+            } catch (\Exception $exception) {}
+            try {
                 $data['lastName'] = $this->lastName;
-            }
-            if (isset($this->name)) {
+            } catch (\Exception $exception) {}
+            try {
                 $data['name'] = $this->name;
-            }
+            } catch (\Exception $exception) {}
             return \Plugin\CampaignMonitor::add($listKey, $data);
         }
 

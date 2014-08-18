@@ -88,10 +88,6 @@
             ));
             if ($validator->valid() === false) {
 
-                // Parent
-                // $args = func_get_args();
-                // $this->__callParent(__FUNCTION__, false, $args);
-
                 // Done
                 throw new \SchemaValidationException(
                     \Modules\Users::getFailedSchemaMessage($validator)
@@ -149,13 +145,7 @@
                             $subject,
                             $buffer,
                             $tag
-                        );
-
-                        // Parent
-                        $args = func_get_args();
-                        // $this->__callParent(__FUNCTION__, true, $args);
-
-                        // 
+                        ); 
 
                         // Donezo
                         return json_encode(array(
@@ -220,12 +210,6 @@
                             $tag
                         );
 
-                        // Parent
-                        $args = func_get_args();
-                        // $this->__callParent(__FUNCTION__, true, $args);
-
-                        // 
-
                         // Donezo
                         return json_encode(array(
                             'success' => $response !== false,
@@ -287,12 +271,6 @@
                             $buffer,
                             $tag
                         );
-
-                        // Parent
-                        $args = func_get_args();
-                        // $this->__callParent(__FUNCTION__, true, $args);
-
-                        // 
 
                         // Donezo
                         return json_encode(array(
