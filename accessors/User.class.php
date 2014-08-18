@@ -212,10 +212,7 @@
             // Subrequest
             $path = ($path) .
                 '?userId=' . ($this->id);
-            $subrequest = (new \Turtle\Request($path));
-            $subrequest->route();
-            $subrequest->generate();
-            $response = $subrequest->getResponse();
+            $response = \Turtle\Application::getPath($path);
 
             // Respond
             return json_decode($response, true);
@@ -237,10 +234,7 @@
             $path = ($path) .
                 '?userId=' . ($this->id) .
                 '&randomPassword=' . ($randomPassword);
-            $subrequest = (new \Turtle\Request($path));
-            $subrequest->route();
-            $subrequest->generate();
-            $response = $subrequest->getResponse();
+            $response = \Turtle\Application::getPath($path);
 
             // Respond
             return json_decode($response, true);
@@ -260,10 +254,7 @@
             // Subrequest
             $path = ($path) .
                 '?userId=' . ($this->id);
-            $subrequest = (new \Turtle\Request($path));
-            $subrequest->route();
-            $subrequest->generate();
-            $response = $subrequest->getResponse();
+            $response = \Turtle\Application::getPath($path);
 
             // Response
             $response = json_decode($response, true);
