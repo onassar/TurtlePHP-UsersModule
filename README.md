@@ -67,21 +67,21 @@ require_once APP . '/plugins/TurtlePHP-MemcachedSessionPlugin/MemcachedSession.c
 require_once APP . '/vendors/PHP-JSON-Validation/Schema.class.php';
 require_once APP . '/vendors/PHP-JSON-Validation/SmartSchema.class.php';
 require_once APP . '/vendors/PHP-JSON-Validation/SchemaValidator.class.php';
-require_once APP . '/modules/TurtlePHP-UsersModules/Users.class.php';
-require_once APP . '/modules/TurtlePHP-UsersModules/includes/init.inc.php';
+require_once APP . '/modules/TurtlePHP-UsersModule/Users.class.php';
+require_once APP . '/modules/TurtlePHP-UsersModule/includes/init.inc.php';
 ```
 
 *Config file is located elsewhere*  
 ``` php
 ...
-require_once APP . '/modules/TurtlePHP-UsersModules/Users.class.php';
+require_once APP . '/modules/TurtlePHP-UsersModule/Users.class.php';
 \Modules\Users::setConfigPath('/path/to/config/file.inc.php');
-require_once APP . '/modules/TurtlePHP-UsersModules/includes/init.inc.php';
+require_once APP . '/modules/TurtlePHP-UsersModule/includes/init.inc.php';
 ```
 
 *Config file named `config.inc.php` is being used in the plugin directory*  
 ``` php
 ...
-require_once APP . '/modules/TurtlePHP-UsersModules/Users.class.php';
-require_once APP . '/modules/TurtlePHP-UsersModules/includes/init.inc.php';
+require_once APP . '/modules/TurtlePHP-UsersModule/Users.class.php';
+require_once APP . '/modules/TurtlePHP-UsersModule/includes/init.inc.php';
 ```
