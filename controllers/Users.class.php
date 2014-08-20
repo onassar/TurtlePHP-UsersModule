@@ -1041,4 +1041,78 @@
                 $this->_actionResetPasswordGet();
             }
         }
+
+        /**
+         * actionTerms
+         * 
+         * @access public
+         * @return void
+         */
+        public function actionTerms()
+        {
+            // View
+            $this->__setView('terms', 'get');
+
+            /**
+             * Validation
+             * 
+             */
+
+            // Schema
+            $path = $this->__getSchemaPath('terms', 'get');
+            $schema = (new \SmartSchema($path));
+
+            // Validator
+            $validator = (new ProjectSchemaValidator(
+                $schema,
+                $this->getRequest()
+            ));
+
+            /**
+             * Validation failed
+             * 
+             */
+            if ($validator->valid() === false) {
+
+                // Parent check
+                if (is_callable(array('parent', __FUNCTION__))) {
+
+                    // Parent
+                    $args = func_get_args();
+                    $this->__callParent(__FUNCTION__, false, $args);
+                }
+                // Otherwise
+                else {
+
+                    // Send to login
+                    $config = getConfig();
+                    $redirectGetRequestsOnError = getConfig(
+                        'defaults',
+                        'redirectGetRequestsOnError'
+                    );
+                    if ($redirectGetRequestsOnError === true) {
+                        header(
+                            'Location: ' . ($config['paths']['login']) . '?' .
+                                'redirected'
+                        );
+                        exit(0);
+                    }
+
+                    // Exception
+                    throw new \SchemaValidationException(
+                        \Modules\Users::getFailedSchemaMessage($validator)
+                    );
+                }
+            }
+            /**
+             * Body
+             * 
+             */
+            else {
+
+                // Parent
+                $args = func_get_args();
+                $this->__callParent(__FUNCTION__, true, $args);
+            }
+        }
     }

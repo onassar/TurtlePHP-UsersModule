@@ -65,6 +65,7 @@
 
     // generic
     $paths = array(
+        'terms' => '/terms',
         'dashboard' => '/dashboard',
         'register' => '/users',
         'login' => '/users/login',
@@ -86,6 +87,9 @@
 
     // generic
     $schemas = array(
+        'terms' => array(
+            'get' => MODULE . '/schemas/users.terms.get.json'
+        ),
         'dashboard' => array(
             'get' => MODULE . '/schemas/users.dashboard.get.json'
         ),
@@ -143,6 +147,9 @@
 
     // GET views
     $views = array(
+        'terms' => array(
+            'get' => MODULE . '/views/terms.inc.php'
+        ),
         'dashboard' => array(
             'get' => MODULE . '/views/dashboard.inc.php'
         ),

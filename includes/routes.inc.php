@@ -10,6 +10,11 @@
     \Turtle\Application::addRoutes(array(
 
         // Users
+        '^' . ($paths['terms']) . '$' => array(// G
+            'module' => true,
+            'controller' => 'Modules\Users\Users',
+            'action' => 'actionTerms'
+        ),
         '^' . ($paths['register']) . '$' => array(// G + P
             'module' => true,
             'controller' => 'Modules\Users\Users',
