@@ -44,7 +44,8 @@
         'UsersController',
         'UserAccessor',
         'UserModel',
-        'EmailsController'
+        'EmailsController',
+        'CronsController'
     );
 
     // checks

@@ -66,5 +66,12 @@
             'module' => true,
             'controller' => 'Modules\Users\Emails',
             'action' => 'actionResetPassword'
-        )
+        ),
+
+        // Crons
+        '^' . ($paths['crons']['sendWelcomeEmails']) . '$' => array(// G
+            'module' => true,
+            'controller' => 'Modules\Users\Crons',
+            'action' => 'actionUsersSendWelcomeEmails'
+        ),
     ));

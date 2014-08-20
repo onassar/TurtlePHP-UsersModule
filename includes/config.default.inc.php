@@ -18,6 +18,7 @@
     $defaults = array(
         'rememberMe' => true,
         'redirectGetRequestsOnError' => true,
+        'welcomeEmailsCronBatchCount' => 5,
 
         /**
          * Method of recovering an account
@@ -53,6 +54,8 @@
         ),
         'welcome' => array(
             'autoSend' => true,
+            'cron' => false,
+            'waitTime' => 3 * 60 * 60,
             'subject' => 'Welcome',
             'tag' => 'welcome'
         )
@@ -77,6 +80,9 @@
             'welcome' => '/emails/user/welcome',
             'loginBypass' => '/emails/user/loginBypass',
             'resetPassword' => '/emails/user/resetPassword'
+        ),
+        'crons' => array(
+            'sendWelcomeEmails' => '/crons/users/sendWelcomeEmails'
         )
     );
 
@@ -125,6 +131,11 @@
             ),
             'welcome' => array(
                 'get' => MODULE . '/schemas/emails.userStandard.get.json'
+            )
+        ),
+        'crons' => array(
+            'sendWelcomeEmails' => array(
+                'get' => MODULE . '/schemas/crons.standard.get.json'
             )
         )
     );
@@ -185,6 +196,11 @@
             ),
             'resetPassword' => array(
                 'get' => MODULE . '/views/emails/resetPassword.v1.inc.php'
+            )
+        ),
+        'crons' => array(
+            'sendWelcomeEmails' => array(
+                'get' => MODULE . '/views/raw.inc.php'
             )
         )
     );
