@@ -55,7 +55,7 @@
         'welcome' => array(
             'autoSend' => true,
             'cron' => false,
-            'waitTime' => 3 * 60 * 60,
+            'cronWaitTime' => 3 * 60 * 60,
             'subject' => 'Welcome',
             'tag' => 'welcome'
         )

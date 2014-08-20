@@ -66,7 +66,7 @@
 
             // Get the users
             $userModel = $this->_getModel('User');
-            $waitTime = getConfig('emails', 'welcome', 'waitTime');
+            $waitTime = getConfig('emails', 'welcome', 'cronWaitTime');
             $users = $userModel->getUsers(
                 0,
                 getConfig('defaults', 'welcomeEmailsCronBatchCount'),
