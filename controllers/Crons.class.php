@@ -108,27 +108,31 @@
              */
             else {
 
-                // Get the users
-                $userModel = $this->_getModel('Modules\\Users\\User');
-                $waitTime = getConfig('emails', 'welcome', 'cronWaitTime');
-                $users = $userModel->getUsers(
-                    0,
-                    getConfig('defaults', 'welcomeEmailsCronBatchCount'),
-                    array(
-                        array('hasReceivedWelcomeEmail', 0),
-                        array(
-                            'UNIX_TIMESTAMP()',
-                            '>',
-                            '(created + ' . ($waitTime) . ')',
-                            false
-                        )
-                    ),
-                    false
-                );
+                // Not the best validation check, but good for now
+                if (getConfig('emails', 'welcome', 'cron') === true) {
 
-                // Mark that the email has been sent
-                foreach ($users as $user) {
-                    $user->sendWelcomeEmail();
+                    // Get the users
+                    $userModel = $this->_getModel('Modules\\Users\\User');
+                    $waitTime = getConfig('emails', 'welcome', 'cronWaitTime');
+                    $users = $userModel->getUsers(
+                        0,
+                        getConfig('defaults', 'welcomeEmailsCronBatchCount'),
+                        array(
+                            array('hasReceivedWelcomeEmail', 0),
+                            array(
+                                'UNIX_TIMESTAMP()',
+                                '>',
+                                '(created + ' . ($waitTime) . ')',
+                                false
+                            )
+                        ),
+                        false
+                    );
+
+                    // Mark that the email has been sent
+                    foreach ($users as $user) {
+                        $user->sendWelcomeEmail();
+                    }
                 }
 
                 // Cron completed message
