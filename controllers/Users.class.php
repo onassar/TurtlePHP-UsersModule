@@ -118,10 +118,7 @@
                         'redirectGetRequestsOnError'
                     );
                     if ($redirectGetRequestsOnError === true) {
-                        header(
-                            'Location: ' . ($config['paths']['login']) . '?' .
-                                'redirected'
-                        );
+                        header('Location: ' . ($config['paths']['login']));
                         exit(0);
                     }
 
@@ -255,10 +252,7 @@
                         'redirectGetRequestsOnError'
                     );
                     if ($redirectGetRequestsOnError === true) {
-                        header(
-                            'Location: ' . ($config['paths']['dashboard']) .
-                                '?redirected'
-                        );
+                        header('Location: ' . ($config['paths']['dashboard']));
                         exit(0);
                     }
 
@@ -448,10 +442,7 @@
                         'redirectGetRequestsOnError'
                     );
                     if ($redirectGetRequestsOnError === true) {
-                        header(
-                            'Location: ' . ($config['paths']['dashboard']) .
-                                '?redirected'
-                        );
+                        header('Location: ' . ($config['paths']['dashboard']));
                         exit(0);
                     }
 
@@ -590,10 +581,7 @@
                         'redirectGetRequestsOnError'
                     );
                     if ($redirectGetRequestsOnError === true) {
-                        header(
-                            'Location: ' . ($config['paths']['dashboard']) .
-                                '?redirected'
-                        );
+                        header('Location: ' . ($config['paths']['dashboard']));
                         exit(0);
                     }
 
@@ -728,10 +716,7 @@
                         'redirectGetRequestsOnError'
                     );
                     if ($redirectGetRequestsOnError === true) {
-                        header(
-                            'Location: ' . ($config['paths']['dashboard']) .
-                                '?redirected'
-                        );
+                        header('Location: ' . ($config['paths']['dashboard']));
                         exit(0);
                     }
 
@@ -901,10 +886,7 @@
                         'redirectGetRequestsOnError'
                     );
                     if ($redirectGetRequestsOnError === true) {
-                        header(
-                            'Location: ' . ($config['paths']['login']) . '?' .
-                                'redirected'
-                        );
+                        header('Location: ' . ($config['paths']['login']));
                         exit(0);
                     }
 
@@ -1107,10 +1089,7 @@
                         'redirectGetRequestsOnError'
                     );
                     if ($redirectGetRequestsOnError === true) {
-                        header(
-                            'Location: ' . ($config['paths']['login']) . '?' .
-                                'redirected'
-                        );
+                        header('Location: ' . ($config['paths']['login']));
                         exit(0);
                     }
 
