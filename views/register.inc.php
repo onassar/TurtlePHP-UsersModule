@@ -60,6 +60,16 @@
                             </div>
                         </div>
                     <?php endif; ?>
+                    <?php
+                        $checked = 1;
+                        if (\Geo::getCountry() === 'CA') {
+                            $checked = 0;
+                        }
+                    ?>
+                    <div class="wrapper">
+                        <input type="checkbox" name="receiveNewsletters" id="receiveNewsletters" value="1" <?= ($checked === 1 ? 'checked="checked" ' : '') ?>/>
+                        <label for="receiveNewsletters">Get updates on awesome new features &amp; promos</label>
+                    </div>
                     <div class="wrapper">
                         <input type="checkbox" name="terms" id="terms" value="1" />
                         <label for="terms">I agree to the </label><a href="<?= getConfig('paths', 'terms') ?>">terms of service</a>
