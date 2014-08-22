@@ -61,9 +61,7 @@
                     $userModel = \Turtle\Application::getModel(
                         'Modules\\Users\\User'
                     );
-                    $user = $userModel->getUserByLoginHash(
-                        $_GET['loginHash']
-                    );
+                    $user = $userModel->getUserByLoginHash($_GET['loginHash']);
                     if ($user !== false) {
                         $defaults = \Modules\Users::getConfig('defaults');
                         $expire = 0;

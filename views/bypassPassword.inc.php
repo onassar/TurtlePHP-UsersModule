@@ -23,7 +23,7 @@
                     Enter your email below and we’ll send you a link to update
                     your password
                 </p>
-                <form action="<?= getConfig('paths', 'loginBypass') ?>" method="post">
+                <form action="<?= getConfig('paths', 'bypassPassword') ?>" method="post">
                     <input type="hidden" name="csrfToken" value="<?= ($csrfToken) ?>" />
                     <div class="wrapper">
                         <label for="email">Email</label>

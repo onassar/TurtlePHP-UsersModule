@@ -96,15 +96,15 @@
         }
 
         /**
-         * actionLoginBypass
+         * actionBypassPassword
          * 
          * @access public
          * @return void
          */
-        public function actionLoginBypass()
+        public function actionBypassPassword()
         {
             // View
-            $this->__setView('loginBypass', 'get');
+            $this->__setView('bypassPassword', 'get');
 
             /**
              * Validation
@@ -114,7 +114,7 @@
             // Preview check
             $_get = $this->getGet();
             if (!isset($_get['preview'])) {
-                $this->__validateUserSchema('loginBypass', 'get');
+                $this->__validateUserSchema('bypassPassword', 'get');
             }
 
             /**
@@ -129,8 +129,8 @@
 
             // callback (for sending the email)
             $self = $this;
-            $subject = $this->__getSubject('loginBypass');
-            $tag = $this->__getTag('loginBypass');
+            $subject = $this->__getSubject('bypassPassword');
+            $tag = $this->__getTag('bypassPassword');
             $this->getRequest()->addCallback(
                 function($buffer) use ($self, $subject, $tag, $user) {
 

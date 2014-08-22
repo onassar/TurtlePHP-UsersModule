@@ -19,17 +19,20 @@
         'rememberMe' => true,
         'redirectGetRequestsOnError' => true,
         'welcomeEmailsCronBatchCount' => 5,
+        'autoLogin' => true,
+        'trackLastActive' => true,
+        'stripeCheckout' => false,
 
         /**
          * Method of recovering an account
          * 
          * If 'resetPassword', user's password will be changed, and login link
-         * will be sent. If 'loginBypass', user will be passed link which will
+         * will be sent. If 'bypassPassword', user will be passed link which will
          * log them in, and forward them to the change password view
          * 
-         * @var string (default: 'loginBypass') can also be 'resetPassword'
+         * @var string (default: 'bypassPassword') can also be 'resetPassword'
          */
-        'accountRecoveryMethod' => 'loginBypass'
+        'accountRecoveryMethod' => 'bypassPassword'
     );
 
     /**
@@ -37,9 +40,9 @@
      * 
      */
     $emails = array(
-        'loginBypass' => array(
+        'bypassPassword' => array(
             'subject' => 'Account recovery',
-            'tag' => 'loginBypass',
+            'tag' => 'bypassPassword',
         ),
         'resetPassword' => array(
             'subject' => 'Your password has been reset',
@@ -70,16 +73,16 @@
     $paths = array(
         'terms' => '/terms',
         'dashboard' => '/dashboard',
-        'register' => '/users',
-        'login' => '/users/login',
-        'logout' => '/users/logout',
-        'resetPassword' => '/users/password/reset',
-        'loginBypass' => '/users/password/recover',
-        'changePassword' => '/users/password/change',
+        'register' => '/register',
+        'login' => '/login',
+        'logout' => '/logout',
+        'resetPassword' => '/password/reset',
+        'bypassPassword' => '/recover',
+        'changePassword' => '/password/change',
         'emails' => array(
             'welcome' => '/emails/user/welcome',
-            'loginBypass' => '/emails/user/loginBypass',
-            'resetPassword' => '/emails/user/resetPassword'
+            'bypassPassword' => '/emails/user/password/bypass',
+            'resetPassword' => '/emails/user/password/reset'
         ),
         'crons' => array(
             'sendWelcomeEmails' => '/crons/users/sendWelcomeEmails'
@@ -114,16 +117,16 @@
             'get' => MODULE . '/schemas/users.resetPassword.get.json',
             'post' => MODULE . '/schemas/users.resetPassword.post.json'
         ),
-        'loginBypass' => array(
-            'get' => MODULE . '/schemas/users.loginBypass.get.json',
-            'post' => MODULE . '/schemas/users.loginBypass.post.json'
+        'bypassPassword' => array(
+            'get' => MODULE . '/schemas/users.bypassPassword.get.json',
+            'post' => MODULE . '/schemas/users.bypassPassword.post.json'
         ),
         'changePassword' => array(
             'get' => MODULE . '/schemas/users.changePassword.get.json',
             'post' => MODULE . '/schemas/users.changePassword.post.json'
         ),
         'emails' => array(
-            'loginBypass' => array(
+            'bypassPassword' => array(
                 'get' => MODULE . '/schemas/emails.userStandard.get.json'
             ),
             'resetPassword' => array(
@@ -179,8 +182,8 @@
             'get' => MODULE . '/views/resetPassword.inc.php',
             'post' => MODULE . '/views/raw.inc.php'
         ),
-        'loginBypass' => array(
-            'get' => MODULE . '/views/loginBypass.inc.php',
+        'bypassPassword' => array(
+            'get' => MODULE . '/views/bypassPassword.inc.php',
             'post' => MODULE . '/views/raw.inc.php'
         ),
         'changePassword' => array(
@@ -191,8 +194,8 @@
             'welcome' => array(
                 'get' => MODULE . '/views/emails/welcome.v1.inc.php'
             ),
-            'loginBypass' => array(
-                'get' => MODULE . '/views/emails/loginBypass.v1.inc.php'
+            'bypassPassword' => array(
+                'get' => MODULE . '/views/emails/bypassPassword.v1.inc.php'
             ),
             'resetPassword' => array(
                 'get' => MODULE . '/views/emails/resetPassword.v1.inc.php'

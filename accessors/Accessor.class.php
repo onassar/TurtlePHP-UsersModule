@@ -128,6 +128,19 @@
         }
 
         /**
+         * delete
+         *
+         * @access public
+         * @return void
+         */
+        public function delete()
+        {
+            $this->update(array(
+                'status' => 'closed'
+            ));
+        }
+
+        /**
          * exists
          *
          * @access public

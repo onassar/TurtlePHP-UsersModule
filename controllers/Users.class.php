@@ -355,6 +355,22 @@
                     'receiveNewsletters' => $receiveNewsletters
                 ));
 
+                // Stripe checkout
+                if (getConfig('defaults', 'stripeCheckout') === true) {
+                    if (isset($_POST['planId'])) {
+
+                        // Stripe records
+                        try {
+                            $stripeCustomer = \Modules\Stripe::createRecords(
+                                $user,
+                                (int) $_POST['planId']
+                            );
+                        } catch (Exception $exception) {
+                            $user->delete();
+                        }
+                    }
+                }
+
                 // Password + login
                 $user->setPassword($_POST['password']);
                 $config = getConfig();
@@ -529,12 +545,12 @@
         }
 
         /**
-         * _actionLoginBypassGet
+         * _actionBypassPasswordGet
          * 
          * @access protected
          * @return void
          */
-        protected function _actionLoginBypassGet()
+        protected function _actionBypassPasswordGet()
         {
             /**
              * Validation
@@ -542,7 +558,7 @@
              */
 
             // Schema
-            $path = $this->__getSchemaPath('loginBypass', 'get');
+            $path = $this->__getSchemaPath('bypassPassword', 'get');
             $schema = (new \SmartSchema($path));
 
             // Validator
@@ -600,12 +616,12 @@
         }
 
         /**
-         * _actionLoginBypassPost
+         * _actionBypassPasswordPost
          * 
          * @access protected
          * @return void
          */
-        protected function _actionLoginBypassPost()
+        protected function _actionBypassPasswordPost()
         {
             /**
              * Validation
@@ -613,7 +629,7 @@
              */
 
             // Schema
-            $path = $this->__getSchemaPath('loginBypass', 'post');
+            $path = $this->__getSchemaPath('bypassPassword', 'post');
             $schema = (new \SmartSchema($path));
 
             // Validator
@@ -649,7 +665,7 @@
                 // Let's do this
                 $userModel = $this->_getModel('Modules\\Users\\User');
                 $user = $userModel->getUserByEmail($_POST['email']);
-                $emailResponse = $user->sendLoginBypassEmail();
+                $emailResponse = $user->sendBypassPasswordEmail();
 
                 // Response
                 $response = array(
@@ -945,19 +961,19 @@
         }
 
         /**
-         * actionLoginBypass
+         * actionBypassPassword
          * 
          * @access public
          * @return void
          */
-        public function actionLoginBypass()
+        public function actionBypassPassword()
         {
             if (!empty($_POST)) {
-                $this->__setView('loginBypass', 'post');
-                $this->_actionLoginBypassPost();
+                $this->__setView('bypassPassword', 'post');
+                $this->_actionBypassPasswordPost();
             } else {
-                $this->__setView('loginBypass', 'get');
-                $this->_actionLoginBypassGet();
+                $this->__setView('bypassPassword', 'get');
+                $this->_actionBypassPasswordGet();
             }
         }
 

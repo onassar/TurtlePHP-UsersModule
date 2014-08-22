@@ -45,10 +45,10 @@
             'controller' => 'Modules\Users\Users',
             'action' => 'actionResetPassword'
         ),
-        '^' . ($paths['loginBypass']) . '$' => array(// G + P
+        '^' . ($paths['bypassPassword']) . '$' => array(// G + P
             'module' => true,
             'controller' => 'Modules\Users\Users',
-            'action' => 'actionLoginBypass'
+            'action' => 'actionBypassPassword'
         ),
 
         // Emails
@@ -57,10 +57,10 @@
             'controller' => 'Modules\Users\Emails',
             'action' => 'actionWelcome'
         ),
-        '^' . ($paths['emails']['loginBypass']) . '$' => array(// G
+        '^' . ($paths['emails']['bypassPassword']) . '$' => array(// G
             'module' => true,
             'controller' => 'Modules\Users\Emails',
-            'action' => 'actionLoginBypass'
+            'action' => 'actionBypassPassword'
         ),
         '^' . ($paths['emails']['resetPassword']) . '$' => array(// G
             'module' => true,
@@ -72,6 +72,6 @@
         '^' . ($paths['crons']['sendWelcomeEmails']) . '$' => array(// G
             'module' => true,
             'controller' => 'Modules\Users\Crons',
-            'action' => 'actionUsersSendWelcomeEmails'
+            'action' => 'actionSendWelcomeEmails'
         ),
     ));

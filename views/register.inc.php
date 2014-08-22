@@ -41,6 +41,25 @@
                         <label for="passwordConfirmation">Re-enter password</label>
                         <input type="password" name="passwordConfirmation" id="passwordConfirmation" />
                     </div>
+                    <?php if (getConfig('defaults', 'stripeCheckout') === true && isset($_GET['planId'])): ?>
+                        <input type="hidden" name="planId" value="<?= ((int) $_GET['planId']) ?>" />
+                        <div class="container">
+                            <div class="wrapper">
+                                <label for="ccNumber">Credit card number</label>
+                                <input type="text" name="ccNumber" id="ccNumber" />
+                            </div>
+                            <div class="aux">
+                                <div class="wrapper left">
+                                    <label for="cvc">CVC</label>
+                                    <input type="password" name="cvc" id="cvc" />
+                                </div>
+                                <div class="wrapper left">
+                                    <label for="expiry">Expiry date</label>
+                                    <input type="text" name="expiry" id="expiry" placeholder="MM/YY" />
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
                     <div class="wrapper">
                         <input type="checkbox" name="terms" id="terms" value="1" />
                         <label for="terms">I agree to the </label><a href="<?= getConfig('paths', 'terms') ?>">terms of service</a>

@@ -28,30 +28,36 @@
                 call_user_func_array($parent, $args);
             }
         }
+
         /**
-         * _validateSchema
-         * 
-         * @access protected
-         * @return void
+         * __getSchemaPath
+         *
+         * @access private
+         * @param  string $action
+         * @param  string $method
+         * @return string
          */
-        protected function _validateSchema()
+        private function __getSchemaPath($action, $method)
         {
-            $schema = (new SmartSchema(
-                APP . '/schemas/crons.standard.get.json'
-            ));
-            $validator = (new ProjectSchemaValidator(
-                $schema,
-                $this->getRequest()
-            ));
-            if ($validator->valid() === false) {
-                throw new SchemaValidationException(
-                    $this->_getFailedSchemaMessage($validator)
-                );
-            }
+            return getConfig('schemas', 'crons', $action, $method);
         }
 
         /**
-         * actionUsersSendWelcomeEmails
+         * __setView
+         *
+         * @access private
+         * @param  string $action
+         * @param  string $method
+         * @return void
+         */
+        private function __setView($action, $method)
+        {
+            $config = getConfig();
+            parent::_setView($config['views']['crons'][$action][$method]);
+        }
+
+        /**
+         * actionSendWelcomeEmails
          * 
          * @runs      Every weekday between 9am (14U) and 5pm (22U)
          * @frequency Every 17 minutes
@@ -59,42 +65,81 @@
          * @access    public
          * @return    void
          */
-        public function actionUsersSendWelcomeEmails()
+        public function actionSendWelcomeEmails()
         {
-            // Validate
-            $this->_validateSchema();
+            // View
+            $this->__setView('sendWelcomeEmails', 'get');
 
-            // Get the users
-            $userModel = $this->_getModel('User');
-            $waitTime = getConfig('emails', 'welcome', 'cronWaitTime');
-            $users = $userModel->getUsers(
-                0,
-                getConfig('defaults', 'welcomeEmailsCronBatchCount'),
-                array(
-                    array('hasReceivedWelcomeEmail', 0),
-                    array(
-                        'UNIX_TIMESTAMP()',
-                        '>',
-                        '(created + ' . ($waitTime) . ')',
-                        false
-                    )
-                ),
-                false
-            );
+            /**
+             * Validation
+             * 
+             */
 
-            // Mark that the email has been sent
-            foreach ($users as $user) {
-                $user->sendWelcomeEmail();
+            // Schema
+            $path = $this->__getSchemaPath('sendWelcomeEmails', 'get');
+            $schema = (new \SmartSchema($path));
+
+            // Validator
+            $validator = (new ProjectSchemaValidator(
+                $schema,
+                $this->getRequest()
+            ));
+
+            /**
+             * Validation failed
+             * 
+             */
+            if ($validator->valid() === false) {
+
+                // Failed response
+                $response = array(
+                    'success' => false,
+                    'failedRules' => $validator->getFailedRules(false)
+                );
+                $this->_pass('response', json_encode($response));
+
+                // Parent
+                $args = func_get_args();
+                $this->__callParent(__FUNCTION__, false, $args);
             }
+            /**
+             * Body
+             * 
+             */
+            else {
 
-            // Parent
-            $args = func_get_args();
-            $this->__callParent(__FUNCTION__, true, $args);
+                // Get the users
+                $userModel = $this->_getModel('Modules\\Users\\User');
+                $waitTime = getConfig('emails', 'welcome', 'cronWaitTime');
+                $users = $userModel->getUsers(
+                    0,
+                    getConfig('defaults', 'welcomeEmailsCronBatchCount'),
+                    array(
+                        array('hasReceivedWelcomeEmail', 0),
+                        array(
+                            'UNIX_TIMESTAMP()',
+                            '>',
+                            '(created + ' . ($waitTime) . ')',
+                            false
+                        )
+                    ),
+                    false
+                );
 
-            // Cron completed message
-            $this->_pass(
-                'response',
-                'Donezo w/ actionUsersSendWelcomeEmails!'
-            );
+                // Mark that the email has been sent
+                foreach ($users as $user) {
+                    $user->sendWelcomeEmail();
+                }
+
+                // Cron completed message
+                $this->_pass(
+                    'response',
+                    'Donezo w/ actionSendWelcomeEmails!'
+                );
+
+                // Parent
+                $args = func_get_args();
+                $this->__callParent(__FUNCTION__, true, $args);
+            }
         }
     }

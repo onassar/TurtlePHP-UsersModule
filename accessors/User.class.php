@@ -199,15 +199,15 @@
         }
 
         /**
-         * sendLoginBypassEmail
+         * sendBypassPasswordEmail
          *
          * @access public
          * @return array
          */
-        public function sendLoginBypassEmail()
+        public function sendBypassPasswordEmail()
         {
             // Path
-            $path = getConfig('paths', 'emails', 'loginBypass');
+            $path = getConfig('paths', 'emails', 'bypassPassword');
 
             // Subrequest
             $path = ($path) .

@@ -17,6 +17,7 @@
         require_once MODULE . '/models/User.class.php';
         require_once MODULE . '/controllers/Users.class.php';
         require_once MODULE . '/controllers/Emails.class.php';
+        require_once MODULE . '/controllers/Crons.class.php';
         require_once MODULE . '/includes/validation/ProjectSchemaValidator.class.php';
 
         // flow includes
@@ -27,8 +28,12 @@
         require_once 'routes.inc.php';
 
         // overhead
-        \Modules\Users::autoLogin();
-        \Modules\Users::trackLastActive();
+        if (getConfig('defaults', 'autoLogin') === true) {
+            \Modules\Users::autoLogin();
+        }
+        if (getConfig('defaults', 'trackLastActive') === true) {
+            \Modules\Users::trackLastActive();
+        }
     };
 
     // run/clear
