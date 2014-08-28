@@ -88,7 +88,8 @@
                         $defaults = \Modules\Users::getConfig('defaults');
                         $expire = 0;
                         if ($defaults['rememberMe'] === true) {
-                            $expire = time() + (10 * 365 * 24 * 60 * 60);
+                            $expire = time() +
+                                ($defaults['rememberMeDuration']);
                         }
                         $user->login($expire);
                     }
@@ -104,7 +105,8 @@
                         $defaults = \Modules\Users::getConfig('defaults');
                         $expire = 0;
                         if ($defaults['rememberMe'] === true) {
-                            $expire = time() + (10 * 365 * 24 * 60 * 60);
+                            $expire = time() +
+                                ($defaults['rememberMeDuration']);
                         }
                         $user->login($expire);
 

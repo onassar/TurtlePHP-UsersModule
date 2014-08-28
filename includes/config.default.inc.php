@@ -17,6 +17,7 @@
      */
     $defaults = array(
         'rememberMe' => true,
+        'rememberMeDuration' =>  10 * 365 * 24 * 60 * 60,
         'redirectGetRequestsOnError' => true,
         'welcomeEmailsCronBatchCount' => 5,
         'autoLogin' => true,
