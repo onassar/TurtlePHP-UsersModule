@@ -38,6 +38,21 @@
         protected $_tableName = 'users';
 
         /**
+         * __call
+         * 
+         * @access public
+         * @param  string $name
+         * @param  array $arguments
+         * @return mixed
+         */
+        public function __call($name, array $arguments)
+        {
+            $method = \Modules\Users::getAccessorMethod('User', $name);
+            array_unshift($arguments, $this);
+            call_user_func_array($method, $arguments);
+        }
+
+        /**
          * addToCmList
          *
          * @access public

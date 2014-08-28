@@ -355,9 +355,11 @@
 
                         // Stripe records
                         try {
-                            $stripeCustomer = \Modules\Stripe::createRecords(
+                            $stripeCustomer = \Modules\Stripe::checkout(
                                 $user,
-                                (int) $_POST['planId']
+                                $_POST['strokeToken'],
+                                (int) $_POST['planId'],
+                                $_POST['province']
                             );
                         } catch (Exception $exception) {
                             $user->delete();
@@ -901,6 +903,10 @@
              * 
              */
             else {
+
+                // User
+                $user = getLoggedInUser();
+prx($user->getStripeCustomer());
 
                 // Parent
                 $args = func_get_args();

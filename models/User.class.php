@@ -111,11 +111,12 @@
         public function getUserByEmail($email)
         {
             // Query
+            $link = \MySQLConnection::getLink();
             $query = (new \Query());
             $query->select('id');
             $query->from('users');
             $query->where('status', 'open');
-            $query->andWhere('email', mysql_real_escape_string($email));
+            $query->andWhere('email', $link->escape_string($email));
 
             // Retrieve matching records
             $mySQLQuery = (new \MySQLQuery($query->parse()));
@@ -140,11 +141,12 @@
         public function getUserByUsername($username)
         {
             // Query
+            $link = \MySQLConnection::getLink();
             $query = (new \Query());
             $query->select('id');
             $query->from('users');
             $query->where('status', 'open');
-            $query->andWhere('username', mysql_real_escape_string($username));
+            $query->andWhere('username', $link->escape_string($username));
 
             // Retrieve matching records
             $mySQLQuery = (new \MySQLQuery($query->parse()));
@@ -169,11 +171,12 @@
         public function getUserByLoginHash($loginHash)
         {
             // Query
+            $link = \MySQLConnection::getLink();
             $query = (new \Query());
             $query->select('id');
             $query->from('users');
             $query->where('status', 'open');
-            $query->andWhere('loginHash', mysql_real_escape_string($loginHash));
+            $query->andWhere('loginHash', $link->escape_string($loginHash));
 
             // Retrieve matching records
             $mySQLQuery = (new \MySQLQuery($query->parse()));
@@ -210,11 +213,12 @@
         public function getUserByPublicKey($publicKey)
         {
             // Query
+            $link = \MySQLConnection::getLink();
             $query = (new \Query());
             $query->select('id');
             $query->from('users');
             $query->where('status', 'open');
-            $query->andWhere('publicKey', mysql_real_escape_string($publicKey));
+            $query->andWhere('publicKey', $link->escape_string($publicKey));
 
             // Retrieve matching records
             $mySQLQuery = (new \MySQLQuery($query->parse()));
@@ -246,6 +250,7 @@
             $escapeValues = true
         ) {
             // Query
+            $link = \MySQLConnection::getLink();
             $query = (new \Query());
             $query->select('id');
             $query->from('users');
@@ -254,7 +259,7 @@
                 foreach ($clauses as $clause) {
                     foreach ($clause as $key => $property) {
                         if ($escapeValues === true) {
-                            $clause[$key] = mysql_real_escape_string($property);
+                            $clause[$key] = $link->escape_string($property);
                         } else {
                             $clause[$key] = $property;
                         }
@@ -288,6 +293,7 @@
         public function getUsersCount($clauses = array())
         {
             // Query
+            $link = \MySQLConnection::getLink();
             $query = (new \Query());
             $query->count();
             $query->table('users');
@@ -295,7 +301,7 @@
             if (!empty($clauses)) {
                 foreach ($clauses as $clause) {
                     foreach ($clause as $key => $property) {
-                        $clause[$key] = mysql_real_escape_string($property);
+                        $clause[$key] = $link->escape_string($property);
                     }
                     $query->andWhere($clause);
                 }

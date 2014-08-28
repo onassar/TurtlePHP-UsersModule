@@ -23,6 +23,44 @@
         protected static $_configPath = 'config.default.inc.php';
 
         /**
+         * _accessorMethods
+         *
+         * @var    array
+         * @access protected
+         * @static
+         */
+        protected static $_accessorMethods = array();
+
+        /**
+         * addAccessorMethod
+         *
+         * @access public
+         * @static
+         * @param  string $accessor
+         * @param  string $method
+         * @param  Closure $closure
+         * @return void
+         */
+        public static function addAccessorMethod($accessor, $method, \Closure $closure)
+        {
+            self::$_accessorMethods[$method] = $closure;
+        }
+
+        /**
+         * getAccessorMethod
+         *
+         * @access public
+         * @static
+         * @param  string $accessor
+         * @param  string $method
+         * @return Closure
+         */
+        public static function getAccessorMethod($accessor, $method)
+        {
+            return self::$_accessorMethods[$method];
+        }
+
+        /**
          * autoLogin
          *
          * @access public

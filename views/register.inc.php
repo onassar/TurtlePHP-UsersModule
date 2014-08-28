@@ -58,6 +58,40 @@
                                     <input type="text" name="expiry" id="expiry" placeholder="MM/YY" />
                                 </div>
                             </div>
+                            <?php
+                                if (
+                                    getConfig('defaults', 'stripeCheckout') === true
+                                    && \getConfig('TurtlePHP-StripeModule', 'applyTaxes') === true
+                                ):
+                            ?>
+                                <div class="location">
+                                    <div class="wrapper left">
+                                        <label for="country">Do you live in Canada?</label>
+                                        
+                                    </div>
+                                    <div class="wrapper left">
+                                        <label for="country">Provinces</label>
+                                        <select name="province">
+                                            <?php
+                                                $provinces = \getConfig('TurtlePHP-StripeModule', 'provinces');
+                                                foreach ($provinces as $province):
+                                            ?>
+                                                <option value="<?= ($province['handle']) ?>"><?= ($province['name']) ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+                            <?php
+                                if (
+                                    getConfig('defaults', 'stripeCheckout') === true
+                                    && \getConfig('TurtlePHP-StripeModule', 'frequencyToggle') === true
+                                ):
+                            ?>
+                                <div class="frequency">
+                                    Monthly / yearly toggle
+                                </div>
+                            <?php endif; ?>
                         </div>
                     <?php endif; ?>
                     <?php
