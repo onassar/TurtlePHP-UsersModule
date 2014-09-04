@@ -17,7 +17,8 @@
      */
     $defaults = array(
         'rememberMe' => true,
-        'rememberMeDuration' =>  10 * 365 * 24 * 60 * 60,
+        'rememberMeDuration' => 10 * 365 * 24 * 60 * 60,
+        'logoPath' => 'http://i.imgur.com/EneDoVl.png',
         'redirectGetRequestsOnError' => true,
         'welcomeEmailsCronBatchCount' => 5,
         'autoLogin' => true,

@@ -516,11 +516,15 @@
                 // Logic
                 $userModel = $this->_getModel('Modules\\Users\\User');
                 $user = $userModel->getUserByEmail($_POST['email']);
-                if (isset($_POST['rememberMe'])) {
-                    $user->login(time() + 2 * 365 * 24 * 60 * 60);
-                } else {
-                    $user->login(0);
+                $defaults = getConfig('defaults');
+                $expire = 0;
+                if (
+                    $defaults['rememberMe'] === true
+                    && isset($_POST['rememberMe']) === true
+                ) {
+                    $expire = time() + ($defaults['rememberMeDuration']);
                 }
+                $user->login($expire);
 
                 // Response
                 $response = array(
