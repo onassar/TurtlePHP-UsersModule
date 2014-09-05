@@ -1,0 +1,10 @@
+[
+    {
+        "validator": ["Modules\\Users\\SecurityValidator", "validCsrfToken"],
+        "params": ["{csrfToken}"],
+        "blocking": true,
+        "error": {
+            "reference": "users.logout.get.1"
+        }
+    }
+]

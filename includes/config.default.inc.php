@@ -113,6 +113,7 @@
             'post' => MODULE . '/schemas/users.login.post.json'
         ),
         'logout' => array(
+            'get' => MODULE . '/schemas/users.logout.get.json',
             'post' => MODULE . '/schemas/users.logout.post.json'
         ),
         'resetPassword' => array(
@@ -178,6 +179,7 @@
             'post' => MODULE . '/views/raw.inc.php'
         ),
         'logout' => array(
+            'get' => MODULE . '/views/raw.inc.php',
             'post' => MODULE . '/views/raw.inc.php'
         ),
         'resetPassword' => array(

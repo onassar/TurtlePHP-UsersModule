@@ -45,5 +45,5 @@ var BypassPasswordPageView = View.extend({
                 }
             }
         ));
-    },
+    }
 });

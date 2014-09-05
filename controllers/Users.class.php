@@ -542,6 +542,128 @@
         }
 
         /**
+         * _actionLogoutGet
+         * 
+         * @access public
+         * @return void
+         */
+        public function _actionLogoutGet()
+        {
+            // View
+            $this->__setView('logout', 'get');
+
+            /**
+             * Validation
+             * 
+             */
+
+            // Schema
+            $path = $this->__getSchemaPath('logout', 'get');
+            $schema = (new \SmartSchema($path));
+
+            // Validator
+            $validator = (new ProjectSchemaValidator(
+                $schema,
+                $this->getRequest(),
+                $_GET
+            ));
+
+            /**
+             * Validation failed
+             * 
+             */
+            if ($validator->valid() === false) {
+
+                // Failed response
+                $response = array(
+                    'success' => false,
+                    'failedRules' => $validator->getFailedRules(false)
+                );
+                $this->_pass('response', json_encode($response));
+
+                // Parent
+                $args = func_get_args();
+                $this->__callParent(__FUNCTION__, false, $args);
+            }
+            /**
+             * Body
+             * 
+             */
+            else {
+
+                // Quick and done
+                $loggedInUser = \getLoggedInUser();
+                $loggedInUser->logout();
+                header('Location: /');
+                exit(0);
+            }
+        }
+
+        /**
+         * _actionLogoutPost
+         * 
+         * @access public
+         * @return void
+         */
+        public function _actionLogoutPost()
+        {
+            // View
+            $this->__setView('logout', 'post');
+
+            /**
+             * Validation
+             * 
+             */
+
+            // Schema
+            $path = $this->__getSchemaPath('logout', 'post');
+            $schema = (new \SmartSchema($path));
+
+            // Validator
+            $validator = (new ProjectSchemaValidator(
+                $schema,
+                $this->getRequest(),
+                $_POST
+            ));
+
+            /**
+             * Validation failed
+             * 
+             */
+            if ($validator->valid() === false) {
+
+                // Failed response
+                $response = array(
+                    'success' => false,
+                    'failedRules' => $validator->getFailedRules(false)
+                );
+                $this->_pass('response', json_encode($response));
+
+                // Parent
+                $args = func_get_args();
+                $this->__callParent(__FUNCTION__, false, $args);
+            }
+            /**
+             * Body
+             * 
+             */
+            else {
+
+                // View
+                $loggedInUser = \getLoggedInUser();
+                $loggedInUser->logout();
+                $response = array(
+                    'success' => true
+                );
+                $this->_pass('response', json_encode($response));
+
+                // Parent
+                $args = func_get_args();
+                $this->__callParent(__FUNCTION__, true, $args);
+            }
+        }
+
+        /**
          * _actionBypassPasswordGet
          * 
          * @access protected
@@ -919,8 +1041,8 @@
             else {
 
                 // User
-                $user = getLoggedInUser();
-prx($user->getStripeCustomer());
+                $user = \getLoggedInUser();
+                $this->_pass('loggedInUser', $user);
 
                 // Parent
                 $args = func_get_args();
@@ -987,59 +1109,12 @@ prx($user->getStripeCustomer());
          */
         public function actionLogout()
         {
-            // View
-            $this->__setView('logout', 'post');
-
-            /**
-             * Validation
-             * 
-             */
-
-            // Schema
-            $path = $this->__getSchemaPath('logout', 'post');
-            $schema = (new \SmartSchema($path));
-
-            // Validator
-            $validator = (new ProjectSchemaValidator(
-                $schema,
-                $this->getRequest(),
-                $_POST
-            ));
-
-            /**
-             * Validation failed
-             * 
-             */
-            if ($validator->valid() === false) {
-
-                // Failed response
-                $response = array(
-                    'success' => false,
-                    'failedRules' => $validator->getFailedRules(false)
-                );
-                $this->_pass('response', json_encode($response));
-
-                // Parent
-                $args = func_get_args();
-                $this->__callParent(__FUNCTION__, false, $args);
-            }
-            /**
-             * Body
-             * 
-             */
-            else {
-
-                // View
-                $loggedInUser = \getLoggedInUser();
-                $loggedInUser->logout();
-                $response = array(
-                    'success' => true
-                );
-                $this->_pass('response', json_encode($response));
-
-                // Parent
-                $args = func_get_args();
-                $this->__callParent(__FUNCTION__, true, $args);
+            if (!empty($_POST)) {
+                $this->__setView('logout', 'post');
+                $this->_actionLogoutPost();
+            } else {
+                $this->__setView('logout', 'get');
+                $this->_actionLogoutGet();
             }
         }
 

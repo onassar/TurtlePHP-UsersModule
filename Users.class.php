@@ -69,7 +69,7 @@
          */
         public static function autoLogin()
         {
-            $loggedInUser = getLoggedInUser();
+            $loggedInUser = \getLoggedInUser();
             if ($loggedInUser === false) {
 
                 // Cookie check
@@ -208,7 +208,7 @@
          */
         public static function trackLastActive()
         {
-            $loggedInUser = getLoggedInUser();
+            $loggedInUser = \getLoggedInUser();
             if ($loggedInUser !== false) {
                 $loggedInUser->update(array(
                     'lastActiveEpoch' => time()

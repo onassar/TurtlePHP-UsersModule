@@ -49,12 +49,6 @@
                     <div class="callout errors hidden">
                         <p>{message}</p>
                     </div>
-                    <div class="callout success hidden">
-                        <div class="headline">
-                            <em>{headline}</em>
-                        </div>
-                        <p>{message}</p>
-                    </div>
                     <input type="hidden" name="csrfToken" value="<?= ($csrfToken) ?>" />
                     <div class="wrapper">
                         <label for="firstName">First name</label>

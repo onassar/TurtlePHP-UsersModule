@@ -45,26 +45,31 @@
                 <a href="/">&nbsp;</a>
             </header>
             <div id="body" class="clearfix">
-                <p>
-                    Enter your email below and we’ll send you a link to update
-                    your password
-                </p>
-                <form action="<?= getConfig('paths', 'bypassPassword') ?>" method="post">
-                    <div class="callout errors hidden">
-                        <p>{message}</p>
-                    </div>
-                    <div class="callout success hidden">
-                        <div class="headline">
-                            <em>{headline}</em>
+                <?php if (isset($_GET['sent'])): ?>
+                    <form action="<?= getConfig('paths', 'bypassPassword') ?>" method="post">
+                        <div class="callout success">
+                            <p>
+                                Check your email for a link to login and change your
+                                password
+                            </p>
                         </div>
-                        <p>{message}</p>
-                    </div>
-                    <input type="hidden" name="csrfToken" value="<?= ($csrfToken) ?>" />
-                    <div class="wrapper">
-                        <input type="text" name="email" id="email" placeholder="example@whatever.com" />
-                    </div>
-                    <button type="submit">Send Recovery Email</button>
-                </form>
+                    </form>
+                <?php else: ?>
+                    <p>
+                        Enter your email below and we’ll send you a link to update
+                        your password
+                    </p>
+                    <form action="<?= getConfig('paths', 'bypassPassword') ?>" method="post">
+                        <div class="callout errors hidden">
+                            <p>{message}</p>
+                        </div>
+                        <input type="hidden" name="csrfToken" value="<?= ($csrfToken) ?>" />
+                        <div class="wrapper">
+                            <input type="text" name="email" id="email" placeholder="example@whatever.com" />
+                        </div>
+                        <button type="submit">Send Recovery Email</button>
+                    </form>
+                <?php endif; ?>
             </div>
         </div>
         <script type="text/javascript">

@@ -45,5 +45,5 @@ var RegisterPageView = View.extend({
                 }
             }
         ));
-    },
+    }
 });

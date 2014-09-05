@@ -77,6 +77,18 @@
         }
 
         /**
+         * getLogoutPath
+         *
+         * @access public
+         * @return string
+         */
+        public function getLogoutPath()
+        {
+            $path = getConfig('paths', 'logout');
+            return ($path) . '?csrfToken=' . ($_SESSION['csrfToken']);
+        }
+
+        /**
          * getAutoLoginUrl
          *
          * @access public
@@ -153,7 +165,9 @@
         public function logout()
         {
             // Close session
-            $GLOBALS['SMSession']->destroy();
+            \Plugin\MemcachedSession::getReference()->destroy();
+
+            // Clear cookies
             setcookie(
                 'isLoggedIn',
                 '',

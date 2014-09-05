@@ -102,6 +102,9 @@ div#wrapper #body form button {
     line-height: 50px;
     margin: 12px 0 0;
 }
+button:focus {
+    outline: 0;
+}
 div#wrapper #body form.loading button {
     text-indent: -10000px;
     background-image: url('//i.imgur.com/TKa5bTT.gif');

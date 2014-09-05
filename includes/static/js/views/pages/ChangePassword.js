@@ -46,5 +46,5 @@ var ChangePasswordPageView = View.extend({
                 }
             }
         ));
-    },
+    }
 });
