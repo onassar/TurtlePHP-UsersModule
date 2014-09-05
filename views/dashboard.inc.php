@@ -3,4 +3,4 @@
     // namespaces
     namespace Modules\Users;
 ?>
-<?= ($loggedInUser->getLogoutPath()) ?>
+<a href="<?= ($loggedInUser->getLogoutPath()) ?>">Logout</a>
