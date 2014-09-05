@@ -1,0 +1,24 @@
+div#wrapper input#receiveNewsletters {
+    float: left;
+    margin: 3px 4px 0 0;
+    padding: 0;
+    display: block;
+}
+div#wrapper label[for="receiveNewsletters"] {
+    float: left;
+    font-size: 13px !important;
+}
+div#wrapper input#terms {
+    float: left;
+    margin: 3px 4px 0 0;
+    padding: 0;
+    display: block;
+}
+div#wrapper label[for="terms"] {
+    float: left;
+    font-size: 13px !important;
+}
+div#wrapper div.wrapper#termsWrapper {
+    margin-top: 0 !important;
+    font-size: 13px !important;
+}

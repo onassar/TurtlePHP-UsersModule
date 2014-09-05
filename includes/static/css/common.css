@@ -1,3 +1,7 @@
+<?php
+    namespace Modules\Users;
+    $config = getConfig();
+?>
 html {
     height: 100%;
 }
@@ -35,19 +39,21 @@ div#wrapper #body form div.callout {
     border-left: 5px solid #ccc;
     border-radius: 6px;
 }
-body form div.callout p:last-child {
-    /*margin-bottom: 0;*/
-}
 body form div.callout p {
     font-size: 15px;
     line-height: 18px;
     margin: 0;
     padding: 0;
 }
-
 div#wrapper #body form div.callout.errors {
-    background-color: #fcf2f2;
-    border-color: #dFb5b4;
+    background-color: #F6DFDF;
+    border: 2px dashed #EFA8B2;
+    font-size: 15px;
+    font-weight: bold;
+    color: #a94442;
+}
+div#wrapper #body form div.callout.errors p {
+    padding: 0;
 }
 div#wrapper #body form div.wrapper {
     margin: 16px 0 0;

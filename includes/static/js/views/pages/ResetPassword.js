@@ -1,10 +1,10 @@
 
 /**
- * RegisterPageView
+ * ResetPasswordPageView
  * 
  * @extends View
  */
-var RegisterPageView = View.extend({
+var ResetPasswordPageView = View.extend({
 
     /**
      * _form
@@ -26,7 +26,7 @@ var RegisterPageView = View.extend({
         this._setupForm();
 
         // Focus
-        var input = this._element.find('input[name="firstName"]');
+        var input = this._element.find('input[name="email"]');
         input.focus();
     },
 
@@ -37,11 +37,12 @@ var RegisterPageView = View.extend({
      * @return void
      */
     _setupForm: function(element) {
+        var _this = this;
         this._form = (new FormView(
             this._element.find('form'),
             function(response) {
                 if (response.success === true) {
-                    location.href = '/dashboard';
+                    location.href = _this._element.find('[name="successRedirectPath"]').val();
                 }
             }
         ));

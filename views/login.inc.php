@@ -40,7 +40,7 @@
             });
         </script>
     </head>
-    <body>
+    <body id="login">
         <div id="wrapper">
             <header>
                 <a href="/">&nbsp;</a>
@@ -48,15 +48,13 @@
             <div id="body" class="clearfix">
                 <form action="<?= ($config['paths']['login']) ?>" method="post">
                     <div class="callout errors hidden">
-                        <p>Please enter a password</p>
+                        <p>{message}</p>
                     </div>
                     <div class="callout success hidden">
                         <div class="headline">
-                            <em>Saved!</em>
+                            <em>{headline}</em>
                         </div>
-                        <p>
-                            Use this new password next time you need to log in
-                        </p>
+                        <p>{message}</p>
                     </div>
                     <input type="hidden" name="csrfToken" value="<?= ($csrfToken) ?>" />
                     <?php
