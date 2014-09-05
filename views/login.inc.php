@@ -50,11 +50,17 @@
                     <div class="callout errors hidden">
                         <p>{message}</p>
                     </div>
-                    <div class="callout success hidden">
-                        <div class="headline">
-                            <em>{headline}</em>
-                        </div>
-                        <p>{message}</p>
+                    <?php
+                        $successCalloutClasses = array('callout', 'success', 'hidden');
+                        $message = '{message}';
+                        if (isset($_GET['reset'])) {
+                            $successCalloutClasses = array('callout', 'success');
+                            $message = 'A temporary password has been sent ' .
+                                'to your email';
+                        }
+                    ?>
+                    <div class="<?= implode(' ', $successCalloutClasses) ?>">
+                        <p><?= ($message) ?></p>
                     </div>
                     <input type="hidden" name="csrfToken" value="<?= ($csrfToken) ?>" />
                     <?php

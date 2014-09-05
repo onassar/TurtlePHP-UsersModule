@@ -141,15 +141,7 @@
             );
 
             // Track email
-            setcookie(
-                'email',
-                $this->email,
-                $expire,
-                '/',
-                $_SERVER['HTTP_HOST'],
-                HTTPS,
-                true
-            );
+            $this->setEmailCookie($expire);
         }
 
         /**
@@ -283,6 +275,26 @@
 
             // Done
             return $response;
+        }
+
+        /**
+         * setEmailCookie
+         *
+         * @access public
+         * @param  integer $expire
+         * @return void
+         */
+        public function setEmailCookie($expire)
+        {
+            setcookie(
+                'email',
+                $this->email,
+                $expire,
+                '/',
+                $_SERVER['HTTP_HOST'],
+                HTTPS,
+                true
+            );
         }
 
         /**

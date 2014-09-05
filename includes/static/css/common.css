@@ -55,6 +55,13 @@ div#wrapper #body form div.callout.errors {
 div#wrapper #body form div.callout.errors p {
     padding: 0;
 }
+div#wrapper #body form div.callout.success {
+    background-color: #DFF6DF;
+    border: 2px dashed #76DB8A;
+    font-size: 15px;
+    font-weight: bold;
+    color: #4EA942;
+}
 div#wrapper #body form div.wrapper {
     margin: 16px 0 0;
 }
@@ -76,6 +83,7 @@ div#wrapper #body form div.wrapper input[type="password"] {
     width: 100%;
     font-size: 18px;
     padding: 0 8px;
+    border-radius: 2px;
 }
 div#wrapper #body form div.wrapper input[readonly] {
     color: #999;

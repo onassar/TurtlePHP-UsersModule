@@ -661,6 +661,11 @@
                 $user = $userModel->getUserByEmail($_POST['email']);
                 $emailResponse = $user->sendBypassPasswordEmail();
 
+                // Email cookie
+                $defaults = getConfig('defaults');
+                $expire = time() + ($defaults['rememberMeDuration']);
+                $user->setEmailCookie($expire);
+
                 // Response
                 $response = array(
                     'success' => true,
@@ -810,6 +815,11 @@
                 $user->resetLoginHash();
                 $user->setPassword($randomPassword);
                 $emailResponse = $user->sendResetPasswordEmail($randomPassword);
+
+                // Email cookie
+                $defaults = getConfig('defaults');
+                $expire = time() + ($defaults['rememberMeDuration']);
+                $user->setEmailCookie($expire);
 
                 // Response
                 $response = array(
