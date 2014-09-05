@@ -50,13 +50,10 @@
                         <p>{message}</p>
                     </div>
                     <input type="hidden" name="csrfToken" value="<?= ($csrfToken) ?>" />
-                    <div class="wrapper">
-                        <label for="firstName">First name</label>
-                        <input type="text" name="firstName" id="firstName" />
-                    </div>
-                    <div class="wrapper">
-                        <label for="lastName">Last name</label>
-                        <input type="text" name="lastName" id="lastName" />
+                    <div class="wrapper clearfix" id="nameWrapper">
+                        <label for="firstName">Name</label>
+                        <input type="text" name="firstName" id="firstName" placeholder="First" />
+                        <input type="text" name="lastName" id="lastName" placeholder="Last" />
                     </div>
                     <div class="wrapper">
                         <label for="email">Email</label>

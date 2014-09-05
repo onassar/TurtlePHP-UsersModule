@@ -1,3 +1,10 @@
+div#wrapper div.wrapper#nameWrapper input {
+    float: left;
+    width: 49% !important;
+}
+div#wrapper div.wrapper#nameWrapper input:last-child {
+    margin-left: 2%;
+}
 div#wrapper input#receiveNewsletters {
     float: left;
     margin: 3px 4px 0 0;
