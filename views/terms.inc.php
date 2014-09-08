@@ -36,7 +36,9 @@
         </script>
         <script type="text/javascript">
             queue.push(function() {
-                (new BypassPasswordPageView($('body').first()));
+                (new BypassPasswordPageView(
+                    $('body').first()
+                ));
             });
         </script>
     </head>

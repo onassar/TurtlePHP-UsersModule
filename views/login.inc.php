@@ -36,7 +36,9 @@
         </script>
         <script type="text/javascript">
             queue.push(function() {
-                (new LoginPageView($('body').first()));
+                (new LoginPageView(
+                    $('body').first()
+                ));
             });
         </script>
     </head>

@@ -36,7 +36,9 @@
         </script>
         <script type="text/javascript">
             queue.push(function() {
-                (new ChangePasswordPageView($('body').first()));
+                (new ChangePasswordPageView(
+                    $('body').first()
+                ));
             });
         </script>
     </head>

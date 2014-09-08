@@ -35,7 +35,14 @@
         </script>
         <script type="text/javascript">
             queue.push(function() {
-                (new RegisterPageView($('body').first()));
+                (new RegisterPageView(
+                    $('body').first(),
+                    function(response) {
+                        if (response.success === true) {
+                            location.href = '/accounts';
+                        }
+                    }
+                ));
             });
         </script>
     </head>

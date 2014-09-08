@@ -7,6 +7,18 @@
 var ResetPasswordPageView = View.extend({
 
     /**
+     * _callback
+     * 
+     * @protected
+     * @var       Function
+     */
+    _callback: function(response) {
+        if (response.success === true) {
+            location.href = this._element.find('[name="successRedirectPath"]').val();
+        }
+    },
+
+    /**
      * _form
      * 
      * @protected
@@ -19,10 +31,12 @@ var ResetPasswordPageView = View.extend({
      * 
      * @public
      * @param  jQuery element
+     * @param  Function|undefined callback
      * @return void
      */
-    init: function(element) {
+    init: function(element, callback) {
         this._super(element);
+        this._callback = callback || this._callback;
         this._setupForm();
 
         // Focus
@@ -41,9 +55,7 @@ var ResetPasswordPageView = View.extend({
         this._form = (new FormView(
             this._element.find('form'),
             function(response) {
-                if (response.success === true) {
-                    location.href = _this._element.find('[name="successRedirectPath"]').val();
-                }
+                _this._callback(response);
             }
         ));
     }

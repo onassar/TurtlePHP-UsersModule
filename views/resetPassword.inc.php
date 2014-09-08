@@ -35,7 +35,9 @@
         </script>
         <script type="text/javascript">
             queue.push(function() {
-                (new ResetPasswordPageView($('body').first()));
+                (new ResetPasswordPageView(
+                    $('body').first()
+                ));
             });
         </script>
     </head>
