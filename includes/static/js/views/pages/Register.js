@@ -41,7 +41,7 @@ var RegisterPageView = View.extend({
             this._element.find('form'),
             function(response) {
                 if (response.success === true) {
-                    location.href = '/dashboard';
+                    location.href = '/accounts';
                 }
             }
         ));

@@ -12,6 +12,7 @@ body {
 }
 div#wrapper header {
     padding: 132px 0 28px;
+    padding: 100px 0 28px;
     background-color: #fff;
 }
 div#wrapper header a {
