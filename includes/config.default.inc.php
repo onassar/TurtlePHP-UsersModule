@@ -16,6 +16,7 @@
      * 
      */
     $defaults = array(
+        'gACode' => 'UA-XXXXXXX-XX',
         'rememberMe' => true,
         'rememberMeDuration' => 10 * 365 * 24 * 60 * 60,
         'logoPath' => 'http://i.imgur.com/EneDoVl.png',
