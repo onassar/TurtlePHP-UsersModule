@@ -63,7 +63,7 @@
             if ($iteration >= 1000) {
                 throw new \Exception('Something terrible went wrong. Terrible.');
             }
-            $publicKey = getRandomHash(8);
+            $publicKey = getRandomHash(16);
             $user = $this->getUserByPublicKey($publicKey);
             if ($user === false) {
                 return $publicKey;
