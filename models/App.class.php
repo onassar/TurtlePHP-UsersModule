@@ -166,7 +166,7 @@
          *
          * @access public
          * @param  string|integer $id
-         * @return Accessor|false
+         * @return false|Accessor
          */
         public function getRecordData($id)
         {

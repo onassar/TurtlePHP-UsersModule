@@ -106,7 +106,7 @@
          *
          * @access public
          * @param  string $email
-         * @return UserAccessor|false
+         * @return false|UserAccessor
          */
         public function getUserByEmail($email)
         {
@@ -136,7 +136,7 @@
          *
          * @access public
          * @param  string $username
-         * @return UserAccessor|false
+         * @return false|UserAccessor
          */
         public function getUserByUsername($username)
         {
@@ -166,7 +166,7 @@
          *
          * @access public
          * @param  string $loginHash
-         * @return UserAccessor|false
+         * @return false|UserAccessor
          */
         public function getUserByLoginHash($loginHash)
         {
@@ -208,7 +208,7 @@
          *
          * @access public
          * @param  string $publicKey
-         * @return UserAccessor|false
+         * @return false|UserAccessor
          */
         public function getUserByPublicKey($publicKey)
         {
