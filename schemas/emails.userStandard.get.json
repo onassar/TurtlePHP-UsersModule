@@ -4,7 +4,7 @@
         "params": ["{__request__}"],
         "blocking": true,
         "error": {
-            "reference": "Emails.userStandard.get.0"
+            "reference": "emails.userStandard.get.json.0"
         }
     },
     {
@@ -12,7 +12,7 @@
         "params": ["{userId}"],
         "blocking": true,
         "error": {
-            "reference": "Emails.userStandard.get.1"
+            "reference": "emails.userStandard.get.json.1"
         }
     }
 ]

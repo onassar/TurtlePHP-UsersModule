@@ -3,7 +3,7 @@
         "validator": ["DataValidator", "dataPosted"],
         "blocking": true,
         "error": {
-            "reference": "users.index.post.0"
+            "reference": "users.index.post.json.0"
         }
     },
     {
@@ -11,14 +11,14 @@
         "params": ["{csrfToken}"],
         "blocking": true,
         "error": {
-            "reference": "users.index.post.1"
+            "reference": "users.index.post.json.1"
         }
     },
     {
         "validator": ["Modules\\Users\\UserValidator", "isLoggedOut"],
         "blocking": true,
         "error": {
-            "reference": "users.index.post.2"
+            "reference": "users.index.post.json.2"
         }
     },
     {
@@ -26,7 +26,7 @@
         "params": ["{email}"],
         "blocking": true,
         "error": {
-            "reference": "users.index.post.3",
+            "reference": "users.index.post.json.3",
             "input": "email",
             "message": "Please enter your email."
         },
@@ -36,7 +36,7 @@
                 "params": ["{email}"],
                 "blocking": true,
                 "error": {
-                    "reference": "users.index.post.4",
+                    "reference": "users.index.post.json.4",
                     "input": "email",
                     "message": "Please enter a valid email address."
                 }
@@ -48,7 +48,7 @@
         "blocking": true,
         "params": ["{email}"],
         "error": {
-            "reference": "users.index.post.5",
+            "reference": "users.index.post.json.5",
             "input": "email",
             "message": "Email found. Maybe your forgot your password?"
         }
@@ -58,7 +58,7 @@
         "params": ["{password}"],
         "blocking": true,
         "error": {
-            "reference": "users.index.post.6",
+            "reference": "users.index.post.json.6",
             "input": "password",
             "message": "Please enter a password"
         }
@@ -68,7 +68,7 @@
         "params": ["{password}", 4],
         "blocking": true,
         "error": {
-            "reference": "users.index.post.7",
+            "reference": "users.index.post.json.7",
             "input": "password",
             "message": "Password needs to be at least 4 characters long"
         }
@@ -78,7 +78,7 @@
         "params": ["{password}", "{passwordConfirmation}"],
         "blocking": true,
         "error": {
-            "reference": "users.index.post.8",
+            "reference": "users.index.post.json.8",
             "input": "passwordConfirmation",
             "message": "Please make sure your passwords match"
         }
@@ -88,7 +88,7 @@
         "params": ["terms", "{__data__}"],
         "blocking": true,
         "error": {
-            "reference": "users.index.post.9",
+            "reference": "users.index.post.json.9",
             "input": "terms",
             "message": "Terms of service must be agreed to"
         }

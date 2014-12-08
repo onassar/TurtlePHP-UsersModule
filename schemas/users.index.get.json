@@ -3,7 +3,7 @@
         "validator": ["Modules\\Users\\UserValidator", "isLoggedOut"],
         "blocking": true,
         "error": {
-            "reference": "users.index.get.0"
+            "reference": "users.index.get.json.0"
         }
     }
 ]

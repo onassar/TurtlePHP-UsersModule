@@ -3,7 +3,7 @@
         "validator": ["DataValidator", "dataPosted"],
         "blocking": true,
         "error": {
-            "reference": "users.login.post.0"
+            "reference": "users.login.post.json.0"
         }
     },
     {
@@ -11,14 +11,14 @@
         "params": ["{csrfToken}"],
         "blocking": true,
         "error": {
-            "reference": "users.login.post.1"
+            "reference": "users.login.post.json.1"
         }
     },
     {
         "validator": ["Modules\\Users\\UserValidator", "isLoggedOut"],
         "blocking": true,
         "error": {
-            "reference": "users.login.post.2"
+            "reference": "users.login.post.json.2"
         }
     },
     {
@@ -26,7 +26,7 @@
         "params": ["{email}"],
         "blocking": true,
         "error": {
-            "reference": "users.login.post.3",
+            "reference": "users.login.post.json.3",
             "input": "email",
             "message": "Please enter your email."
         }
@@ -36,7 +36,7 @@
         "params": ["{password}"],
         "blocking": true,
         "error": {
-            "reference": "users.login.post.4",
+            "reference": "users.login.post.json.4",
             "input": "password",
             "message": "Please enter your password."
         },
@@ -46,7 +46,7 @@
                 "params": ["{email}", "{password}"],
                 "blocking": true,
                 "error": {
-                    "reference": "users.login.post.5",
+                    "reference": "users.login.post.json.5",
                     "input": "password",
                     "message": "Could not log you in. Try again."
                 }

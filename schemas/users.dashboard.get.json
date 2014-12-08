@@ -3,7 +3,7 @@
         "validator": ["Modules\\Users\\UserValidator", "isLoggedIn"],
         "blocking": true,
         "error": {
-            "reference": "users.dashboard.get.0"
+            "reference": "users.dashboard.get.json.0"
         }
     }
 ]
