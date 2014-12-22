@@ -11,6 +11,14 @@
     class AppModel extends \UserModel
     {
         /**
+         * _cache
+         * 
+         * @var    boolean (default: false)
+         * @access protected
+         */
+        protected $_cache = false;
+
+        /**
          * _modelName
          * 
          * @var    string
@@ -166,10 +174,29 @@
          *
          * @access public
          * @param  string|integer $id
+         * @param  boolean $renew (default: false)
          * @return false|Accessor
          */
-        public function getRecordData($id)
+        public function getRecordData($id, $renew = false)
         {
+            // Cache lookup
+            if (
+                $this->_cache === true
+                && $renew === false
+            ) {
+                $key = implode(
+                    ' / ',
+                    array(
+                        $this->_tableName,
+                        (int) $id
+                    )
+                );
+                $lookup = \MemcachedCache::read($key);
+                if ($lookup !== null) {
+                    return $lookup;
+                }
+            }
+
             // Query
             $query = (new \Query());
             $query->select('*');
@@ -181,6 +208,11 @@
             // Retrieve matching records; cache them
             $mySQLQuery = (new \MySQLQuery($query->parse()));
             $records = $mySQLQuery->getResults();
+
+            // Cache writing
+            if ($this->_cache === true) {
+                \MemcachedCache::write($key, $records);
+            }
 
             // Not found
             if (empty($records)) {
@@ -220,5 +252,10 @@
                 'WHERE ' .
                     'id = ' . ($id)
             ));
+
+            // Cache updates
+            if ($this->_cache === true) {
+                $this->getRecordData($id, true);
+            }
         }
     }
