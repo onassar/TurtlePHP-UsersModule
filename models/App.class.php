@@ -211,6 +211,13 @@
 
             // Cache writing
             if ($this->_cache === true) {
+                $key = implode(
+                    ' / ',
+                    array(
+                        $this->_tableName,
+                        (int) $id
+                    )
+                );
                 \MemcachedCache::write($key, $records);
             }
 
