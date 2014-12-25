@@ -109,6 +109,7 @@
             }
 
             // Return accessor
+            $accessorName = ($this->_modelName) . 'Accessor';
             $accessorName = 'Modules\Users\\' . ($accessorName);
             $accessor = (new $accessorName($id));
             $this->_cacheAccessor($accessor);

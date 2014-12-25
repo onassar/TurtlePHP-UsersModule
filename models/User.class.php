@@ -61,7 +61,9 @@
         {
             // Recursion
             if ($iteration >= 1000) {
-                throw new \Exception('Something terrible went wrong. Terrible.');
+                throw new \Exception(
+                    'Something terrible went wrong. Terrible.'
+                );
             }
             $publicKey = getRandomHash(16);
             $user = $this->getUserByPublicKey($publicKey);
@@ -83,7 +85,9 @@
         {
             // Recursion
             if ($iteration >= 1000) {
-                throw new \Exception('Something terrible went wrong. Terrible.');
+                throw new \Exception(
+                    'Something terrible went wrong. Terrible.'
+                );
             }
             $handleCheck = $username;
             $pattern = '/[^a-zA-Z0-9\.]/';
