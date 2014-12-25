@@ -51,12 +51,9 @@
          */
         protected function _cacheAccessor(\Accessor $accessor)
         {
-            \RequestCache::simpleWrite(
-                'accessor'.
-                $accessor->getRecordType().
-                $accessor->id,
-                $accessor
-            );
+            $key = 'accessor / ' . ($accessor->getRecordType()) . ' / ' . 
+                ($accessor->id);
+            \RequestCache::simpleWrite($key, $accessor);
         }
 
         /**
@@ -112,7 +109,6 @@
             }
 
             // Return accessor
-            $accessorName = ($this->_modelName) . 'Accessor';
             $accessorName = 'Modules\Users\\' . ($accessorName);
             $accessor = (new $accessorName($id));
             $this->_cacheAccessor($accessor);
@@ -125,14 +121,13 @@
          * @todo   Give key proper formatting
          * @access protected
          * @param  string $accessorType
-         * @param  integer $id
+         * @param  string $id
          * @return null|Accessor
          */
         protected function _getCachedAccessor($accessorType, $id)
         {
-            $accessor = \RequestCache::simpleRead(
-                'accessor' . ($accessorType) . ($id)
-            );
+            $key = 'accessor / ' . ($accessorType) . ' / ' . ($id);
+            $accessor = \RequestCache::simpleRead($key);
             if ($accessor === null) {
                 return null;
             }
