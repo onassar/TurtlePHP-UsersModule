@@ -30,7 +30,7 @@
                     $('body').first(),
                     function(response) {
                         if (response.success === true) {
-                            location.href = '/welcome';
+                            location.href = '/dashboard';
                         }
                     }
                 ));
