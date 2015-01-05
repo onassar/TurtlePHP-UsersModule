@@ -136,7 +136,7 @@ var FormView = View.extend({
                         jQuery.proxy(_this._submitCallback, _this),
                         'json'
                     ).fail(function() {
-                        log('Failed submitting');
+                        window['log'] && log('Failed submitting');
                     });
                 };
 
