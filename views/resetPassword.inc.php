@@ -2,6 +2,7 @@
 
     // namespaces
     namespace Modules\Users;
+    $config = getConfig();
 ?><!DOCTYPE html>
 <html lang="en">
     <head>
@@ -14,6 +15,12 @@
 <?php
     require_once MODULE . '/includes/static/css/common.css';
     require_once MODULE . '/includes/static/css/pages/resetPassword.css';
+    if ($config['defaults']['css'] !== false):
+        $bust = filemtime(WEBROOT . ($config['defaults']['css']));
+?>
+    <link rel="stylesheet" href="<?= ($config['defaults']['css']) ?>?cache=<?= ($bust) ?>">
+<?php
+    endif;
 ?>
         </style>
         <script type="text/javascript">      
