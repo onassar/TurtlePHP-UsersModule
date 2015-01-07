@@ -15,14 +15,16 @@
 <?php
     require_once MODULE . '/includes/static/css/common.css';
     require_once MODULE . '/includes/static/css/pages/login.css';
+?>
+        </style>
+<?php
     if ($config['defaults']['css'] !== false):
         $bust = filemtime(WEBROOT . ($config['defaults']['css']));
 ?>
-    <link rel="stylesheet" href="<?= ($config['defaults']['css']) ?>?cache=<?= ($bust) ?>">
+        <link rel="stylesheet" href="<?= ($config['defaults']['css']) ?>?cache=<?= ($bust) ?>">
 <?php
     endif;
 ?>
-        </style>
         <script type="text/javascript">      
 <?php
     require_once MODULE . '/includes/static/js/extend.js';
