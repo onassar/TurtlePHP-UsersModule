@@ -36,7 +36,12 @@
         <script type="text/javascript">
             queue.push(function() {
                 (new ChangePasswordPageView(
-                    $('body').first()
+                    $('body').first(),
+                    function(response) {
+                        if (response.success === true) {
+                            location.href = '/login';
+                        }
+                    }
                 ));
             });
         </script>
