@@ -69,8 +69,8 @@
          */
         public static function autoLogin()
         {
-            $loggedInUser = \getLoggedInUser();
-            if ($loggedInUser === false) {
+            $liu = \getLoggedInUser();
+            if ($liu === false) {
 
                 // Cookie check
                 if (
@@ -208,9 +208,9 @@
          */
         public static function trackLastActive()
         {
-            $loggedInUser = \getLoggedInUser();
-            if ($loggedInUser !== false) {
-                $loggedInUser->update(array(
+            $liu = \getLoggedInUser();
+            if ($liu !== false) {
+                $liu->update(array(
                     'lastActiveEpoch' => time()
                 ));
             }

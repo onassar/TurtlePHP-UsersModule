@@ -4,4 +4,4 @@
     namespace Modules\Users;
     $config = getConfig();
 ?>
-<a href="<?= ($loggedInUser->getLogoutPath()) ?>">Logout</a>
+<a href="<?= ($liu->getLogoutPath()) ?>">Logout</a>

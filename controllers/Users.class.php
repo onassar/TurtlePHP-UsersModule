@@ -188,14 +188,14 @@
             else {
 
                 // Logic
-                $loggedInUser = \getLoggedInUser();
-                $loggedInUser->setPassword($_POST['password']);
+                $liu = \getLoggedInUser();
+                $liu->setPassword($_POST['password']);
 
                 // Response
                 $response = array(
                     'success' => true,
                     'data' => array(
-                        'user' => $loggedInUser->getPublicData()
+                        'user' => $liu->getPublicData()
                     )
                 );
                 $this->_pass('response', json_encode($response));
@@ -592,8 +592,8 @@
             else {
 
                 // Quick and done
-                $loggedInUser = \getLoggedInUser();
-                $loggedInUser->logout();
+                $liu = \getLoggedInUser();
+                $liu->logout();
                 header('Location: /');
                 exit(0);
             }
@@ -650,8 +650,8 @@
             else {
 
                 // View
-                $loggedInUser = \getLoggedInUser();
-                $loggedInUser->logout();
+                $liu = \getLoggedInUser();
+                $liu->logout();
                 $response = array(
                     'success' => true
                 );
@@ -1132,7 +1132,7 @@
 
                 // User
                 $user = \getLoggedInUser();
-                $this->_pass('loggedInUser', $user);
+                $this->_pass('liu', $user);
 
                 // Parent
                 $args = func_get_args();

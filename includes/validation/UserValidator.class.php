@@ -74,8 +74,8 @@
          */
         public static function uniqueOrLoggedInUserEmailAddress($email)
         {
-            $loggedInUser = \getLoggedInUser();
-            return $email === $loggedInUser->email
+            $liu = \getLoggedInUser();
+            return $email === $liu->email
                 || self::uniqueEmailAddress($email);
         }
 
