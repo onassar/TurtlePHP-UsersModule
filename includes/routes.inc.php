@@ -15,6 +15,11 @@
             'controller' => 'Modules\Users\Users',
             'action' => 'actionTerms'
         ),
+        '^' . ($paths['crumble']) . '$' => array(// G
+            'module' => true,
+            'controller' => 'Modules\Users\Users',
+            'action' => 'actionCrumble'
+        ),
         '^' . ($paths['register']) . '$' => array(// G + P
             'module' => true,
             'controller' => 'Modules\Users\Users',

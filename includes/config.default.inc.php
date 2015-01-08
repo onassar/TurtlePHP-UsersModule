@@ -76,6 +76,7 @@
     // generic
     $paths = array(
         'terms' => '/terms',
+        'crumble' => '/crumble',
         'dashboard' => '/dashboard',
         'register' => '/register',
         'login' => '/login',
@@ -102,6 +103,9 @@
     $schemas = array(
         'terms' => array(
             'get' => MODULE . '/schemas/users.terms.get.json'
+        ),
+        'crumble' => array(
+            'get' => MODULE . '/schemas/users.crumble.get.json'
         ),
         'dashboard' => array(
             'get' => MODULE . '/schemas/users.dashboard.get.json'
@@ -168,6 +172,9 @@
     $views = array(
         'terms' => array(
             'get' => MODULE . '/views/terms.inc.php'
+        ),
+        'crumble' => array(
+            'get' => false
         ),
         'dashboard' => array(
             'get' => MODULE . '/views/dashboard.inc.php'

@@ -976,6 +976,96 @@
         }
 
         /**
+         * actionCrumble
+         * 
+         * @access public
+         * @return void
+         */
+        public function actionCrumble()
+        {
+            // View
+            $this->__setView('crumble', 'get');
+
+            /**
+             * Validation
+             * 
+             */
+
+            // Schema
+            $path = $this->__getSchemaPath('crumble', 'get');
+            $schema = (new \SmartSchema($path));
+
+            // Validator
+            $validator = (new ProjectSchemaValidator(
+                $schema,
+                $this->getRequest()
+            ));
+
+            /**
+             * Validation failed
+             * 
+             */
+            if ($validator->valid() === false) {
+
+                // Parent check
+                if (is_callable(array('parent', __FUNCTION__))) {
+
+                    // Parent
+                    $args = func_get_args();
+                    $this->__callParent(__FUNCTION__, false, $args);
+                }
+                // Otherwise
+                else {
+
+                    // Send to login
+                    $config = getConfig();
+                    $redirectGetRequestsOnError = getConfig(
+                        'defaults',
+                        'redirectGetRequestsOnError'
+                    );
+                    if ($redirectGetRequestsOnError === true) {
+                        header('Location: ' . ($config['paths']['login']));
+                        exit(0);
+                    }
+
+                    // Exception
+                    throw new \SchemaValidationException(
+                        \Modules\Users::getFailedSchemaMessage($validator)
+                    );
+                }
+            }
+            /**
+             * Body
+             * 
+             */
+            else {
+
+                // Parent check
+                if (is_callable(array('parent', __FUNCTION__))) {
+
+                    // Parent
+                    $args = func_get_args();
+                    $this->__callParent(__FUNCTION__, true, $args);
+                }
+                // Otherwise
+                else {
+                    foreach ($_COOKIE as $key => $value) {
+                        setcookie(
+                            $key,
+                            '',
+                            time() - 3600,
+                            '/',
+                            $_SERVER['HTTP_HOST'],
+                            HTTPS,
+                            true
+                        );
+                    }
+                    exit(0);
+                }
+            }
+        }
+
+        /**
          * actionDashboard
          * 
          * @access public
