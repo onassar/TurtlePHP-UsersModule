@@ -70,11 +70,11 @@
                     <input type="hidden" name="csrfToken" value="<?= ($csrfToken) ?>" />
                     <div class="wrapper">
                         <label for="password">Password</label>
-                        <input type="password" name="password" id="password" />
+                        <input type="password" name="password" id="password" autocomplete="off" />
                     </div>
                     <div class="wrapper">
                         <label for="passwordConfirmation">Re-enter password</label>
-                        <input type="password" name="passwordConfirmation" id="passwordConfirmation" />
+                        <input type="password" name="passwordConfirmation" id="passwordConfirmation" autocomplete="off" />
                     </div>
                     <button type="submit">Save</button>
                 </form>

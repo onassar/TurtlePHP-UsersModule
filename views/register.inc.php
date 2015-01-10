@@ -68,11 +68,11 @@
                     </div>
                     <div class="wrapper">
                         <label for="password">Password</label>
-                        <input type="password" name="password" id="password" />
+                        <input type="password" name="password" id="password" autocomplete="off" />
                     </div>
                     <div class="wrapper">
                         <label for="passwordConfirmation">Re-enter password</label>
-                        <input type="password" name="passwordConfirmation" id="passwordConfirmation" />
+                        <input type="password" name="passwordConfirmation" id="passwordConfirmation" autocomplete="off" />
                     </div>
                     <?php if (getConfig('defaults', 'stripeCheckout') === true && isset($_GET['planId'])): ?>
                         <input type="hidden" name="planId" value="<?= ((int) $_GET['planId']) ?>" />
@@ -84,7 +84,7 @@
                             <div class="aux">
                                 <div class="wrapper left">
                                     <label for="cvc">CVC</label>
-                                    <input type="password" name="cvc" id="cvc" />
+                                    <input type="password" name="cvc" id="cvc" autocomplete="off" />
                                 </div>
                                 <div class="wrapper left">
                                     <label for="expiry">Expiry date</label>
