@@ -76,6 +76,7 @@
     // generic
     $paths = array(
         'terms' => '/terms',
+        'privacy' => '/privacy',
         'crumble' => '/crumble',
         'dashboard' => '/dashboard',
         'register' => '/register',
@@ -103,6 +104,9 @@
     $schemas = array(
         'terms' => array(
             'get' => MODULE . '/schemas/users.terms.get.json'
+        ),
+        'privacy' => array(
+            'get' => MODULE . '/schemas/users.privacy.get.json'
         ),
         'crumble' => array(
             'get' => MODULE . '/schemas/users.crumble.get.json'
@@ -172,6 +176,9 @@
     $views = array(
         'terms' => array(
             'get' => MODULE . '/views/terms.inc.php'
+        ),
+        'privacy' => array(
+            'get' => MODULE . '/views/privacy.inc.php'
         ),
         'crumble' => array(
             'get' => false

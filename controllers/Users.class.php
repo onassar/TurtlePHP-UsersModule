@@ -1209,6 +1209,77 @@
         }
 
         /**
+         * actionPrivacy
+         * 
+         * @access public
+         * @return void
+         */
+        public function actionPrivacy()
+        {
+            // View
+            $this->__setView('privacy', 'get');
+
+            /**
+             * Validation
+             * 
+             */
+
+            // Schema
+            $path = $this->__getSchemaPath('privacy', 'get');
+            $schema = (new \SmartSchema($path));
+
+            // Validator
+            $validator = (new ProjectSchemaValidator(
+                $schema,
+                $this->getRequest()
+            ));
+
+            /**
+             * Validation failed
+             * 
+             */
+            if ($validator->valid() === false) {
+
+                // Parent check
+                if (is_callable(array('parent', __FUNCTION__))) {
+
+                    // Parent
+                    $args = func_get_args();
+                    $this->__callParent(__FUNCTION__, false, $args);
+                }
+                // Otherwise
+                else {
+
+                    // Send to login
+                    $config = getConfig();
+                    $redirectGetRequestsOnError = getConfig(
+                        'defaults',
+                        'redirectGetRequestsOnError'
+                    );
+                    if ($redirectGetRequestsOnError === true) {
+                        header('Location: ' . ($config['paths']['login']));
+                        exit(0);
+                    }
+
+                    // Exception
+                    throw new \SchemaValidationException(
+                        \Modules\Users::getFailedSchemaMessage($validator)
+                    );
+                }
+            }
+            /**
+             * Body
+             * 
+             */
+            else {
+
+                // Parent
+                $args = func_get_args();
+                $this->__callParent(__FUNCTION__, true, $args);
+            }
+        }
+
+        /**
          * actionResetPassword
          * 
          * @access public
