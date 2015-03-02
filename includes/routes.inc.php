@@ -83,5 +83,5 @@
             'module' => true,
             'controller' => 'Modules\Users\Crons',
             'action' => 'actionSendWelcomeEmails'
-        ),
+        )
     ));

@@ -47,6 +47,7 @@
         'bypassPassword' => array(
             'subject' => 'Account recovery',
             'tag' => 'bypassPassword',
+            'signature' => 'default'
         ),
         'resetPassword' => array(
             'subject' => 'Your password has been reset',
@@ -57,14 +58,16 @@
                 'Shoe',
                 'Pencil',
                 'Kitten'
-            )
+            ),
+            'signature' => 'default'
         ),
         'welcome' => array(
             'autoSend' => true,
             'cron' => false,
             'cronWaitTime' => 3 * 60 * 60,
             'subject' => 'Welcome',
-            'tag' => 'welcome'
+            'tag' => 'welcome',
+            'signature' => 'default'
         )
     );
 

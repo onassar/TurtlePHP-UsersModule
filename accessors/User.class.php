@@ -279,13 +279,13 @@
 
             // Response
             $response = json_decode($response, true);
-            if ($response['success'] === true) {
+            // if ($response['success'] === true) {
                 $this->update(
                     array(
                         'hasReceivedWelcomeEmail' => 1
                     )
                 );
-            }
+            // }
 
             // Done
             return $response;

@@ -144,7 +144,12 @@
                             $user->email,
                             $subject,
                             $buffer,
-                            $tag
+                            $tag,
+                            true,
+                            false,
+                            false,
+                            false,
+                            $self->getSignature('bypassPassword')
                         ); 
 
                         // Donezo
@@ -207,7 +212,12 @@
                             $user->email,
                             $subject,
                             $buffer,
-                            $tag
+                            $tag,
+                            true,
+                            false,
+                            false,
+                            false,
+                            $self->getSignature('resetPassword')
                         );
 
                         // Donezo
@@ -269,7 +279,12 @@
                             $user->email,
                             $subject,
                             $buffer,
-                            $tag
+                            $tag,
+                            true,
+                            false,
+                            false,
+                            false,
+                            $self->getSignature('welcome')
                         );
 
                         // Donezo
@@ -280,6 +295,19 @@
                     }
                 }
             );
+        }
+
+        /**
+         * getSignature
+         * 
+         * @access public
+         * @param  string $action
+         * @return string
+         */
+        public function getSignature($action)
+        {
+            $config = getConfig();
+            return $config['emails'][$action]['signature'];
         }
 
         /**
