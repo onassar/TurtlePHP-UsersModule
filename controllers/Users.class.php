@@ -337,8 +337,12 @@
                 // Create the user
                 $user = $userModel->createUser(array(
                     'publicKey' => $userModel->getUniquePublicKey(),
-                    'firstName' => $_POST['firstName'],
-                    'lastName' => $_POST['lastName'],
+                    'firstName' => isset($_POST['firstName'])
+                        ? $_POST['firstName']
+                        : '',
+                    'lastName' => isset($_POST['lastName'])
+                        ? $_POST['lastName']
+                        : '',
                     'email' => $_POST['email'],
                     'username' => $username,
                     'registeredIPAddress' => IP,
