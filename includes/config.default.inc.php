@@ -16,6 +16,7 @@
      * 
      */
     $defaults = array(
+        'appName' => 'AppName',
         'gACode' => 'UA-XXXXXXX-XX',
         'rememberMe' => true,
         'rememberMeDuration' => 10 * 365 * 24 * 60 * 60,
